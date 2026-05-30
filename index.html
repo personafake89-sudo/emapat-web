@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPS EMAPAT S.A. - Calidad Humana en Saneamiento</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar py-1">
+  <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div class="d-flex gap-3 text-white small">
+      <span><i class="bi bi-telephone-fill me-1"></i>(042) 522-900</span>
+      <span><i class="bi bi-envelope-fill me-1"></i>emapat@emapat.com.pe</span>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="#" class="btn btn-sm btn-light rounded-circle p-1 lh-1"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="btn btn-sm btn-light rounded-circle p-1 lh-1"><i class="bi bi-twitter-x"></i></a>
+      <a href="#" class="btn btn-sm btn-light rounded-circle p-1 lh-1"><i class="bi bi-youtube"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <img src="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62dff53bb5303.png"
+           alt="EMAPAT Logo" height="60" onerror="this.src='https://via.placeholder.com/120x60?text=EMAPAT'" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto fw-semibold">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Empresa</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Quiénes Somos</a></li>
+            <li><a class="dropdown-item" href="#">Origen e Historia</a></li>
+            <li><a class="dropdown-item" href="#">Organigrama</a></li>
+            <li><a class="dropdown-item" href="#">Directorio</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Servicios</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Nuevo Servicio</a></li>
+            <li><a class="dropdown-item" href="#">Pagos en Línea</a></li>
+            <li><a class="dropdown-item" href="#">Reclamos</a></li>
+            <li><a class="dropdown-item" href="#">Tarifas</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Trámites</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Solicitudes</a></li>
+            <li><a class="dropdown-item" href="#">Estado de Trámite</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Gestión</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Plan Estratégico</a></li>
+            <li><a class="dropdown-item" href="#">Presupuesto</a></li>
+            <li><a class="dropdown-item" href="#">Licitaciones</a></li>
+            <li><a class="dropdown-item" href="#">Transparencia</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#noticias">Noticias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contacto">Contacto</a>
+        </li>
+      </ul>
+      <a href="#pagos" class="btn btn-primary ms-3 rounded-pill px-4">
+        <i class="bi bi-credit-card me-1"></i>Pagar Recibo
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO CAROUSEL -->
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="hero-slide" style="background-image: url('https://emapat.com.pe/administrador_pagina/controller/operacion/FOTOS/OPERA811202517541.PNG')">
+        <div class="hero-overlay">
+          <div class="container text-white text-center">
+            <h1 class="display-4 fw-bold text-shadow">CALIDAD HUMANA</h1>
+            <p class="lead text-shadow">Especializada en Saneamiento</p>
+            <a href="#servicios" class="btn btn-primary btn-lg rounded-pill px-5 mt-2">Nuestros Servicios</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="hero-slide" style="background-image: url('https://emapat.com.pe/administrador_pagina/controller/operacion/FOTOS/OPERA811202517921.PNG')">
+        <div class="hero-overlay">
+          <div class="container text-white text-center">
+            <h1 class="display-4 fw-bold text-shadow">AGUA SEGURA</h1>
+            <p class="lead text-shadow">Para toda la región Loreto</p>
+            <a href="#pagos" class="btn btn-success btn-lg rounded-pill px-5 mt-2">Pagar en Línea</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="hero-slide" style="background-image: url('https://emapat.com.pe/administrador_pagina/controller/operacion/FOTOS/OPERA811202520571.PNG')">
+        <div class="hero-overlay">
+          <div class="container text-white text-center">
+            <h1 class="display-4 fw-bold text-shadow">COMPROMETIDOS</h1>
+            <p class="lead text-shadow">Con el desarrollo y bienestar de la comunidad</p>
+            <a href="#contacto" class="btn btn-warning btn-lg rounded-pill px-5 mt-2">Contáctanos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- ACCESOS RÁPIDOS -->
+<section id="servicios" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center fw-bold section-title mb-4">Servicios al Cliente</h2>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-3 col-lg-2">
+        <a href="#" class="access-card text-center d-flex flex-column align-items-center justify-content-center p-3 rounded-3 shadow-sm h-100">
+          <div class="icon-circle bg-primary text-white mb-2"><i class="bi bi-receipt fs-4"></i></div>
+          <span class="fw-semibold small">Pago de Recibo</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <a href="#" class="access-card text-center d-flex flex-column align-items-center justify-content-center p-3 rounded-3 shadow-sm h-100">
+          <div class="icon-circle bg-success text-white mb-2"><i class="bi bi-clipboard-check fs-4"></i></div>
+          <span class="fw-semibold small">Reclamos</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <a href="#" class="access-card text-center d-flex flex-column align-items-center justify-content-center p-3 rounded-3 shadow-sm h-100">
+          <div class="icon-circle bg-warning text-white mb-2"><i class="bi bi-file-earmark-text fs-4"></i></div>
+          <span class="fw-semibold small">Nuevas Conexiones</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <a href="#" class="access-card text-center d-flex flex-column align-items-center justify-content-center p-3 rounded-3 shadow-sm h-100">
+          <div class="icon-circle bg-info text-white mb-2"><i class="bi bi-droplet-half fs-4"></i></div>
+          <span class="fw-semibold small">Corte y Reposición</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <a href="#" class="access-card text-center d-flex flex-column align-items-center justify-content-center p-3 rounded-3 shadow-sm h-100">
+          <div class="icon-circle bg-danger text-white mb-2"><i class="bi bi-currency-dollar fs-4"></i></div>
+          <span class="fw-semibold small">Tarifas</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <a href="#" class="access-card text-center d-flex flex-column align-items-center justify-content-center p-3 rounded-3 shadow-sm h-100">
+          <div class="icon-circle bg-secondary text-white mb-2"><i class="bi bi-search fs-4"></i></div>
+          <span class="fw-semibold small">Estado de Trámite</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section py-5">
+  <div class="container">
+    <div class="row g-4 text-center text-white">
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number" data-target="45000">0</div>
+          <p class="mb-0 small">Conexiones Activas</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number" data-target="98">0</div>
+          <p class="mb-0 small">% Cobertura Agua</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number" data-target="30">0</div>
+          <p class="mb-0 small">Años de Servicio</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-number" data-target="350">0</div>
+          <p class="mb-0 small">Colaboradores</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTICIAS -->
+<section id="noticias" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center fw-bold section-title mb-4">Últimas Noticias</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card news-card shadow-sm h-100 border-0">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202612188.PNG"
+               class="card-img-top" alt="Noticia 1" onerror="this.src='https://via.placeholder.com/400x220?text=Noticia'" />
+          <div class="card-body">
+            <span class="badge bg-primary mb-2">Operaciones</span>
+            <h6 class="card-title fw-bold">Mejoras en el sistema de distribución de agua potable</h6>
+            <p class="card-text text-muted small">EMAPAT continúa con las obras de mejoramiento del sistema de agua potable para garantizar un mejor servicio a la población.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm rounded-pill">Leer más</a>
+          </div>
+          <div class="card-footer text-muted small border-0 bg-transparent">
+            <i class="bi bi-calendar3 me-1"></i>Mayo 2026
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card news-card shadow-sm h-100 border-0">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202610869.PNG"
+               class="card-img-top" alt="Noticia 2" onerror="this.src='https://via.placeholder.com/400x220?text=Noticia'" />
+          <div class="card-body">
+            <span class="badge bg-success mb-2">Gestión</span>
+            <h6 class="card-title fw-bold">Nueva campaña de sensibilización sobre el uso eficiente del agua</h6>
+            <p class="card-text text-muted small">Con el objetivo de promover el uso responsable del recurso hídrico, EMAPAT lanza nueva campaña en colegios y comunidades.</p>
+            <a href="#" class="btn btn-outline-success btn-sm rounded-pill">Leer más</a>
+          </div>
+          <div class="card-footer text-muted small border-0 bg-transparent">
+            <i class="bi bi-calendar3 me-1"></i>Mayo 2026
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card news-card shadow-sm h-100 border-0">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI28520269944.PNG"
+               class="card-img-top" alt="Noticia 3" onerror="this.src='https://via.placeholder.com/400x220?text=Noticia'" />
+          <div class="card-body">
+            <span class="badge bg-warning text-dark mb-2">Licitaciones</span>
+            <h6 class="card-title fw-bold">Convocatoria pública para obras de saneamiento 2026</h6>
+            <p class="card-text text-muted small">Se convoca a empresas constructoras a participar en el proceso de selección para las obras de ampliación de redes de alcantarillado.</p>
+            <a href="#" class="btn btn-outline-warning btn-sm rounded-pill">Leer más</a>
+          </div>
+          <div class="card-footer text-muted small border-0 bg-transparent">
+            <i class="bi bi-calendar3 me-1"></i>Abril 2026
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="#" class="btn btn-primary rounded-pill px-5">Ver todas las noticias</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold section-title mb-4">Galería de Operaciones</h2>
+    <div class="row g-2">
+      <div class="col-6 col-md-4">
+        <div class="gallery-item rounded overflow-hidden">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215443.JPG"
+               alt="Galería 1" class="img-fluid w-100" onerror="this.src='https://via.placeholder.com/400x300?text=Foto'" />
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="gallery-item rounded overflow-hidden">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215124.JPG"
+               alt="Galería 2" class="img-fluid w-100" onerror="this.src='https://via.placeholder.com/400x300?text=Foto'" />
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="gallery-item rounded overflow-hidden">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215939.JPG"
+               alt="Galería 3" class="img-fluid w-100" onerror="this.src='https://via.placeholder.com/400x300?text=Foto'" />
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="gallery-item rounded overflow-hidden">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/operacion/FOTOS/OPERA811202518623.PNG"
+               alt="Galería 4" class="img-fluid w-100" onerror="this.src='https://via.placeholder.com/400x300?text=Foto'" />
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="gallery-item rounded overflow-hidden">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/operacion/FOTOS/OPERA811202517342.PNG"
+               alt="Galería 5" class="img-fluid w-100" onerror="this.src='https://via.placeholder.com/400x300?text=Foto'" />
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="gallery-item rounded overflow-hidden">
+          <img src="https://emapat.com.pe/administrador_pagina/controller/operacion/FOTOS/OPERA7120269395.PNG"
+               alt="Galería 6" class="img-fluid w-100" onerror="this.src='https://via.placeholder.com/400x300?text=Foto'" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENTROS DE PAGO -->
+<section id="pagos" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center fw-bold section-title mb-4">Centros de Pago</h2>
+    <div class="row g-4">
+      <div class="col-md-3 col-6">
+        <div class="text-center">
+          <img src="https://emapat.com.pe/administrador_pagina/Vista/centro_pago/fotos/centro_62e923789b2bb.png"
+               alt="Centro 1" class="img-fluid rounded shadow-sm mb-2" style="height:80px;object-fit:contain;"
+               onerror="this.src='https://via.placeholder.com/150x80?text=Centro'" />
+          <p class="small fw-semibold mb-0">Agencia Principal</p>
+          <p class="small text-muted">Jr. Próspero 560, Iquitos</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="text-center">
+          <img src="https://emapat.com.pe/administrador_pagina/Vista/centro_pago/fotos/centro_62e9236134e12.png"
+               alt="Centro 2" class="img-fluid rounded shadow-sm mb-2" style="height:80px;object-fit:contain;"
+               onerror="this.src='https://via.placeholder.com/150x80?text=Centro'" />
+          <p class="small fw-semibold mb-0">Agencia Belén</p>
+          <p class="small text-muted">Av. La Marina 120</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="text-center">
+          <img src="https://emapat.com.pe/administrador_pagina/Vista/centro_pago/fotos/centro_62e923ec1d125.jpg"
+               alt="Centro 3" class="img-fluid rounded shadow-sm mb-2" style="height:80px;object-fit:contain;"
+               onerror="this.src='https://via.placeholder.com/150x80?text=Centro'" />
+          <p class="small fw-semibold mb-0">Agencia San Juan</p>
+          <p class="small text-muted">Carretera Nauta km 4</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="text-center">
+          <img src="https://emapat.com.pe/administrador_pagina/Vista/centro_pago/fotos/centro_62e92476f0fbd.png"
+               alt="Centro 4" class="img-fluid rounded shadow-sm mb-2" style="height:80px;object-fit:contain;"
+               onerror="this.src='https://via.placeholder.com/150x80?text=Centro'" />
+          <p class="small fw-semibold mb-0">Pago en Línea</p>
+          <p class="small text-muted">Disponible 24/7</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold section-title">Contáctanos</h2>
+        <p class="text-muted">Estamos aquí para atenderte. Comunícate con nosotros a través de cualquier canal.</p>
+        <ul class="list-unstyled mt-3">
+          <li class="mb-3 d-flex align-items-center gap-3">
+            <div class="icon-circle bg-primary text-white flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+            <span>Jr. Próspero 560, Iquitos, Loreto - Perú</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center gap-3">
+            <div class="icon-circle bg-success text-white flex-shrink-0"><i class="bi bi-telephone-fill"></i></div>
+            <span>(042) 522-900 / (042) 231-001</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center gap-3">
+            <div class="icon-circle bg-warning text-white flex-shrink-0"><i class="bi bi-envelope-fill"></i></div>
+            <span>emapat@emapat.com.pe</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center gap-3">
+            <div class="icon-circle bg-info text-white flex-shrink-0"><i class="bi bi-clock-fill"></i></div>
+            <span>Lun - Vie: 8:00am - 5:00pm</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 shadow rounded-4 p-4">
+          <h5 class="fw-bold mb-3">Envíanos un mensaje</h5>
+          <form id="contactForm">
+            <div class="mb-3">
+              <input type="text" class="form-control rounded-3" placeholder="Nombre completo" required />
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control rounded-3" placeholder="Correo electrónico" required />
+            </div>
+            <div class="mb-3">
+              <select class="form-select rounded-3">
+                <option value="">Asunto</option>
+                <option>Reclamo</option>
+                <option>Nuevo servicio</option>
+                <option>Información</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control rounded-3" rows="4" placeholder="Escribe tu mensaje..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 rounded-pill">
+              <i class="bi bi-send me-2"></i>Enviar Mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTIDADES VINCULADAS -->
+<section class="py-4 bg-light border-top border-bottom">
+  <div class="container">
+    <p class="text-center text-muted small mb-3">Entidades vinculadas</p>
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
+      <img src="https://www.sedamhuancayo.com.pe/wp-content/uploads/2021/09/b3_anepssa.png" height="40" alt="ANEPSSA" onerror="this.style.display='none'" />
+      <img src="https://www.sedamhuancayo.com.pe/wp-content/uploads/2021/09/b2_otass.png" height="40" alt="OTASS" onerror="this.style.display='none'" />
+      <img src="https://www.sedamhuancayo.com.pe/wp-content/uploads/2021/09/b1_sunass.png" height="40" alt="SUNASS" onerror="this.style.display='none'" />
+      <img src="https://www.sedamhuancayo.com.pe/wp-content/uploads/2021/09/b5_mef.png" height="40" alt="MEF" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer pt-5 pb-3">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <img src="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62b4c49fd5ccf.png"
+             alt="EMAPAT" height="60" class="mb-3" onerror="this.src='https://via.placeholder.com/150x60?text=EMAPAT'" />
+        <p class="text-muted small">EPS EMAPAT S.A. brinda servicios de agua potable y alcantarillado a la ciudad de Iquitos y distritos del ámbito jurisdiccional.</p>
+        <div class="d-flex gap-2 mt-3">
+          <a href="#" class="btn btn-sm btn-outline-light rounded-circle p-2 lh-1"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light rounded-circle p-2 lh-1"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-light rounded-circle p-2 lh-1"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-md-2 col-6">
+        <h6 class="text-white fw-bold mb-3">Empresa</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#">Quiénes somos</a></li>
+          <li><a href="#">Organigrama</a></li>
+          <li><a href="#">Directorio</a></li>
+          <li><a href="#">Historia</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2 col-6">
+        <h6 class="text-white fw-bold mb-3">Servicios</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#">Nuevo servicio</a></li>
+          <li><a href="#">Pagos</a></li>
+          <li><a href="#">Reclamos</a></li>
+          <li><a href="#">Tarifas</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6 class="text-white fw-bold mb-3">Boletín Informativo</h6>
+        <p class="text-muted small">Suscríbete y recibe las últimas noticias de EMAPAT.</p>
+        <div class="input-group mt-2">
+          <input type="email" class="form-control rounded-start-pill" placeholder="Tu correo electrónico" />
+          <button class="btn btn-primary rounded-end-pill">Suscribir</button>
+        </div>
+      </div>
+    </div>
+    <hr class="border-secondary mt-4" />
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <p class="text-muted small mb-0">&copy; 2026 EPS EMAPAT S.A. — Todos los derechos reservados.</p>
+      <p class="text-muted small mb-0">Diseñado con Bootstrap 5</p>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button id="scrollTop" class="btn btn-primary rounded-circle shadow" title="Subir">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
