@@ -13,6 +13,18 @@
   });
 })();
 
+// Centros de pago — mostrar mapa al hacer clic
+$(function () {
+  $(document).on('click', '.btn-reveal-mapa', function () {
+    const url = $(this).data('mapa');
+    const iframe = `<iframe src="${url}" width="100%" height="455" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+    $('.iframe-centrop').html(iframe);
+    $('html, body').animate({ scrollTop: $('.iframe-centrop').offset().top - 80 }, 400);
+  });
+  // Auto-mostrar el primer mapa al cargar
+  setTimeout(() => { $('.btn-reveal-mapa').first().trigger('click'); }, 800);
+});
+
 // Owl Carousel — entidades vinculadas
 $(function () {
   $('.owl-carousel').owlCarousel({
