@@ -13,6 +13,22 @@
   });
 })();
 
+// Owl Carousel — entidades vinculadas
+$(function () {
+  $('.owl-carousel').owlCarousel({
+    items: 5,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    responsive: {
+      0:    { items: 1, nav: false },
+      600:  { items: 3, nav: false },
+      1000: { items: 5, nav: false }
+    }
+  });
+});
+
 // Portfolio filters — igual al original
 function activar_noticia(el) {
   setFilter(el);
