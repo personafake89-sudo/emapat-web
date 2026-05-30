@@ -13,6 +13,33 @@
   });
 })();
 
+// Portfolio filters — igual al original
+function activar_noticia(el) {
+  setFilter(el);
+  toggle('filter-app', 'block');
+  toggle('filter-card', 'none');
+  toggle('filter-web', 'none');
+}
+function activar_foto(el) {
+  setFilter(el);
+  toggle('filter-app', 'none');
+  toggle('filter-card', 'block');
+  toggle('filter-web', 'none');
+}
+function activar_video(el) {
+  setFilter(el);
+  toggle('filter-app', 'none');
+  toggle('filter-card', 'none');
+  toggle('filter-web', 'block');
+}
+function toggle(cls, display) {
+  document.querySelectorAll('.' + cls).forEach(el => el.style.display = display);
+}
+function setFilter(el) {
+  document.querySelectorAll('#portfolio-flters li').forEach(li => li.classList.remove('filter-active'));
+  if (el) el.classList.add('filter-active');
+}
+
 // Contact form feedback
 document.getElementById('contactForm')?.addEventListener('submit', function (e) {
   e.preventDefault();

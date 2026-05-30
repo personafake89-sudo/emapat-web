@@ -363,157 +363,189 @@
     </div>
   </section>
 
-  <!-- ======= Noticias ======= -->
-  <section id="noticias" class="py-5">
+  <!-- ======= Portfolio: Noticias / Fotos / Videos ======= -->
+  <section id="portfolio" class="portfolio bg-white text-dark py-5">
     <div class="container" data-aos="fade-up">
-      <div class="mb-4">
-        <h2 class="title-striped fw-bold" style="color:var(--dark); font-family:'Raleway',sans-serif;">
-          Últimas Noticias
-        </h2>
-        <p class="text-muted">Explora comunicados, actividades y novedades de EMAPAT</p>
+
+      <!-- Botones filtro -->
+      <div class="row">
+        <div class="col-lg-12">
+          <ul id="portfolio-flters">
+            <li onclick="activar_noticia(this)" class="filter-active">
+              <i class="fas fa-newspaper" style="margin-right:8px;"></i>Noticias
+            </li>
+            <li onclick="activar_foto(this)">
+              <i class="fas fa-camera" style="margin-right:8px;"></i>Fotos
+            </li>
+            <li onclick="activar_video(this)">
+              <i class="fas fa-video" style="margin-right:8px;"></i>Videos
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="row g-4">
 
-        <div class="col-lg-4 col-md-6">
-          <div class="card noticia-card h-100">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202612188.PNG"
-                 class="card-img-top" alt="Noticia"
-                 onerror="this.src='https://via.placeholder.com/400x200?text=Noticia'">
+      <!-- Items -->
+      <div class="row portfolio-container g-4">
+
+        <!-- NOTICIAS (filter-app) -->
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+          <div class="card">
+            <a href="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202612188.PNG" class="portfolio-lightbox" title="COMUNICADO 28-05-2026">
+              <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202612188.PNG" class="img-fluid" alt="">
+            </a>
             <div class="card-body">
-              <span class="badge mb-2" style="background:var(--accent)">Operaciones</span>
-              <h6 class="card-title fw-bold">Mejoras en el sistema de distribución de agua potable en Iquitos</h6>
-              <p class="card-text text-muted small">EMAPAT continúa con las obras de mejoramiento del sistema de agua potable para garantizar un mejor servicio.</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-              <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Mayo 2026</span>
-              <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Leer más</a>
+              <h4 class="title-striped">COMUNICADO 28-05-2026</h4>
+              <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>28 de Mayo de 2026</small>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6">
-          <div class="card noticia-card h-100">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202610869.PNG"
-                 class="card-img-top" alt="Noticia"
-                 onerror="this.src='https://via.placeholder.com/400x200?text=Noticia'">
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+          <div class="card">
+            <a href="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202610869.PNG" class="portfolio-lightbox" title="COMUNICADO 28-05-2026">
+              <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI285202610869.PNG" class="img-fluid" alt="">
+            </a>
             <div class="card-body">
-              <span class="badge mb-2" style="background:#28a745">Gestión</span>
-              <h6 class="card-title fw-bold">Campaña de sensibilización sobre el uso eficiente del agua</h6>
-              <p class="card-text text-muted small">Promovemos el uso responsable del recurso hídrico en colegios y comunidades de la región.</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-              <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Mayo 2026</span>
-              <a href="#" class="btn btn-sm btn-outline-success rounded-pill">Leer más</a>
+              <h4 class="title-striped">COMUNICADO 28-05-2026</h4>
+              <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>28 de Mayo de 2026</small>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6">
-          <div class="card noticia-card h-100">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI275202613908.JPEG"
-                 class="card-img-top" alt="Noticia"
-                 onerror="this.src='https://via.placeholder.com/400x200?text=Noticia'">
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+          <div class="card">
+            <a href="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI28520269944.PNG" class="portfolio-lightbox" title="COMUNICADO 28-05-2026">
+              <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI28520269944.PNG" class="img-fluid" alt="">
+            </a>
             <div class="card-body">
-              <span class="badge mb-2" style="background:#ffc107;color:#000">Aviso</span>
-              <h6 class="card-title fw-bold">Recordatorio de pago oportuno para evitar corte del servicio</h6>
-              <p class="card-text text-muted small">Instamos a los usuarios a mantener al día sus pagos para evitar la suspensión del servicio de agua.</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-              <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Mayo 2026</span>
-              <a href="#" class="btn btn-sm btn-outline-warning rounded-pill">Leer más</a>
+              <h4 class="title-striped">COMUNICADO 28-05-2026</h4>
+              <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>28 de Mayo de 2026</small>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6">
-          <div class="card noticia-card h-100">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI2552026114.PNG"
-                 class="card-img-top" alt="Noticia"
-                 onerror="this.src='https://via.placeholder.com/400x200?text=Noticia'">
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+          <div class="card">
+            <a href="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI275202613908.JPEG" class="portfolio-lightbox" title="COMUNICADO 27-05-2026">
+              <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI275202613908.JPEG" class="img-fluid" alt="">
+            </a>
             <div class="card-body">
-              <span class="badge mb-2" style="background:var(--dark)">Licitaciones</span>
-              <h6 class="card-title fw-bold">Convocatoria pública para obras de saneamiento 2026</h6>
-              <p class="card-text text-muted small">Se convoca a empresas para el proceso de selección de obras de ampliación de redes de alcantarillado.</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-              <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Abril 2026</span>
-              <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill">Leer más</a>
+              <h4 class="title-striped">COMUNICADO 27-05-2026</h4>
+              <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>27 de Mayo de 2026</small>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6">
-          <div class="card noticia-card h-100">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI25520267984.JPEG"
-                 class="card-img-top" alt="Noticia"
-                 onerror="this.src='https://via.placeholder.com/400x200?text=Noticia'">
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+          <div class="card">
+            <a href="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI2552026114.PNG" class="portfolio-lightbox" title="COMUNICADO 25-05-2026">
+              <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI2552026114.PNG" class="img-fluid" alt="">
+            </a>
             <div class="card-body">
-              <span class="badge mb-2" style="background:var(--accent)">Operaciones</span>
-              <h6 class="card-title fw-bold">Trabajos de mantenimiento en la red de distribución</h6>
-              <p class="card-text text-muted small">Se realizan trabajos preventivos en sectores de Iquitos para garantizar la continuidad del servicio.</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-              <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Abril 2026</span>
-              <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Leer más</a>
+              <h4 class="title-striped">COMUNICADO 25-05-2026</h4>
+              <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>25 de Mayo de 2026</small>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6">
-          <div class="card noticia-card h-100">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI225202612185.PNG"
-                 class="card-img-top" alt="Noticia"
-                 onerror="this.src='https://via.placeholder.com/400x200?text=Noticia'">
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+          <div class="card">
+            <a href="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI25520267984.JPEG" class="portfolio-lightbox" title="COMUNICADO 25-05-2026">
+              <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI25520267984.JPEG" class="img-fluid" alt="">
+            </a>
             <div class="card-body">
-              <span class="badge mb-2" style="background:#28a745">Gestión</span>
-              <h6 class="card-title fw-bold">EMAPAT participa en reunión de EPS a nivel nacional</h6>
-              <p class="card-text text-muted small">Representantes de EMAPAT presentaron avances en gestión y mejoras en indicadores de calidad del servicio.</p>
-            </div>
-            <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-              <span class="text-muted small"><i class="bi bi-calendar3 me-1"></i>Marzo 2026</span>
-              <a href="#" class="btn btn-sm btn-outline-success rounded-pill">Leer más</a>
+              <h4 class="title-striped">COMUNICADO 25-05-2026</h4>
+              <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>25 de Mayo de 2026</small>
             </div>
           </div>
         </div>
 
-      </div>
-      <div class="text-center mt-4">
-        <a href="#" class="btn btn-primary px-5 rounded-pill">Ver todas las noticias</a>
-      </div>
-    </div>
-  </section>
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+          <div class="card">
+            <a href="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI225202612185.PNG" class="portfolio-lightbox" title="COMUNICADO 22-05-2026">
+              <img src="https://emapat.com.pe/administrador_pagina/controller/noticia/FOTOS/NOTI225202612185.PNG" class="img-fluid" alt="">
+            </a>
+            <div class="card-body">
+              <h4 class="title-striped">COMUNICADO 22-05-2026</h4>
+              <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>22 de Mayo de 2026</small>
+            </div>
+          </div>
+        </div>
 
-  <!-- ======= Galería ======= -->
-  <section class="py-5 section-bg">
-    <div class="container" data-aos="fade-up">
-      <div class="mb-4">
-        <h2 class="title-striped fw-bold" style="color:var(--dark); font-family:'Raleway',sans-serif;">
-          Galería de Fotos
-        </h2>
-      </div>
-      <div class="row g-3">
-        <div class="col-md-4 col-6">
+        <!-- Botón ver más noticias -->
+        <div class="col-lg-3 col-md-6 portfolio-item filter-app d-flex align-items-center justify-content-center">
+          <div class="text-center p-3">
+            <img src="https://mail.emapat.com.pe/images/mas.png" style="height:120px;object-fit:contain;" alt="Ver más" class="mb-3">
+            <div>
+              <a href="#" class="btn btn-primary btn-sm">Ver todas las noticias</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOTOS (filter-card, ocultas por defecto) -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card" style="display:none;">
           <div class="portfolio-wrap">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215443.JPG"
-                 alt="Foto 1" onerror="this.src='https://via.placeholder.com/400x220?text=Foto'">
-            <div class="portfolio-info"><h4>Operaciones en campo</h4></div>
+            <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215443.JPG" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215443.JPG" class="portfolio-lightbox" title="Ver Imagen">
+                  <i class="fa fa-eye"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-4 col-6">
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card" style="display:none;">
           <div class="portfolio-wrap">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215124.JPG"
-                 alt="Foto 2" onerror="this.src='https://via.placeholder.com/400x220?text=Foto'">
-            <div class="portfolio-info"><h4>Infraestructura</h4></div>
+            <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215124.JPG" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215124.JPG" class="portfolio-lightbox" title="Ver Imagen">
+                  <i class="fa fa-eye"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-4 col-6">
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card" style="display:none;">
           <div class="portfolio-wrap">
-            <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215939.JPG"
-                 alt="Foto 3" onerror="this.src='https://via.placeholder.com/400x220?text=Foto'">
-            <div class="portfolio-info"><h4>Equipo de trabajo</h4></div>
+            <img src="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215939.JPG" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <div class="portfolio-links">
+                <a href="https://emapat.com.pe/administrador_pagina/controller/foto/FOTOS/FOTOS267202215939.JPG" class="portfolio-lightbox" title="Ver Imagen">
+                  <i class="fa fa-eye"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- VIDEOS (filter-web, ocultos por defecto) -->
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="display:none;">
+          <div class="portfolio-wrap">
+            <iframe width="100%" height="215"
+              src="https://www.youtube.com/embed/aJ96mg0lDbQ"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="display:none;">
+          <div class="portfolio-wrap text-center">
+            <img src="https://mail.emapat.com.pe/images/mas.png" style="height:215px;object-fit:contain;" class="img-fluid" alt="">
+            <div class="card-body">
+              <div class="d-block mt-2 text-start">
+                <a href="#" class="btn btn-sm btn-primary">Ver todos los videos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /portfolio-container -->
     </div>
   </section>
 
