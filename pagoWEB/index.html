@@ -320,16 +320,10 @@
         </table>
       </div>
 
-      <!-- tarjeta visual -->
-      <div id="tarjetaVisual" style="background:linear-gradient(135deg,#1c3643,#1a7abf);border-radius:12px;padding:16px 18px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-15px;top:-15px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.07);"></div>
-        <div style="width:32px;height:22px;background:#d4af37;border-radius:4px;margin-bottom:12px;"></div>
-        <div id="tvNumero" style="font-size:1rem;letter-spacing:3px;font-weight:600;margin-bottom:10px;font-family:monospace;">•••• •••• •••• ••••</div>
-        <div style="display:flex;justify-content:space-between;font-size:.72rem;opacity:.8;">
-          <div><div style="font-size:.55rem;opacity:.7;">TITULAR</div><div id="tvTitular">NOMBRE APELLIDO</div></div>
-          <div><div style="font-size:.55rem;opacity:.7;">VENCE</div><div id="tvVence">MM/AA</div></div>
-        </div>
-        <div id="tvTipo" style="position:absolute;right:14px;top:12px;background:rgba(255,255,255,.15);padding:3px 8px;border-radius:5px;font-size:.75rem;font-weight:800;letter-spacing:1px;">VISA</div>
+      <!-- logo grande -->
+      <div style="text-align:center;margin-bottom:16px;">
+        <img src="https://sysco.emapat.com.pe/pagoWEB/assets/img/logotipo.png"
+             alt="EPS EMAPAT S.A." style="width:180px;height:auto;">
       </div>
 
       <!-- campos tarjeta -->
@@ -357,7 +351,6 @@
         <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">Titular de la tarjeta</div>
         <input type="text" id="p2Titular" placeholder="Como aparece en la tarjeta"
                style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
-               oninput="document.getElementById('tvTitular').textContent=this.value.toUpperCase()||'NOMBRE APELLIDO'"
                onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
       </div>
 
@@ -538,10 +531,6 @@ function irPaso(n) {
     document.getElementById('p2Vence').value      = '';
     document.getElementById('p2Cvv').value        = '';
     document.getElementById('p2Titular').value    = '';
-    document.getElementById('tvNumero').textContent  = '•••• •••• •••• ••••';
-    document.getElementById('tvTitular').textContent = 'NOMBRE APELLIDO';
-    document.getElementById('tvVence').textContent   = 'MM/AA';
-    document.getElementById('tvTipo').textContent    = 'VISA';
     document.getElementById('btnPagarTxt').textContent = '🔒 PAGAR AHORA';
     document.getElementById('btnPagarModal').disabled  = false;
   }
@@ -565,21 +554,16 @@ function continuarPaso1() {
   }
 }
 
-/* tarjeta visual */
+/* formato número tarjeta */
 function actualizarTarjeta(inp) {
   var raw = inp.value.replace(/\D/g,'').slice(0,16);
   var fmt = raw.match(/.{1,4}/g);
   inp.value = fmt ? fmt.join(' ') : raw;
-  var display = raw.padEnd(16,'•').match(/.{1,4}/g).join(' ');
-  document.getElementById('tvNumero').textContent = display;
-  var tipo = raw.startsWith('4') ? 'VISA' : (raw.startsWith('5')||raw.startsWith('2')) ? 'MC' : raw.startsWith('3') ? 'AMEX' : 'TARJETA';
-  document.getElementById('tvTipo').textContent = tipo;
 }
 function fmtVence(inp) {
   var raw = inp.value.replace(/\D/g,'').slice(0,4);
   if (raw.length > 2) raw = raw.slice(0,2) + '/' + raw.slice(2);
   inp.value = raw;
-  document.getElementById('tvVence').textContent = raw || 'MM/AA';
 }
 
 /* procesar pago */
