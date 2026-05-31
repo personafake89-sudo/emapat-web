@@ -16,7 +16,7 @@
       min-height: 100vh;
     }
     .borde-sombreado { box-shadow: 0 20px 60px rgba(0,0,0,.35); }
-    .titulo-empresa  { font-weight: 700; color: #1c3643; }
+    .titulo-empresa  { font-weight: 700; color: #111 !important; }
 
     /* ── panel deuda ── */
     #panelDeuda { display: none; }
@@ -40,9 +40,6 @@
       transition: transform .15s, box-shadow .15s;
     }
     .btn-pagar-verde:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(39,174,96,.4); color: #fff; }
-    .modal-header-pago { background: #1c3643; color: #fff; }
-    .modal-header-pago .close { color: #fff; opacity: .8; }
-    .monto-modal { font-size: 2.2rem; font-weight: 700; color: #27ae60; }
     #sinDeuda { display: none; }
   </style>
 </head>
@@ -204,7 +201,7 @@
       </div>
 
       <div class="text-center mt-4" id="contenedorBtnPagar">
-        <button class="btn-pagar-verde" data-toggle="modal" data-target="#modalConfirmar">
+        <button class="btn-pagar-verde" onclick="abrirModalPago()">
           <i class="fas fa-credit-card mr-2"></i>REALIZAR PAGO
         </button>
       </div>
@@ -221,39 +218,136 @@
 
 
 <!-- ══════════════════════════════════════════════════
-     MODAL CONFIRMACIÓN (Bootstrap 4)
+     OVERLAY MÉTODOS DE PAGO
 ══════════════════════════════════════════════════ -->
-<div class="modal fade" id="modalConfirmar" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header modal-header-pago">
-        <h5 class="modal-title">Confirmar Pago</h5>
-        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-sm table-borderless mb-0">
-          <tr><td class="text-muted" style="width:40%;">Titular</td>    <td><strong id="mNombre">—</strong></td></tr>
-          <tr><td class="text-muted">Suministro</td>                    <td id="mSuministro">—</td></tr>
-          <tr><td class="text-muted">Dirección</td>                     <td id="mDireccion">—</td></tr>
-          <tr><td class="text-muted">Meses en deuda</td>
-              <td><span class="badge badge-warning text-dark" id="mMeses">0</span></td></tr>
-        </table>
-        <hr>
-        <div class="text-center">
-          <div class="text-muted small">Total a pagar</div>
-          <div class="monto-modal" id="mTotal">S/ 0.00</div>
+<div id="overlayPago" style="
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(0,0,0,0.5);
+  align-items:center; justify-content:center;
+">
+  <div id="modalPago" style="
+    background:#f0f0f0; border-radius:14px;
+    padding:1.5rem 1.25rem 1.25rem;
+    width:320px; max-width:95vw;
+    position:relative;
+    box-shadow:0 8px 32px rgba(0,0,0,0.22);
+    font-family: Arial, sans-serif;
+  ">
+
+    <!-- Botón cerrar -->
+    <button onclick="cerrarModalPago()" style="
+      position:absolute; top:10px; right:10px;
+      background:none; border:none; cursor:pointer; padding:0;
+    ">
+      <img src="https://static-content.vnforapps.com/v2/css/images/close.png" alt="Cerrar" width="20" height="20">
+    </button>
+
+    <!-- Selector de idioma -->
+    <div style="font-size:12px; color:#555; margin-bottom:0.75rem; display:flex; gap:10px;">
+      <span style="font-weight:700; color:#222; cursor:pointer;">ESP</span>
+      <span style="cursor:pointer;">ENG</span>
+    </div>
+
+    <!-- Logo EMAPAT -->
+    <div style="margin-bottom:1.1rem;">
+      <img src="https://sysco.emapat.com.pe/pagoWEB/assets/img/logotipo.png"
+           alt="EPS EMAPAT S.A." style="width:70px; height:auto;">
+    </div>
+
+    <!-- Título -->
+    <div style="font-size:14px; font-weight:700; color:#222; margin-bottom:0.85rem;">
+      Elige un método de pago
+    </div>
+
+    <!-- Opción 1: Tarjeta -->
+    <div class="metodo-pago selected" onclick="seleccionarMetodo(this,'tarjeta')" style="
+      display:flex; align-items:flex-start; gap:10px;
+      background:#fff; border:2px solid #2196f3;
+      border-radius:10px; padding:10px 12px;
+      margin-bottom:9px; cursor:pointer; transition:border-color 0.15s;
+    ">
+      <input type="radio" name="metodoPago" value="tarjeta" checked
+             style="margin-top:3px; accent-color:#2196f3; flex-shrink:0;">
+      <div>
+        <div style="font-size:13px; font-weight:700; color:#222; margin-bottom:2px;">
+          Tarjeta de crédito y/o débito
         </div>
-        <div class="alert alert-info mt-3 mb-0 py-2 text-center" style="font-size:.82rem;">
-          Serás redirigido al portal seguro <strong>EPS EMAPAT</strong> para completar el pago con Niubiz/Visa.
+        <div style="font-size:11px; color:#777; margin-bottom:7px;">Paga al contado o en cuotas</div>
+        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
+          <span style="height:26px; padding:0 7px; background:#1a1f71; border-radius:4px;
+                       font-size:11px; font-weight:800; color:#fff;
+                       display:inline-flex; align-items:center; letter-spacing:1px;">VISA</span>
+          <img src="https://static-content.vnforapps.com/v2/img/bottom/mc.png"
+               alt="Mastercard" style="height:26px; width:auto; border-radius:4px;">
+          <img src="https://static-content.vnforapps.com/v2/img/bottom/dc.png"
+               alt="Diners Club" style="height:26px; width:auto; border-radius:4px;">
+          <span style="height:26px; padding:0 7px; background:#e21836; border-radius:4px;
+                       font-size:9px; font-weight:700; color:#fff;
+                       display:inline-flex; align-items:center;">UnionPay</span>
         </div>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-        <button class="btn btn-success btn-lg" id="btnConfirmar">
-          <i class="fas fa-check mr-1"></i>Confirmar y Pagar
-        </button>
       </div>
     </div>
+
+    <!-- Opción 2: QR / Billetera -->
+    <div class="metodo-pago" onclick="seleccionarMetodo(this,'qr')" style="
+      display:flex; align-items:flex-start; gap:10px;
+      background:#fff; border:1.5px solid #ddd;
+      border-radius:10px; padding:10px 12px;
+      margin-bottom:9px; cursor:pointer; transition:border-color 0.15s;
+    ">
+      <input type="radio" name="metodoPago" value="qr"
+             style="margin-top:3px; accent-color:#2196f3; flex-shrink:0;">
+      <div>
+        <div style="font-size:13px; font-weight:700; color:#222; margin-bottom:5px;">
+          Código QR / Billetera electrónica
+        </div>
+        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
+          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/plin.png"
+               alt="Plin" style="height:26px; width:auto; border-radius:4px;">
+          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/agoraPay.png"
+               alt="Agora Pay" style="height:26px; width:auto; border-radius:4px;">
+          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/ligo.png"
+               alt="Ligo" style="height:26px; width:auto; border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Opción 3: Yape / Plin -->
+    <div class="metodo-pago" onclick="seleccionarMetodo(this,'yapeplin')" style="
+      display:flex; align-items:flex-start; gap:10px;
+      background:#fff; border:1.5px solid #ddd;
+      border-radius:10px; padding:10px 12px;
+      margin-bottom:9px; cursor:pointer; transition:border-color 0.15s;
+    ">
+      <input type="radio" name="metodoPago" value="yapeplin"
+             style="margin-top:3px; accent-color:#2196f3; flex-shrink:0;">
+      <div>
+        <div style="font-size:13px; font-weight:700; color:#222; margin-bottom:5px;">
+          Pago con Yape / Plin
+        </div>
+        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
+          <span style="height:26px; padding:0 10px; background:#6a0dad; border-radius:4px;
+                       font-size:11px; font-weight:700; color:#fff;
+                       display:inline-flex; align-items:center;">Yape</span>
+          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/plin.png"
+               alt="Plin" style="height:26px; width:auto; border-radius:4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón Continuar -->
+    <button id="btnContinuarPago" onclick="continuarPago()" style="
+      width:100%; padding:13px;
+      background:#2ecc71; border:none;
+      border-radius:8px; color:#fff;
+      font-size:15px; font-weight:700;
+      cursor:pointer; margin-top:0.5rem;
+      letter-spacing:0.01em; transition:background 0.15s;
+    "
+      onmouseover="this.style.background='#27ae60'"
+      onmouseout="this.style.background='#2ecc71'"
+    >Continuar</button>
+
   </div>
 </div>
 
@@ -364,23 +458,47 @@ function mostrarDeuda(cod, cli) {
     document.getElementById('tablaContenedor').style.display    = '';
   }
 
-  document.getElementById('mNombre').textContent     = cli.nombre;
-  document.getElementById('mSuministro').textContent = cod;
-  document.getElementById('mDireccion').textContent  = cli.dir || '—';
-  document.getElementById('mMeses').textContent      = meses + ' mes' + (meses !== 1 ? 'es' : '');
-  document.getElementById('mTotal').textContent      = 'S/ ' + total.toFixed(2);
-  document.getElementById('btnConfirmar').dataset.cod = cod;
+  suministroActual = cod;
 
   document.getElementById('panelBusqueda').style.display = 'none';
   document.getElementById('panelDeuda').style.display    = 'flex';
 }
 
-/* ── Confirmar → abrir portal producción ── */
-document.getElementById('btnConfirmar').addEventListener('click', function() {
-  var cod = this.dataset.cod || '';
-  $('#modalConfirmar').modal('hide');
-  window.open('https://sysco.emapat.com.pe/pagoWEB/?suministro=' + cod, '_blank');
+/* ── Modal métodos de pago ── */
+var metodoSeleccionado = 'tarjeta';
+var suministroActual   = '';
+
+function abrirModalPago() {
+  var overlay = document.getElementById('overlayPago');
+  overlay.style.display = 'flex';
+}
+function cerrarModalPago() {
+  document.getElementById('overlayPago').style.display = 'none';
+}
+document.getElementById('overlayPago').addEventListener('click', function(e) {
+  if (e.target === this) cerrarModalPago();
 });
+
+function seleccionarMetodo(el, metodo) {
+  metodoSeleccionado = metodo;
+  document.querySelectorAll('.metodo-pago').forEach(function(o) {
+    o.style.border = '1.5px solid #ddd';
+    o.querySelector('input').checked = false;
+  });
+  el.style.border = '2px solid #2196f3';
+  el.querySelector('input').checked = true;
+}
+
+function continuarPago() {
+  cerrarModalPago();
+  if (metodoSeleccionado === 'tarjeta') {
+    window.open('https://sysco.emapat.com.pe/pagoWEB/?suministro=' + suministroActual, '_blank');
+  } else if (metodoSeleccionado === 'qr') {
+    alert('Próximamente: pago con QR / billetera electrónica.');
+  } else if (metodoSeleccionado === 'yapeplin') {
+    alert('Próximamente: pago con Yape / Plin.');
+  }
+}
 
 /* ── Volver a búsqueda ── */
 function volverBusqueda() {
