@@ -2,6 +2,7 @@
   "name": "emapat-web",
   "version": "1.0.0",
   "private": true,
+  "engines": { "node": "22.x" },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.5"
   }
