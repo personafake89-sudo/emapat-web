@@ -3,319 +3,424 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Pago de Agua en Línea | EPS EMAPAT S.A. – Tayacaja</title>
-  <meta name="description" content="Pague su recibo de agua potable de EPS EMAPAT de forma rápida y segura. Ingrese su código de suministro y pague en segundos.">
+  <title>Pago de Agua en Línea | EPS EMAPAT S.A.</title>
+  <meta name="description" content="Consulte y pague su recibo de agua potable de EPS EMAPAT. Ingrese su código de suministro.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emapat-web.vercel.app/pagoWEB/">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://emapat-web.vercel.app/pagoWEB/">
-  <meta property="og:site_name" content="EPS EMAPAT S.A.">
-  <meta property="og:title" content="Pago de Agua en Línea | EPS EMAPAT S.A. – Puerto Maldonado">
-  <meta property="og:description" content="Pague su recibo de agua potable de EPS EMAPAT en Puerto Maldonado, Madre de Dios. Rápido, seguro y sin filas.">
-  <meta property="og:locale" content="es_PE">
+  <meta property="og:title" content="Pago de Agua en Línea | EPS EMAPAT S.A.">
+  <meta property="og:description" content="Pague su recibo de agua potable de EPS EMAPAT en Puerto Maldonado. Rápido, seguro y sin filas.">
   <meta property="og:image" content="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62b4c49fd5ccf.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Logo EPS EMAPAT S.A. – Pago de agua en línea">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pago de Agua en Línea | EPS EMAPAT S.A. – Puerto Maldonado">
-  <meta name="twitter:description" content="Pague su recibo de agua potable de EPS EMAPAT en Puerto Maldonado, Madre de Dios.">
-  <meta name="twitter:image" content="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62b4c49fd5ccf.png">
-  <meta name="twitter:image:alt" content="Logo EPS EMAPAT S.A.">
-
   <link href="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62b4c49fd5ccf.png" rel="icon">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     *, body { font-family: 'Roboto', sans-serif; }
-
     html, body { height: 100%; margin: 0; }
 
+    /* ── fondo gradiente ── */
     .fxt-bg {
       min-height: 100vh;
-      background: linear-gradient(21deg, rgb(38,105,167) 0%, rgb(43,131,178) 42%, rgb(0,156,227) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 30px 16px;
+      background: linear-gradient(135deg, #1c3643 0%, #1a7abf 60%, #00b0ff 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px 16px;
     }
 
-    .card-pago {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      max-width: 860px;
-      width: 100%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-      display: flex;
-      flex-wrap: wrap;
+    /* ── tarjeta central ── */
+    .card-main {
+      background: #fff; border-radius: 18px;
+      overflow: hidden; width: 100%; max-width: 920px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.30);
     }
 
-    /* Panel izquierdo — imagen */
-    .panel-img {
-      flex: 0 0 45%;
-      max-width: 45%;
-      overflow: hidden;
+    /* ── header de la tarjeta ── */
+    .card-header-emapat {
+      background: #1c3643; color: #fff;
+      padding: 20px 28px; display: flex;
+      align-items: center; gap: 14px;
     }
-    .panel-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .card-header-emapat img { width: 46px; border-radius: 6px; }
+    .card-header-emapat h5 { margin: 0; font-size: 1.1rem; font-weight: 700; }
+    .card-header-emapat small { opacity: .75; font-size: .78rem; }
 
-    /* Panel derecho — formulario */
-    .panel-form {
-      flex: 0 0 55%;
-      max-width: 55%;
-      padding: 44px 40px;
-    }
-
-    .titulo-empresa {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1565c0;
-      margin-bottom: 4px;
-    }
-
-    .subtitulo {
-      color: #555;
-      font-size: 0.95rem;
-      margin-bottom: 28px;
-    }
-
-    /* Inputs estilo original — sin borde, solo línea inferior */
-    .fxt-form .form-group {
-      position: relative;
-      margin-bottom: 20px;
-    }
-    .fxt-form .form-control {
-      border: none;
-      border-bottom: 1.5px solid #546e7a;
-      border-radius: 0;
-      padding: 10px 32px 10px 0;
-      font-size: 0.9rem;
-      color: #111;
-      background: transparent;
-      box-shadow: none;
-    }
-    .fxt-form .form-control:focus {
-      box-shadow: none;
-      border-bottom-color: #00b0ff;
-      background: transparent;
-    }
-    .fxt-form .form-control::placeholder { color: #4f554f; font-weight: 300; }
-    .fxt-form .form-group .field-icon {
-      position: absolute;
-      right: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #a1a1a1;
-      font-size: 1rem;
-      pointer-events: none;
-    }
-
-    /* Checkbox */
-    .form-check-label a { color: #00b0ff; }
-    .form-check-input:checked { background-color: #00b0ff; border-color: #00b0ff; }
-
-    /* Botón consultar */
+    /* ── panel búsqueda ── */
+    #panelBusqueda { padding: 32px 28px; }
+    .label-field { font-size: .82rem; font-weight: 600; color: #546e7a; margin-bottom: 4px; }
+    .input-sum { border: 2px solid #b0bec5; border-radius: 8px; font-size: 1.05rem;
+                 font-weight: 700; color: #1c3643; padding: 10px 14px; }
+    .input-sum:focus { border-color: #00b0ff; box-shadow: 0 0 0 3px rgba(0,176,255,.15); }
     .btn-consultar {
-      margin-top: 10px;
-      background-color: #00b0ff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      padding: 10px 36px;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: background 0.25s;
+      width: 100%; background: #00b0ff; color: #fff; border: none;
+      border-radius: 8px; padding: 12px; font-size: 1rem; font-weight: 700;
+      transition: background .2s;
     }
-    .btn-consultar:hover { background-color: #1c9ed9; color: #fff; }
+    .btn-consultar:hover { background: #0091d4; color: #fff; }
+    .btn-consultar:disabled { background: #90caf9; }
 
-    /* Banda VISA */
-    .visa-banner {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid #eee;
+    /* ── alerta error ── */
+    #alertError { display: none; }
+
+    /* ── panel deuda ── */
+    #panelDeuda { display: none; padding: 0; }
+
+    .info-cliente {
+      background: #f0f4f8; border-bottom: 1px solid #dce3ea;
+      padding: 16px 28px;
     }
-    .visa-banner img { width: 80px; }
-    .visa-banner p {
-      font-size: 0.88rem;
-      font-style: italic;
-      color: #1565c0;
-      font-weight: 500;
-      margin: 0;
-      line-height: 1.3;
+    .info-cliente .label { font-size: .78rem; color: #546e7a; font-weight: 600; }
+    .info-cliente .value { font-size: .95rem; color: #1c3643; font-weight: 700; }
+
+    .alert-corte {
+      background: #fff3e0; border-left: 4px solid #e67e22;
+      padding: 10px 18px; font-size: .9rem; margin: 0;
     }
 
-    /* Volver link */
-    .volver-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255,255,255,0.85);
-      font-size: 0.85rem;
-      margin-bottom: 20px;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .volver-link:hover { color: #fff; }
+    /* ── tabla deuda ── */
+    .tabla-deuda { font-size: .88rem; }
+    .tabla-deuda thead th { background: #1c3643; color: #fff; font-weight: 600; border: none; }
+    .fila-corte { background: #fff3e0 !important; }
+    .fila-normal { background: #fff; }
 
-    /* Responsive */
-    @media (max-width: 640px) {
-      .panel-img  { flex: 0 0 100%; max-width: 100%; height: 180px; }
-      .panel-form { flex: 0 0 100%; max-width: 100%; padding: 28px 24px; }
-    }
+    /* ── badges ── */
+    .badge-corte   { background: #e74c3c; color: #fff; font-size: .72rem; padding: 3px 8px; border-radius: 12px; }
+    .badge-pend    { background: #90a4ae; color: #fff; font-size: .72rem; padding: 3px 8px; border-radius: 12px; }
 
-    /* Animación de entrada */
-    .card-pago {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: slideUp 0.55s ease forwards 0.1s;
-    }
-    @keyframes slideUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ── total ── */
+    .total-row td { background: #1c3643; color: #fff; font-weight: 700; }
 
-    /* Estados del formulario */
-    #resultado { display: none; }
+    /* ── botón pagar ── */
+    .btn-pagar {
+      background: linear-gradient(90deg, #27ae60, #2ecc71);
+      color: #fff; border: none; border-radius: 10px;
+      padding: 14px 36px; font-size: 1.1rem; font-weight: 700;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-pagar:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,.4); }
+
+    /* ── modal confirmación ── */
+    .modal-header-pago { background: #1c3643; color: #fff; }
+    .modal-header-pago .btn-close { filter: invert(1); }
+    .monto-modal { font-size: 2.4rem; font-weight: 700; color: #27ae60; }
+
+    /* ── footer ── */
+    .footer-card {
+      background: #1c3643; color: #90caf9;
+      padding: 14px 28px; font-size: .8rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 8px;
+    }
+    .footer-card span { color: #fff; font-weight: 600; }
+
+    @media (max-width: 576px) {
+      #panelBusqueda, .info-cliente { padding: 20px 18px; }
+      .monto-modal { font-size: 1.8rem; }
+    }
   </style>
 </head>
 <body>
-
 <div class="fxt-bg">
-  <div style="width:100%;max-width:860px;">
 
-    <!-- Botón volver -->
-    <a href="../index.html" class="volver-link">
-      <i class="bi bi-arrow-left-circle"></i> Volver al inicio
-    </a>
+  <div class="card-main">
 
-    <div class="card-pago">
+    <!-- Header -->
+    <div class="card-header-emapat">
+      <img src="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62b4c49fd5ccf.png" alt="Logo EMAPAT">
+      <div>
+        <h5>EPS EMAPAT S.A.</h5>
+        <small>Sistema de Pagos en Línea — Puerto Maldonado</small>
+      </div>
+    </div>
 
-      <!-- Imagen izquierda -->
-      <div class="panel-img">
-        <img src="https://sysco.emapat.com.pe/pagoWEB/assets/img/tarjetas.jpg"
-             alt="Métodos de pago"
-             onerror="this.src='https://via.placeholder.com/400x500/1565c0/ffffff?text=EMAPAT+Pagos'">
+    <!-- Panel Búsqueda -->
+    <div id="panelBusqueda">
+      <p class="text-muted mb-4" style="font-size:.9rem;">
+        Consulte el estado de su cuenta ingresando su <strong>número de suministro</strong>.
+      </p>
+
+      <div id="alertError" class="alert alert-danger py-2 mb-3" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-1"></i>
+        <span id="msgError">Suministro no encontrado.</span>
       </div>
 
-      <!-- Formulario derecho -->
-      <div class="panel-form">
-
-        <!-- Título -->
+      <form id="formBusqueda" autocomplete="off">
         <div class="mb-3">
-          <h2 class="titulo-empresa">EPS EMAPAT S.A.</h2>
-          <p class="subtitulo">¡Bienvenido, pague su recibo!</p>
+          <div class="label-field">Número de suministro</div>
+          <input id="inpSuministro" type="tel" class="form-control input-sum"
+                 placeholder="Ej: 1061554" required
+                 inputmode="numeric" pattern="[0-9]+">
+        </div>
+        <button type="submit" class="btn-consultar" id="btnConsultar">
+          <i class="bi bi-search me-1"></i> CONSULTAR
+        </button>
+      </form>
+
+      <hr class="my-4">
+      <p class="text-center text-muted" style="font-size:.78rem;">
+        ¿Tiene cuenta registrada?
+        <a href="https://sysco.emapat.com.pe/pagoWEB/" target="_blank" rel="noopener" class="fw-bold">
+          Acceder al portal completo
+        </a>
+      </p>
+    </div>
+
+    <!-- Panel Deuda (se muestra tras la búsqueda) -->
+    <div id="panelDeuda">
+
+      <!-- Info cliente -->
+      <div class="info-cliente">
+        <div class="row g-2">
+          <div class="col-6 col-md-3">
+            <div class="label">Suministro</div>
+            <div class="value" id="infoSuministro">—</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="label">Localidad</div>
+            <div class="value">PUERTO MALDONADO</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="label">Titular</div>
+            <div class="value" id="infoNombre">—</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="label">Dirección</div>
+            <div class="value" id="infoDireccion">—</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="label">Correo</div>
+            <div class="value" id="infoEmail">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerta meses en deuda -->
+      <div class="alert-corte" id="alertaMeses"></div>
+
+      <!-- Tabla estado de cuenta -->
+      <div class="px-3 pt-3 pb-2">
+        <div class="table-responsive">
+          <table class="table table-sm tabla-deuda mb-0">
+            <thead>
+              <tr>
+                <th>Período</th>
+                <th>Recibo</th>
+                <th class="text-end">Total Mes</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyDeuda"></tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="2" class="text-end">TOTAL DEUDA</td>
+                <td class="text-end" id="totalDeuda">S/ 0.00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
 
-        <!-- Formulario de consulta -->
-        <form class="fxt-form" id="formConsulta" onsubmit="return consultarRecibo(event)">
+        <!-- Sin deuda -->
+        <div id="sinDeuda" class="text-center py-4" style="display:none;">
+          <i class="bi bi-check-circle-fill text-success" style="font-size:2.5rem;"></i>
+          <p class="mt-2 fw-bold text-success">¡Sin deuda pendiente!</p>
+          <p class="text-muted small">Su cuenta está al día.</p>
+        </div>
 
-          <div class="form-group">
-            <input type="number" class="form-control" id="codigo" name="codigo"
-                   placeholder="Código de suministro" required>
-            <i class="bi bi-person field-icon"></i>
-          </div>
-
-          <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email"
-                   placeholder="Correo electrónico" required autocomplete="off">
-            <i class="bi bi-envelope field-icon"></i>
-          </div>
-
-          <div class="form-group">
-            <input type="number" class="form-control" id="dni" name="dni"
-                   placeholder="Número de DNI (8 dígitos)" required maxlength="8"
-                   oninput="if(this.value.length>8)this.value=this.value.slice(0,8)">
-            <i class="bi bi-credit-card-2-front field-icon"></i>
-          </div>
-
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="terminos" required>
-            <label class="form-check-label small" for="terminos">
-              Acepto los <a href="#" onclick="return false;">Términos y Condiciones</a>
-            </label>
-          </div>
-
-          <button type="submit" class="btn-consultar" id="btnConsultar">
-            CONSULTAR
+        <!-- Botón pagar -->
+        <div class="text-center py-3" id="contenedorBtnPagar">
+          <button class="btn-pagar" id="btnPagar" data-bs-toggle="modal" data-bs-target="#modalConfirmar">
+            <i class="bi bi-credit-card-fill me-2"></i>REALIZAR PAGO
           </button>
-        </form>
-
-        <!-- Resultado simulado -->
-        <div id="resultado" class="mt-3">
-          <div class="alert alert-info py-2 small" id="msgResultado"></div>
         </div>
+      </div>
 
-        <!-- Banda VISA -->
-        <div class="visa-banner">
-          <img src="https://sysco.emapat.com.pe/pagoWEB/assets/img/figure/credit-card.gif"
-               alt="Tarjeta" onerror="this.src='https://via.placeholder.com/80x50?text=VISA'">
-          <p>Paga con VISA, en nuestros<br>canales digitales</p>
+      <!-- Volver -->
+      <div class="px-3 pb-3 text-center">
+        <button class="btn btn-outline-secondary btn-sm" onclick="volverBusqueda()">
+          <i class="bi bi-arrow-left me-1"></i>Nueva búsqueda
+        </button>
+      </div>
+
+    </div><!-- /panelDeuda -->
+
+    <!-- Footer -->
+    <div class="footer-card">
+      <span>EPS EMAPAT S.A.</span>
+      <span>Centro de atención: 571984 &nbsp;|&nbsp; Av. Ernesto Rivero 782, Pto. Maldonado</span>
+    </div>
+
+  </div><!-- /card-main -->
+</div><!-- /fxt-bg -->
+
+
+<!-- ── Modal Confirmación de Pago ───────────────────────────────────── -->
+<div class="modal fade" id="modalConfirmar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header modal-header-pago">
+        <h5 class="modal-title">Confirmar Pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><td class="text-muted w-40">Titular</td>    <td><strong id="mNombre">—</strong></td></tr>
+          <tr><td class="text-muted">Suministro</td>      <td id="mSuministro">—</td></tr>
+          <tr><td class="text-muted">Dirección</td>       <td id="mDireccion">—</td></tr>
+          <tr><td class="text-muted">Meses en deuda</td>
+              <td><span class="badge bg-warning text-dark" id="mMeses">0</span></td></tr>
+        </table>
+        <hr>
+        <div class="text-center">
+          <div class="text-muted small">Total a pagar</div>
+          <div class="monto-modal" id="mTotal">S/ 0.00</div>
         </div>
+        <div class="alert alert-info mt-3 mb-0 py-2 text-center" style="font-size:.82rem;">
+          Serás redirigido al portal seguro <strong>EPS EMAPAT</strong> para completar el pago con Niubiz/Visa.
+        </div>
+      </div>
 
-      </div><!-- /panel-form -->
-    </div><!-- /card-pago -->
+      <div class="modal-footer justify-content-between">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-success btn-lg" id="btnConfirmar">
+          <i class="bi bi-check-lg me-1"></i>Confirmar y Pagar
+        </button>
+      </div>
 
-    <p class="text-center mt-3" style="color:rgba(255,255,255,0.6);font-size:0.78rem;">
-      &copy; 2026 EPS EMAPAT S.A. &mdash; Sistema de Pagos en Línea
-    </p>
-
+    </div>
   </div>
 </div>
+<!-- ──────────────────────────────────────────────────────────────────── -->
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-function consultarRecibo(e) {
-  e.preventDefault();
-  const dni = document.getElementById('dni').value;
-  if (dni.length !== 8) {
-    alert('Ingrese un número de DNI válido (8 dígitos).');
-    document.getElementById('dni').focus();
-    return false;
-  }
+/* ═══════════════════════════════════════════════════════════
+   Carga el JSON de datos (generado desde saldos + clientes)
+   ═══════════════════════════════════════════════════════════ */
+let DB = null;
 
+async function cargarDB() {
+  if (DB) return;
+  try {
+    const r = await fetch('pagoweb_data.json');
+    DB = await r.json();
+  } catch (e) {
+    DB = {};
+  }
+}
+
+/* ─── Búsqueda ─────────────────────────────────────────────── */
+document.getElementById('formBusqueda').addEventListener('submit', async function(e) {
+  e.preventDefault();
   const btn = document.getElementById('btnConsultar');
   btn.textContent = 'Consultando...';
   btn.disabled = true;
 
-  setTimeout(() => {
-    const codigo = document.getElementById('codigo').value;
-    const resultado = document.getElementById('resultado');
-    const msg = document.getElementById('msgResultado');
+  await cargarDB();
 
-    msg.innerHTML = `
-      <strong>Recibo encontrado</strong><br>
-      Suministro: <strong>${codigo}</strong><br>
-      Importe pendiente: <strong>S/ 45.80</strong><br>
-      Período: Mayo 2026<br><br>
-      <button class="btn btn-sm" style="background:#00b0ff;color:#fff;border-radius:4px;" onclick="pagarRecibo()">
-        Proceder al pago
-      </button>`;
-    resultado.style.display = 'block';
-    btn.textContent = 'CONSULTAR';
-    btn.disabled = false;
-  }, 1200);
+  const codigo = document.getElementById('inpSuministro').value.trim();
+  const cliente = DB[codigo];
 
-  return false;
+  btn.textContent = 'CONSULTAR';
+  btn.disabled = false;
+
+  if (!cliente) {
+    document.getElementById('msgError').textContent =
+      `Suministro "${codigo}" no encontrado. Verifique el número e intente de nuevo.`;
+    document.getElementById('alertError').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('alertError').style.display = 'none';
+  mostrarDeuda(codigo, cliente);
+});
+
+/* ─── Mostrar deuda ─────────────────────────────────────────── */
+function mostrarDeuda(cod, cli) {
+  // Info cliente
+  document.getElementById('infoSuministro').textContent = cod;
+  document.getElementById('infoNombre').textContent     = cli.nombre;
+  document.getElementById('infoDireccion').textContent  = cli.dir || '—';
+  document.getElementById('infoEmail').textContent      = cli.email || '—';
+
+  const periodos  = cli.periodos || [];
+  const total     = cli.deuda || 0;
+  const meses     = cli.meses || 0;
+
+  // Alerta meses en deuda
+  const alertaMeses = document.getElementById('alertaMeses');
+  if (meses > 0) {
+    alertaMeses.innerHTML =
+      `<strong>Meses en deuda: ${meses}</strong> &nbsp;|&nbsp; ` +
+      `El período más reciente está <span class="badge-corte">AFECTO AL CORTE</span>`;
+    alertaMeses.style.display = 'block';
+  } else {
+    alertaMeses.style.display = 'none';
+  }
+
+  // Tabla
+  const tbody = document.getElementById('tbodyDeuda');
+  tbody.innerHTML = '';
+  periodos.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.className = p.corte ? 'fila-corte' : 'fila-normal';
+    tr.innerHTML = `
+      <td>${p.periodo}</td>
+      <td>${p.recibo}</td>
+      <td class="text-end fw-bold">S/ ${p.total.toFixed(2)}</td>
+      <td>${p.corte
+          ? '<span class="badge-corte">AFECTO AL CORTE</span>'
+          : '<span class="badge-pend">PENDIENTE</span>'}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('totalDeuda').textContent = `S/ ${total.toFixed(2)}`;
+
+  // Sin deuda
+  const sinDeuda = document.getElementById('sinDeuda');
+  const btnPagar = document.getElementById('contenedorBtnPagar');
+  if (meses === 0) {
+    sinDeuda.style.display = 'block';
+    btnPagar.style.display = 'none';
+    tbody.closest('table').style.display = 'none';
+  } else {
+    sinDeuda.style.display = 'none';
+    btnPagar.style.display = 'block';
+    tbody.closest('table').style.display = '';
+  }
+
+  // Datos para el modal
+  document.getElementById('mNombre').textContent    = cli.nombre;
+  document.getElementById('mSuministro').textContent = cod;
+  document.getElementById('mDireccion').textContent  = cli.dir || '—';
+  document.getElementById('mMeses').textContent      = meses + ' mes' + (meses !== 1 ? 'es' : '');
+  document.getElementById('mTotal').textContent      = `S/ ${total.toFixed(2)}`;
+
+  // Guardar para el botón confirmar
+  document.getElementById('btnConfirmar').dataset.cod = cod;
+
+  // Mostrar panel
+  document.getElementById('panelBusqueda').style.display = 'none';
+  document.getElementById('panelDeuda').style.display   = 'block';
 }
 
-function pagarRecibo() {
-  const msg = document.getElementById('msgResultado');
-  msg.className = 'alert alert-success py-2 small';
-  msg.innerHTML = `<i class="bi bi-check-circle-fill me-1"></i>
-    <strong>Pago registrado con éxito.</strong><br>
-    Se enviará la constancia a su correo electrónico.`;
+/* ─── Confirmar → abrir portal producción en nueva pestaña ─── */
+document.getElementById('btnConfirmar').addEventListener('click', function() {
+  const cod = this.dataset.cod || '';
+  bootstrap.Modal.getInstance(document.getElementById('modalConfirmar')).hide();
+  // Abre el portal PHP de producción en nueva pestaña con el suministro pre-llenado
+  window.open(`https://sysco.emapat.com.pe/pagoWEB/?suministro=${cod}`, '_blank');
+});
+
+/* ─── Volver a búsqueda ─────────────────────────────────────── */
+function volverBusqueda() {
+  document.getElementById('panelDeuda').style.display   = 'none';
+  document.getElementById('panelBusqueda').style.display = 'block';
+  document.getElementById('inpSuministro').value = '';
 }
 </script>
 </body>
