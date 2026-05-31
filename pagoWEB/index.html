@@ -491,8 +491,13 @@ function seleccionarMetodo(el, metodo) {
 
 function continuarPago() {
   cerrarModalPago();
+  var p = new URLSearchParams(window.location.search);
+  var nombre  = encodeURIComponent(document.getElementById('infoNombre').textContent || '');
+  var monto   = document.getElementById('totalDeuda').textContent.replace('S/ ','').trim();
+
   if (metodoSeleccionado === 'tarjeta') {
-    window.open('https://sysco.emapat.com.pe/pagoWEB/?suministro=' + suministroActual, '_blank');
+    window.location.href = 'pagar.html?suministro=' + suministroActual +
+                           '&nombre=' + nombre + '&monto=' + monto;
   } else if (metodoSeleccionado === 'qr') {
     alert('Próximamente: pago con QR / billetera electrónica.');
   } else if (metodoSeleccionado === 'yapeplin') {

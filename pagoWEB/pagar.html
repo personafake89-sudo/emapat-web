@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+  <title>Pago Seguro — EPS EMAPAT S.A.</title>
+  <style>
+    *, body { font-family: 'Roboto', sans-serif; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1c3643 0%, #1a7abf 60%, #00b0ff 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .card-pago {
+      background: #fff; border-radius: 18px;
+      width: 100%; max-width: 480px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.30);
+      overflow: hidden;
+    }
+
+    .card-header-pago {
+      background: #1c3643; color: #fff;
+      padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .card-header-pago img  { width: 38px; border-radius: 5px; }
+    .card-header-pago h5   { margin: 0; font-size: 1rem; font-weight: 700; }
+    .card-header-pago small { opacity: .7; font-size: .75rem; }
+
+    .resumen {
+      background: #f0f4f8; border-bottom: 1px solid #dce3ea;
+      padding: 14px 24px; font-size: .88rem;
+    }
+    .resumen .lbl { color: #546e7a; font-size: .75rem; font-weight: 600; text-transform: uppercase; }
+    .resumen .val { color: #1c3643; font-weight: 700; }
+    .monto-grande { font-size: 1.8rem; font-weight: 700; color: #27ae60; }
+
+    .card-body-pago { padding: 24px; }
+
+    /* tarjeta visual */
+    .tarjeta-visual {
+      background: linear-gradient(135deg, #1c3643, #1a7abf);
+      border-radius: 14px; padding: 20px 22px;
+      color: #fff; margin-bottom: 20px;
+      position: relative; overflow: hidden;
+    }
+    .tarjeta-visual::after {
+      content: ''; position: absolute; right: -20px; top: -20px;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    .tarjeta-visual .chip {
+      width: 36px; height: 26px; background: #d4af37;
+      border-radius: 5px; margin-bottom: 14px;
+    }
+    .tarjeta-visual .numero {
+      font-size: 1.15rem; letter-spacing: 3px; font-weight: 600;
+      margin-bottom: 12px; font-family: monospace;
+    }
+    .tarjeta-visual .meta { display: flex; justify-content: space-between; font-size: .75rem; opacity: .8; }
+    .tarjeta-visual .tipo-logo {
+      position: absolute; right: 18px; top: 16px;
+      font-size: .8rem; font-weight: 800; letter-spacing: 1px;
+      background: rgba(255,255,255,.15); padding: 4px 10px; border-radius: 6px;
+    }
+
+    .form-label-sm { font-size: .78rem; font-weight: 600; color: #546e7a; margin-bottom: 3px; }
+    .form-control:focus { border-color: #1a7abf; box-shadow: 0 0 0 3px rgba(26,122,191,.15); }
+
+    .btn-pagar-final {
+      width: 100%; background: linear-gradient(90deg, #27ae60, #2ecc71);
+      color: #fff; border: none; border-radius: 10px;
+      padding: 14px; font-size: 1.05rem; font-weight: 700;
+      transition: transform .15s, box-shadow .15s; margin-top: 8px;
+    }
+    .btn-pagar-final:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,.4); }
+    .btn-pagar-final:disabled { background: #a8d5b5; transform: none; box-shadow: none; }
+
+    .seguridad { font-size: .73rem; color: #90a4ae; text-align: center; margin-top: 10px; }
+
+    /* resultado */
+    #panelResultado { display: none; padding: 32px 24px; text-align: center; }
+    .icono-resultado { font-size: 3.5rem; margin-bottom: 12px; }
+    .nro-operacion { background: #f0f4f8; border-radius: 8px; padding: 10px 16px;
+                     font-family: monospace; font-size: .95rem; margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="card-pago">
+
+  <!-- Header -->
+  <div class="card-header-pago">
+    <img src="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62b4c49fd5ccf.png" alt="Logo">
+    <div>
+      <h5>EPS EMAPAT S.A.</h5>
+      <small>Pago Seguro — Puerto Maldonado</small>
+    </div>
+  </div>
+
+  <!-- Resumen deuda -->
+  <div class="resumen">
+    <div class="row align-items-center">
+      <div class="col">
+        <div class="lbl">Suministro</div>
+        <div class="val" id="rSuministro">—</div>
+        <div class="lbl mt-1">Titular</div>
+        <div class="val" id="rNombre">—</div>
+      </div>
+      <div class="col-auto text-right">
+        <div class="lbl">Total a pagar</div>
+        <div class="monto-grande" id="rMonto">S/ 0.00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <div id="panelForm" class="card-body-pago">
+
+    <!-- Tarjeta visual -->
+    <div class="tarjeta-visual">
+      <div class="chip"></div>
+      <div class="numero" id="vNumero">•••• •••• •••• ••••</div>
+      <div class="meta">
+        <div>
+          <div style="font-size:.6rem;opacity:.7;">TITULAR</div>
+          <div id="vTitular">NOMBRE APELLIDO</div>
+        </div>
+        <div>
+          <div style="font-size:.6rem;opacity:.7;">VENCE</div>
+          <div id="vVence">MM/AA</div>
+        </div>
+      </div>
+      <div class="tipo-logo" id="vTipo">VISA</div>
+    </div>
+
+    <form id="formPago" autocomplete="off">
+      <!-- Número de tarjeta -->
+      <div class="form-group mb-3">
+        <div class="form-label-sm">Número de tarjeta</div>
+        <input type="tel" id="numTarjeta" class="form-control"
+               placeholder="1234 5678 9012 3456" maxlength="19" required>
+      </div>
+
+      <div class="row">
+        <div class="col-7 form-group mb-3">
+          <div class="form-label-sm">Fecha de vencimiento</div>
+          <input type="tel" id="vencimiento" class="form-control"
+                 placeholder="MM/AA" maxlength="5" required>
+        </div>
+        <div class="col-5 form-group mb-3">
+          <div class="form-label-sm">CVV</div>
+          <input type="tel" id="cvv" class="form-control"
+                 placeholder="•••" maxlength="4" required>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="form-label-sm">Nombre del titular</div>
+        <input type="text" id="titular" class="form-control"
+               placeholder="Como aparece en la tarjeta" required>
+      </div>
+
+      <button type="submit" class="btn-pagar-final" id="btnPagarFinal">
+        <i class="fas fa-lock mr-2"></i>PAGAR AHORA
+      </button>
+      <div class="seguridad">
+        <i class="fas fa-shield-alt mr-1"></i>Pago simulado — entorno de pruebas EPS EMAPAT
+      </div>
+    </form>
+  </div>
+
+  <!-- Resultado -->
+  <div id="panelResultado">
+    <div class="icono-resultado" id="iconoRes"></div>
+    <h4 id="tituloRes" class="font-weight-bold"></h4>
+    <p id="textoRes" class="text-muted"></p>
+    <div class="nro-operacion" id="nroOpRes" style="display:none;"></div>
+    <button class="btn btn-outline-secondary btn-sm mt-4" onclick="window.location.href='index.html'">
+      <i class="fas fa-arrow-left mr-1"></i>Volver al inicio
+    </button>
+  </div>
+
+</div><!-- /card-pago -->
+
+<script src="assets/js/jquery-3.5.0.min.js"></script>
+<script>
+/* ── Leer params de URL ── */
+(function() {
+  const p = new URLSearchParams(window.location.search);
+  document.getElementById('rSuministro').textContent = p.get('suministro') || '—';
+  document.getElementById('rNombre').textContent     = decodeURIComponent(p.get('nombre') || '—');
+  const monto = parseFloat(p.get('monto') || 0);
+  document.getElementById('rMonto').textContent = 'S/ ' + monto.toFixed(2);
+})();
+
+/* ── Tarjeta visual ── */
+document.getElementById('numTarjeta').addEventListener('input', function() {
+  var raw = this.value.replace(/\D/g, '').slice(0, 16);
+  var fmt = raw.match(/.{1,4}/g);
+  this.value = fmt ? fmt.join(' ') : raw;
+
+  var display = raw.padEnd(16, '•').match(/.{1,4}/g).join(' ');
+  document.getElementById('vNumero').textContent = display;
+
+  var tipo = raw.startsWith('4') ? 'VISA'
+           : (raw.startsWith('5') || raw.startsWith('2')) ? 'MC'
+           : raw.startsWith('3') ? 'AMEX' : 'TARJETA';
+  document.getElementById('vTipo').textContent = tipo;
+});
+
+document.getElementById('vencimiento').addEventListener('input', function() {
+  var raw = this.value.replace(/\D/g, '').slice(0, 4);
+  if (raw.length > 2) raw = raw.slice(0,2) + '/' + raw.slice(2);
+  this.value = raw;
+  document.getElementById('vVence').textContent = raw || 'MM/AA';
+});
+
+document.getElementById('titular').addEventListener('input', function() {
+  document.getElementById('vTitular').textContent = this.value.toUpperCase() || 'NOMBRE APELLIDO';
+});
+
+/* ── Submit ── */
+document.getElementById('formPago').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btnPagarFinal');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Procesando...';
+
+  const p = new URLSearchParams(window.location.search);
+
+  const payload = {
+    codcliente: p.get('suministro') || '',
+    nombre:     decodeURIComponent(p.get('nombre') || ''),
+    monto:      parseFloat(p.get('monto') || 0),
+    numTarjeta: document.getElementById('numTarjeta').value,
+    vencimiento:document.getElementById('vencimiento').value,
+    cvv:        document.getElementById('cvv').value,
+    titular:    document.getElementById('titular').value,
+  };
+
+  try {
+    const resp = await fetch('/api/pagar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+
+    document.getElementById('panelForm').style.display      = 'none';
+    document.getElementById('panelResultado').style.display = 'block';
+
+    if (data.exitoso) {
+      document.getElementById('iconoRes').textContent  = '✅';
+      document.getElementById('tituloRes').textContent = '¡Pago registrado!';
+      document.getElementById('textoRes').textContent  = 'Tu pago fue procesado correctamente.';
+      document.getElementById('nroOpRes').textContent  = 'N° Operación: ' + data.nroOperacion;
+      document.getElementById('nroOpRes').style.display = 'block';
+    } else {
+      document.getElementById('iconoRes').textContent  = '❌';
+      document.getElementById('tituloRes').textContent = 'Pago rechazado';
+      document.getElementById('textoRes').textContent  = data.motivo || 'No se pudo procesar el pago.';
+      document.getElementById('nroOpRes').textContent  = 'N° Operación: ' + data.nroOperacion;
+      document.getElementById('nroOpRes').style.display = 'block';
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-lock mr-2"></i>PAGAR AHORA';
+    alert('Error de conexión. Intente de nuevo.');
+  }
+});
+</script>
+</body>
+</html>
