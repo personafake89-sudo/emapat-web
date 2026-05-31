@@ -96,7 +96,7 @@
     <div class="row mt-3">
         <div class="col-12">
             <div class="card mb-4">
-                <form action="./pagar.php" method="POST"  name="frm" id="frm">
+                <form action="./pagar.php" method="POST" name="frm" id="frm" target="_blank">
                     <input type='hidden' name='codcliente' value='<?php echo $codcliente; ?>' />
                     <input type='hidden' name='nropedido' value='<?php echo $nropedido; ?>' />
                     <div class="card-header">
@@ -369,9 +369,10 @@
         $('#modalConfirmarPago').modal('show');
     });
 
-    // Confirmar → enviar el form real
+    // Confirmar → abre pagar.php en nueva pestaña
     $('#btnConfirmarPagar').on('click', function() {
         $('#modalConfirmarPago').modal('hide');
+        // target="_blank" ya está en el form, submit nativo lo respeta
         document.getElementById('frm').submit();
     });
 </script>
