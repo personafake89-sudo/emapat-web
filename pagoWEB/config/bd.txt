@@ -1,0 +1,18 @@
+CREATE DATABASE conline;
+USE conline;
+
+CREATE TABLE `tbl_users` (
+  `userID` int(11) NOT NULL,
+  `userName` varchar(100) NOT NULL,
+  `userEmail` varchar(100) NOT NULL,
+  `userPass` varchar(100) NOT NULL,
+  `userStatus` enum('Y','N') NOT NULL DEFAULT 'N',
+  `tokenCode` varchar(100) NOT NULL,
+  `codcliente` int(11) NOT NULL,
+  `fechareg` datetime DEFAULT CURRENT_TIMESTAMP,
+  `celular` int(11) NOT NULL,
+  `cliente` varchar(100) DEFAULT NULL,
+  `docident` varchar(11) DEFAULT NULL,
+  `nombres` varchar(50) DEFAULT NULL ,
+  `apellidos` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
