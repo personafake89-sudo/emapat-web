@@ -218,135 +218,180 @@
 
 
 <!-- ══════════════════════════════════════════════════
-     OVERLAY MÉTODOS DE PAGO
+     OVERLAY MÉTODOS DE PAGO (2 pasos)
 ══════════════════════════════════════════════════ -->
 <div id="overlayPago" style="
   display:none; position:fixed; inset:0; z-index:9999;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.52);
   align-items:center; justify-content:center;
 ">
-  <div id="modalPago" style="
+  <div style="
     background:#f0f0f0; border-radius:14px;
-    padding:1.5rem 1.25rem 1.25rem;
-    width:320px; max-width:95vw;
+    width:320px; max-width:95vw; max-height:95vh; overflow-y:auto;
     position:relative;
-    box-shadow:0 8px 32px rgba(0,0,0,0.22);
+    box-shadow:0 8px 32px rgba(0,0,0,0.28);
     font-family: Arial, sans-serif;
   ">
 
-    <!-- Botón cerrar -->
-    <button onclick="cerrarModalPago()" style="
-      position:absolute; top:10px; right:10px;
-      background:none; border:none; cursor:pointer; padding:0;
-    ">
-      <img src="https://static-content.vnforapps.com/v2/css/images/close.png" alt="Cerrar" width="20" height="20">
-    </button>
+    <!-- ══ PASO 1: SELECCIÓN ══ -->
+    <div id="paso1" style="padding:1.5rem 1.25rem 1.25rem;">
 
-    <!-- Selector de idioma -->
-    <div style="font-size:12px; color:#555; margin-bottom:0.75rem; display:flex; gap:10px;">
-      <span style="font-weight:700; color:#222; cursor:pointer;">ESP</span>
-      <span style="cursor:pointer;">ENG</span>
-    </div>
+      <button onclick="cerrarModalPago()" style="position:absolute;top:10px;right:10px;background:none;border:none;cursor:pointer;padding:0;z-index:1;">
+        <img src="https://static-content.vnforapps.com/v2/css/images/close.png" alt="Cerrar" width="20" height="20">
+      </button>
 
-    <!-- Logo EMAPAT -->
-    <div style="margin-bottom:1.1rem;">
-      <img src="https://sysco.emapat.com.pe/pagoWEB/assets/img/logotipo.png"
-           alt="EPS EMAPAT S.A." style="width:70px; height:auto;">
-    </div>
+      <div style="font-size:12px;color:#555;margin-bottom:.75rem;display:flex;gap:10px;">
+        <span style="font-weight:700;color:#222;cursor:pointer;">ESP</span>
+        <span style="cursor:pointer;color:#888;">ENG</span>
+      </div>
 
-    <!-- Título -->
-    <div style="font-size:14px; font-weight:700; color:#222; margin-bottom:0.85rem;">
-      Elige un método de pago
-    </div>
+      <div style="margin-bottom:1.1rem;">
+        <img src="https://sysco.emapat.com.pe/pagoWEB/assets/img/logotipo.png" alt="EPS EMAPAT S.A." style="width:72px;height:auto;">
+      </div>
 
-    <!-- Opción 1: Tarjeta -->
-    <div class="metodo-pago selected" onclick="seleccionarMetodo(this,'tarjeta')" style="
-      display:flex; align-items:flex-start; gap:10px;
-      background:#fff; border:2px solid #2196f3;
-      border-radius:10px; padding:10px 12px;
-      margin-bottom:9px; cursor:pointer; transition:border-color 0.15s;
-    ">
-      <input type="radio" name="metodoPago" value="tarjeta" checked
-             style="margin-top:3px; accent-color:#2196f3; flex-shrink:0;">
-      <div>
-        <div style="font-size:13px; font-weight:700; color:#222; margin-bottom:2px;">
-          Tarjeta de crédito y/o débito
+      <div style="font-size:14px;font-weight:700;color:#222;margin-bottom:.85rem;">Elige un método de pago</div>
+
+      <!-- Tarjeta -->
+      <div class="metodo-pago" onclick="seleccionarMetodo(this,'tarjeta')" style="display:flex;align-items:flex-start;gap:10px;background:#fff;border:2px solid #2196f3;border-radius:10px;padding:10px 12px;margin-bottom:9px;cursor:pointer;">
+        <input type="radio" name="metodoPago" value="tarjeta" checked style="margin-top:3px;accent-color:#2196f3;flex-shrink:0;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#222;margin-bottom:2px;">Tarjeta de crédito y/o débito</div>
+          <div style="font-size:11px;color:#777;margin-bottom:7px;">Paga al contado o en cuotas</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
+            <img src="https://static-content.vnforapps.com/v2/img/bottom/visa.png"     alt="Visa"       style="height:24px;width:auto;border-radius:3px;">
+            <img src="https://static-content.vnforapps.com/v2/img/bottom/mc.png"       alt="Mastercard" style="height:24px;width:auto;border-radius:3px;">
+            <img src="https://static-content.vnforapps.com/v2/img/bottom/dc.png"       alt="Diners"     style="height:24px;width:auto;border-radius:3px;">
+            <img src="https://static-content.vnforapps.com/v2/img/bottom/unionpay.svg" alt="UnionPay"   style="height:24px;width:auto;border-radius:3px;">
+          </div>
         </div>
-        <div style="font-size:11px; color:#777; margin-bottom:7px;">Paga al contado o en cuotas</div>
-        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
-          <span style="height:26px; padding:0 7px; background:#1a1f71; border-radius:4px;
-                       font-size:11px; font-weight:800; color:#fff;
-                       display:inline-flex; align-items:center; letter-spacing:1px;">VISA</span>
-          <img src="https://static-content.vnforapps.com/v2/img/bottom/mc.png"
-               alt="Mastercard" style="height:26px; width:auto; border-radius:4px;">
-          <img src="https://static-content.vnforapps.com/v2/img/bottom/dc.png"
-               alt="Diners Club" style="height:26px; width:auto; border-radius:4px;">
-          <span style="height:26px; padding:0 7px; background:#e21836; border-radius:4px;
-                       font-size:9px; font-weight:700; color:#fff;
-                       display:inline-flex; align-items:center;">UnionPay</span>
+      </div>
+
+      <!-- QR -->
+      <div class="metodo-pago" onclick="seleccionarMetodo(this,'qr')" style="display:flex;align-items:flex-start;gap:10px;background:#fff;border:1.5px solid #ddd;border-radius:10px;padding:10px 12px;margin-bottom:9px;cursor:pointer;">
+        <input type="radio" name="metodoPago" value="qr" style="margin-top:3px;accent-color:#2196f3;flex-shrink:0;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#222;margin-bottom:5px;">Código QR / Billetera electrónica</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
+            <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/plin.png"     alt="Plin"  style="height:24px;width:auto;border-radius:3px;">
+            <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/agoraPay.png" alt="Agora" style="height:24px;width:auto;border-radius:3px;">
+            <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/ligo.png"     alt="Ligo"  style="height:24px;width:auto;border-radius:3px;">
+          </div>
         </div>
+      </div>
+
+      <!-- Yape/Plin -->
+      <div class="metodo-pago" onclick="seleccionarMetodo(this,'yapeplin')" style="display:flex;align-items:flex-start;gap:10px;background:#fff;border:1.5px solid #ddd;border-radius:10px;padding:10px 12px;margin-bottom:9px;cursor:pointer;">
+        <input type="radio" name="metodoPago" value="yapeplin" style="margin-top:3px;accent-color:#2196f3;flex-shrink:0;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#222;margin-bottom:5px;">Pago con Yape / Plin</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
+            <span style="height:24px;padding:0 9px;background:#6a0dad;border-radius:3px;font-size:11px;font-weight:700;color:#fff;display:inline-flex;align-items:center;">Yape</span>
+            <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/plin.png" alt="Plin" style="height:24px;width:auto;border-radius:3px;">
+          </div>
+        </div>
+      </div>
+
+      <button onclick="continuarPaso1()" style="width:100%;padding:13px;background:#2ecc71;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:.4rem;"
+        onmouseover="this.style.background='#27ae60'" onmouseout="this.style.background='#2ecc71'">
+        Continuar
+      </button>
+    </div>
+
+    <!-- ══ PASO 2: FORMULARIO TARJETA ══ -->
+    <div id="paso2" style="display:none;padding:1.25rem;">
+
+      <!-- cabecera -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <button onclick="irPaso(1)" style="background:none;border:none;cursor:pointer;padding:0;font-size:13px;color:#2196f3;">&#8592; Volver</button>
+        <img src="https://sysco.emapat.com.pe/pagoWEB/assets/img/logotipo.png" alt="EPS EMAPAT" style="width:60px;height:auto;">
+        <button onclick="cerrarModalPago()" style="background:none;border:none;cursor:pointer;padding:0;">
+          <img src="https://static-content.vnforapps.com/v2/css/images/close.png" alt="Cerrar" width="18" height="18">
+        </button>
+      </div>
+
+      <!-- resumen -->
+      <div style="background:#fff;border-radius:10px;padding:12px 14px;margin-bottom:1rem;border:1px solid #e0e0e0;">
+        <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:8px;">Información del pago</div>
+        <table style="width:100%;font-size:12px;color:#555;border-collapse:collapse;">
+          <tr><td style="padding:2px 0;color:#888;">Código cliente:</td><td style="text-align:right;font-weight:600;color:#333;" id="p2Suministro">—</td></tr>
+          <tr><td style="padding:2px 0;color:#888;">Importe:</td>       <td style="text-align:right;font-weight:700;color:#27ae60;font-size:14px;" id="p2Monto">S/ 0.00</td></tr>
+          <tr><td style="padding:2px 0;color:#888;">Concepto:</td>      <td style="text-align:right;font-weight:600;color:#333;">PAGO DE SERVICIO DE AGUA</td></tr>
+          <tr><td style="padding:2px 0;color:#888;">Fecha:</td>         <td style="text-align:right;color:#333;" id="p2Fecha">—</td></tr>
+        </table>
+      </div>
+
+      <!-- tarjeta visual -->
+      <div id="tarjetaVisual" style="background:linear-gradient(135deg,#1c3643,#1a7abf);border-radius:12px;padding:16px 18px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-15px;top:-15px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.07);"></div>
+        <div style="width:32px;height:22px;background:#d4af37;border-radius:4px;margin-bottom:12px;"></div>
+        <div id="tvNumero" style="font-size:1rem;letter-spacing:3px;font-weight:600;margin-bottom:10px;font-family:monospace;">•••• •••• •••• ••••</div>
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;opacity:.8;">
+          <div><div style="font-size:.55rem;opacity:.7;">TITULAR</div><div id="tvTitular">NOMBRE APELLIDO</div></div>
+          <div><div style="font-size:.55rem;opacity:.7;">VENCE</div><div id="tvVence">MM/AA</div></div>
+        </div>
+        <div id="tvTipo" style="position:absolute;right:14px;top:12px;background:rgba(255,255,255,.15);padding:3px 8px;border-radius:5px;font-size:.75rem;font-weight:800;letter-spacing:1px;">VISA</div>
+      </div>
+
+      <!-- campos tarjeta -->
+      <div style="margin-bottom:10px;">
+        <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">Número de tarjeta</div>
+        <input type="tel" id="p2NumTarjeta" maxlength="19" placeholder="1234 5678 9012 3456"
+               style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
+               oninput="actualizarTarjeta(this)" onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:10px;">
+        <div style="flex:1;">
+          <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">Vencimiento</div>
+          <input type="tel" id="p2Vence" maxlength="5" placeholder="MM/AA"
+                 style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
+                 oninput="fmtVence(this)" onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">CVV</div>
+          <input type="tel" id="p2Cvv" maxlength="4" placeholder="•••"
+                 style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
+                 onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">Titular de la tarjeta</div>
+        <input type="text" id="p2Titular" placeholder="Como aparece en la tarjeta"
+               style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
+               oninput="document.getElementById('tvTitular').textContent=this.value.toUpperCase()||'NOMBRE APELLIDO'"
+               onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+      </div>
+
+      <!-- términos -->
+      <div style="margin-bottom:10px;font-size:12px;color:#555;">
+        <input type="checkbox" id="ckbTerms">
+        <label for="ckbTerms"> Acepto los <a href="#" target="_blank" style="color:#2196f3;">Términos y condiciones</a></label>
+      </div>
+
+      <!-- botón pagar -->
+      <button id="btnPagarModal" onclick="procesarPago()" style="width:100%;padding:13px;background:#2ecc71;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;"
+        onmouseover="this.style.background='#27ae60'" onmouseout="this.style.background='#2ecc71'">
+        <span id="btnPagarTxt">&#128274; PAGAR AHORA</span>
+      </button>
+
+      <!-- logos -->
+      <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid #e0e0e0;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/visa.png"     alt="Visa"       style="height:18px;width:auto;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/mc.png"       alt="Mastercard" style="height:18px;width:auto;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/dc.png"       alt="Diners"     style="height:18px;width:auto;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/unionpay.svg" alt="UnionPay"   style="height:18px;width:auto;">
       </div>
     </div>
 
-    <!-- Opción 2: QR / Billetera -->
-    <div class="metodo-pago" onclick="seleccionarMetodo(this,'qr')" style="
-      display:flex; align-items:flex-start; gap:10px;
-      background:#fff; border:1.5px solid #ddd;
-      border-radius:10px; padding:10px 12px;
-      margin-bottom:9px; cursor:pointer; transition:border-color 0.15s;
-    ">
-      <input type="radio" name="metodoPago" value="qr"
-             style="margin-top:3px; accent-color:#2196f3; flex-shrink:0;">
-      <div>
-        <div style="font-size:13px; font-weight:700; color:#222; margin-bottom:5px;">
-          Código QR / Billetera electrónica
-        </div>
-        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
-          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/plin.png"
-               alt="Plin" style="height:26px; width:auto; border-radius:4px;">
-          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/agoraPay.png"
-               alt="Agora Pay" style="height:26px; width:auto; border-radius:4px;">
-          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/ligo.png"
-               alt="Ligo" style="height:26px; width:auto; border-radius:4px;">
-        </div>
-      </div>
+    <!-- ══ PASO 3: RESULTADO ══ -->
+    <div id="paso3" style="display:none;padding:2rem 1.25rem;text-align:center;">
+      <div id="p3Icono" style="font-size:3rem;margin-bottom:12px;"></div>
+      <div id="p3Titulo" style="font-size:1.1rem;font-weight:700;color:#222;margin-bottom:6px;"></div>
+      <div id="p3Texto"  style="font-size:.85rem;color:#666;margin-bottom:16px;"></div>
+      <div id="p3NroOp"  style="background:#f0f4f8;border-radius:8px;padding:8px 14px;font-family:monospace;font-size:.85rem;margin-bottom:20px;display:none;"></div>
+      <button onclick="cerrarModalPago()" style="padding:10px 28px;background:#1c3643;border:none;border-radius:8px;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;">
+        Cerrar
+      </button>
     </div>
-
-    <!-- Opción 3: Yape / Plin -->
-    <div class="metodo-pago" onclick="seleccionarMetodo(this,'yapeplin')" style="
-      display:flex; align-items:flex-start; gap:10px;
-      background:#fff; border:1.5px solid #ddd;
-      border-radius:10px; padding:10px 12px;
-      margin-bottom:9px; cursor:pointer; transition:border-color 0.15s;
-    ">
-      <input type="radio" name="metodoPago" value="yapeplin"
-             style="margin-top:3px; accent-color:#2196f3; flex-shrink:0;">
-      <div>
-        <div style="font-size:13px; font-weight:700; color:#222; margin-bottom:5px;">
-          Pago con Yape / Plin
-        </div>
-        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
-          <span style="height:26px; padding:0 10px; background:#6a0dad; border-radius:4px;
-                       font-size:11px; font-weight:700; color:#fff;
-                       display:inline-flex; align-items:center;">Yape</span>
-          <img src="https://static-content.vnforapps.com/v2/img/pagoefectivo/wallets/plin.png"
-               alt="Plin" style="height:26px; width:auto; border-radius:4px;">
-        </div>
-      </div>
-    </div>
-
-    <!-- Botón Continuar -->
-    <button id="btnContinuarPago" onclick="continuarPago()" style="
-      width:100%; padding:13px;
-      background:#2ecc71; border:none;
-      border-radius:8px; color:#fff;
-      font-size:15px; font-weight:700;
-      cursor:pointer; margin-top:0.5rem;
-      letter-spacing:0.01em; transition:background 0.15s;
-    "
-      onmouseover="this.style.background='#27ae60'"
-      onmouseout="this.style.background='#2ecc71'"
-    >Continuar</button>
 
   </div>
 </div>
@@ -469,8 +514,8 @@ var metodoSeleccionado = 'tarjeta';
 var suministroActual   = '';
 
 function abrirModalPago() {
-  var overlay = document.getElementById('overlayPago');
-  overlay.style.display = 'flex';
+  irPaso(1);
+  document.getElementById('overlayPago').style.display = 'flex';
 }
 function cerrarModalPago() {
   document.getElementById('overlayPago').style.display = 'none';
@@ -478,6 +523,29 @@ function cerrarModalPago() {
 document.getElementById('overlayPago').addEventListener('click', function(e) {
   if (e.target === this) cerrarModalPago();
 });
+
+function irPaso(n) {
+  document.getElementById('paso1').style.display = n === 1 ? 'block' : 'none';
+  document.getElementById('paso2').style.display = n === 2 ? 'block' : 'none';
+  document.getElementById('paso3').style.display = n === 3 ? 'block' : 'none';
+  if (n === 2) {
+    var now = new Date();
+    document.getElementById('p2Suministro').textContent = suministroActual;
+    document.getElementById('p2Monto').textContent      = document.getElementById('totalDeuda').textContent;
+    document.getElementById('p2Fecha').textContent      = now.toLocaleDateString('es-PE');
+    document.getElementById('ckbTerms').checked = false;
+    document.getElementById('p2NumTarjeta').value = '';
+    document.getElementById('p2Vence').value      = '';
+    document.getElementById('p2Cvv').value        = '';
+    document.getElementById('p2Titular').value    = '';
+    document.getElementById('tvNumero').textContent  = '•••• •••• •••• ••••';
+    document.getElementById('tvTitular').textContent = 'NOMBRE APELLIDO';
+    document.getElementById('tvVence').textContent   = 'MM/AA';
+    document.getElementById('tvTipo').textContent    = 'VISA';
+    document.getElementById('btnPagarTxt').textContent = '🔒 PAGAR AHORA';
+    document.getElementById('btnPagarModal').disabled  = false;
+  }
+}
 
 function seleccionarMetodo(el, metodo) {
   metodoSeleccionado = metodo;
@@ -489,19 +557,88 @@ function seleccionarMetodo(el, metodo) {
   el.querySelector('input').checked = true;
 }
 
-function continuarPago() {
-  cerrarModalPago();
-  var p = new URLSearchParams(window.location.search);
-  var nombre  = encodeURIComponent(document.getElementById('infoNombre').textContent || '');
-  var monto   = document.getElementById('totalDeuda').textContent.replace('S/ ','').trim();
-
+function continuarPaso1() {
   if (metodoSeleccionado === 'tarjeta') {
-    window.location.href = 'pagar.html?suministro=' + suministroActual +
-                           '&nombre=' + nombre + '&monto=' + monto;
-  } else if (metodoSeleccionado === 'qr') {
-    alert('Próximamente: pago con QR / billetera electrónica.');
-  } else if (metodoSeleccionado === 'yapeplin') {
-    alert('Próximamente: pago con Yape / Plin.');
+    irPaso(2);
+  } else {
+    alert('Próximamente disponible.');
+  }
+}
+
+/* tarjeta visual */
+function actualizarTarjeta(inp) {
+  var raw = inp.value.replace(/\D/g,'').slice(0,16);
+  var fmt = raw.match(/.{1,4}/g);
+  inp.value = fmt ? fmt.join(' ') : raw;
+  var display = raw.padEnd(16,'•').match(/.{1,4}/g).join(' ');
+  document.getElementById('tvNumero').textContent = display;
+  var tipo = raw.startsWith('4') ? 'VISA' : (raw.startsWith('5')||raw.startsWith('2')) ? 'MC' : raw.startsWith('3') ? 'AMEX' : 'TARJETA';
+  document.getElementById('tvTipo').textContent = tipo;
+}
+function fmtVence(inp) {
+  var raw = inp.value.replace(/\D/g,'').slice(0,4);
+  if (raw.length > 2) raw = raw.slice(0,2) + '/' + raw.slice(2);
+  inp.value = raw;
+  document.getElementById('tvVence').textContent = raw || 'MM/AA';
+}
+
+/* procesar pago */
+async function procesarPago() {
+  if (!document.getElementById('ckbTerms').checked) {
+    alert('Debes aceptar los términos y condiciones.');
+    return;
+  }
+  var numTarjeta = document.getElementById('p2NumTarjeta').value;
+  var vencimiento= document.getElementById('p2Vence').value;
+  var cvv        = document.getElementById('p2Cvv').value;
+  var titular    = document.getElementById('p2Titular').value;
+
+  if (!numTarjeta || !vencimiento || !cvv || !titular) {
+    alert('Completa todos los campos de la tarjeta.');
+    return;
+  }
+
+  var btn = document.getElementById('btnPagarModal');
+  btn.disabled = true;
+  document.getElementById('btnPagarTxt').textContent = '⏳ Procesando...';
+
+  var monto = parseFloat(
+    document.getElementById('totalDeuda').textContent.replace('S/ ','').trim()
+  ) || 0;
+
+  try {
+    var resp = await fetch('/api/pagar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        codcliente: suministroActual,
+        nombre:     document.getElementById('infoNombre').textContent,
+        monto:      monto,
+        numTarjeta: numTarjeta,
+        vencimiento:vencimiento,
+        cvv:        cvv,
+        titular:    titular,
+      }),
+    });
+    var data = await resp.json();
+    irPaso(3);
+    if (data.exitoso) {
+      document.getElementById('p3Icono').textContent  = '✅';
+      document.getElementById('p3Titulo').textContent = '¡Pago registrado!';
+      document.getElementById('p3Texto').textContent  = 'Tu pago fue procesado correctamente.';
+      document.getElementById('p3NroOp').textContent  = 'N° Operación: ' + data.nroOperacion;
+      document.getElementById('p3NroOp').style.display = 'block';
+    } else {
+      document.getElementById('p3Icono').textContent  = '❌';
+      document.getElementById('p3Titulo').textContent = 'Pago rechazado';
+      document.getElementById('p3Texto').textContent  = data.motivo || 'No se pudo procesar el pago.';
+      document.getElementById('p3NroOp').textContent  = 'N° Operación: ' + data.nroOperacion;
+      document.getElementById('p3NroOp').style.display = 'block';
+    }
+  } catch(err) {
+    btn.disabled = false;
+    document.getElementById('btnPagarTxt').textContent = '🔒 PAGAR AHORA';
+    alert('Error de conexión. Intente de nuevo.');
   }
 }
 
