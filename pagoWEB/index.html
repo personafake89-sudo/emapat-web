@@ -152,22 +152,15 @@
 
         <div class="card mt-3 mt-md-2" style="border-radius:15px;box-shadow:0 2px 20px #cbcbcb;">
           <div class="card-header font-weight-bold text-center">
-            <p class="mb-0">Información del cliente</p>
+            <p class="mb-0">Información del pago</p>
           </div>
           <div class="card-body">
-            <p class="h5" style="padding-left:20px;">Datos del suministro</p>
-            <b style="padding-left:20px;">Código de Suministro: </b><span id="infoSuministro">—</span><br>
-            <b style="padding-left:20px;">Titular: </b><span id="infoNombre">—</span><br>
-            <b style="padding-left:20px;">Dirección: </b><span id="infoDireccion">—</span><br>
-            <b style="padding-left:20px;">Correo: </b><span id="infoEmail">—</span><br>
-            <b style="padding-left:20px;">Localidad: </b>Puerto Maldonado<br>
-            <hr>
-            <p class="h5" style="padding-left:20px;">Detalle de deuda</p>
-            <b style="padding-left:20px;">Período: </b><span id="infoUltimoPeriodo">—</span><br>
-            <b style="padding-left:20px;">Nro. Recibo: </b><span id="infoUltimoRecibo">—</span><br>
-            <b style="padding-left:20px;">Importe a pagar: </b><span id="totalDeuda" style="color:#27ae60;font-weight:700;">S/ 0.00</span><br>
+            <b style="padding-left:20px;">Codigo Cliente: </b><span id="infoSuministro">—</span><br>
+            <b style="padding-left:20px;">Importe a pagar: </b><span id="totalDeuda">S/ 0.00</span><br>
+            <b style="padding-left:20px;">Número de pedido: </b><span id="infoUltimoRecibo">—</span><br>
             <b style="padding-left:20px;">Concepto: </b>PAGO DE SERVICIO DE AGUA<br>
-            <b style="padding-left:20px;">Meses en deuda: </b><span id="infoMesesDeuda">—</span><br>
+            <b style="padding-left:20px;">Fecha: </b><span id="infoFecha">—</span><br>
+            <b style="padding-left:20px;">DNI: </b><span id="infoDni">—</span><br>
             <hr>
 
             <div id="contenedorBtnPagar">
@@ -457,27 +450,24 @@ async function buscar(e) {
 
 /* ── Mostrar panel de deuda ── */
 function mostrarDeuda(cod, cli) {
-  document.getElementById('infoSuministro').textContent = cod;
-  document.getElementById('infoNombre').textContent     = cli.nombre;
-  document.getElementById('infoDireccion').textContent  = cli.dir   || '—';
-  document.getElementById('infoEmail').textContent      = cli.email || '—';
-
   var periodos = cli.periodos || [];
   var meses    = cli.meses   || 0;
+  var hoy      = new Date().toLocaleDateString('es-PE');
+  var dni      = document.getElementById('dni').value;
+
+  document.getElementById('infoSuministro').textContent = cod;
+  document.getElementById('infoFecha').textContent      = hoy;
+  document.getElementById('infoDni').textContent        = dni;
 
   if (meses === 0) {
     var ur = cli.ultimo_recibo;
-    document.getElementById('infoUltimoPeriodo').textContent = ur ? ur.periodo : '—';
-    document.getElementById('infoUltimoRecibo').textContent  = ur ? ur.recibo  : '—';
-    document.getElementById('totalDeuda').textContent        = ur ? 'S/ ' + parseFloat(ur.total).toFixed(2) : 'S/ 0.00';
-    document.getElementById('infoMesesDeuda').textContent    = '0 (AL DÍA)';
+    document.getElementById('infoUltimoRecibo').textContent = ur ? ur.recibo : '—';
+    document.getElementById('totalDeuda').textContent       = ur ? 'S/ ' + parseFloat(ur.total).toFixed(2) : 'S/ 0.00';
     document.getElementById('contenedorBtnPagar').style.display = 'none';
   } else {
     var p = periodos[0];
-    document.getElementById('infoUltimoPeriodo').textContent = p.periodo;
-    document.getElementById('infoUltimoRecibo').textContent  = p.recibo;
-    document.getElementById('totalDeuda').textContent        = 'S/ ' + p.total.toFixed(2);
-    document.getElementById('infoMesesDeuda').textContent    = '1';
+    document.getElementById('infoUltimoRecibo').textContent = p.recibo;
+    document.getElementById('totalDeuda').textContent       = 'S/ ' + p.total.toFixed(2);
     document.getElementById('contenedorBtnPagar').style.display = 'block';
   }
 
