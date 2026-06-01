@@ -254,7 +254,11 @@
             <hr>
 
             <div id="contenedorBtnPagar">
-              <button onclick="abrirModalPago()" style="background:url('https://static-content.vnforapps.com/v2/img/button/EN/navy/default/PayWith.png') center/contain no-repeat;width:100%;max-width:260px;height:46px;border:none;cursor:pointer;display:block;margin:0 auto;"></button>
+              <div style="margin-bottom:10px;">
+                <input type="checkbox" name="ckbTermsDeuda" id="ckbTermsDeuda">
+                <label for="ckbTermsDeuda"> Acepto los <a href="assets/doc/Terminos_condiciones_visa.pdf" target="_blank">Términos y condiciones</a></label>
+              </div>
+              <button onclick="abrirModalSiAcepta()" style="background:url('https://static-content.vnforapps.com/v2/img/button/EN/navy/default/PayWith.png') center/contain no-repeat;width:100%;max-width:260px;height:46px;border:none;cursor:pointer;display:block;margin:0 auto;"></button>
             </div>
 
             <div class="text-center mt-3">
@@ -615,6 +619,14 @@ function irAPago() {
 /* ── Modal métodos de pago ── */
 var metodoSeleccionado = 'tarjeta';
 var suministroActual   = '';
+
+function abrirModalSiAcepta() {
+  if (!document.getElementById('ckbTermsDeuda').checked) {
+    alert('Debe aceptar los Términos y condiciones para continuar.');
+    return;
+  }
+  abrirModalPago();
+}
 
 function abrirModalPago() {
   irPaso(1);
