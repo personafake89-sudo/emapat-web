@@ -239,6 +239,21 @@
               </tr>
             </thead>
             <tbody>
+              <?php if ($mesesDeuda === 0): ?>
+              <tr>
+                <td colspan="<?= ($checkfactmes == 'SI') ? 5 : 4 ?>" style="text-align:center; padding:18px; color:#555; font-style:italic;">
+                  No se encontraron recibos pendientes en este momento.
+                </td>
+              </tr>
+              <tr>
+                <td colspan="<?= ($checkfactmes == 'SI') ? 4 : 3 ?>" style="text-align:right; padding:10px; font-weight:700; color:#1B4F72; background:#eaf4fb;">
+                  ESTADO ACTUAL
+                </td>
+                <td style="text-align:right; padding:10px; background:#eaf4fb;">
+                  <span style="background:#27ae60;color:#fff;font-size:11px;padding:3px 10px;border-radius:10px;font-weight:700;">AL DÍA</span>
+                </td>
+              </tr>
+              <?php else: ?>
               <?php
               $tot_02 = 0;
               foreach ($rowsArray as $rows):
@@ -288,6 +303,7 @@
                 </td>
                 <td style="text-align:right; padding:10px;">S/ <?= number_format($valcomision, 2) ?></td>
               </tr>
+              <?php endif; ?>
               <?php endif; ?>
             </tbody>
           </table>

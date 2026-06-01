@@ -178,12 +178,6 @@
 
       <div id="alertaMeses" class="alert-corte-bar" style="display:none;"></div>
 
-      <div id="sinDeuda" class="text-center py-4">
-        <i class="fas fa-check-circle text-success" style="font-size:2.5rem;"></i>
-        <p class="mt-2 font-weight-bold text-success">¡Sin deuda pendiente!</p>
-        <p class="text-muted small">Su cuenta está al día.</p>
-      </div>
-
       <div id="tablaContenedor" class="table-responsive">
         <table class="table table-sm tabla-deuda mb-0">
           <thead>
@@ -469,30 +463,43 @@ function mostrarDeuda(cod, cli) {
 
   var tbody = document.getElementById('tbodyDeuda');
   tbody.innerHTML = '';
-  periodos.forEach(function(p) {
-    var tr = document.createElement('tr');
-    tr.className = p.corte ? 'fila-corte' : 'fila-normal';
-    tr.innerHTML =
-      '<td>' + p.periodo + '</td>' +
-      '<td>' + p.recibo  + '</td>' +
-      '<td class="text-right font-weight-bold">S/ ' + p.total.toFixed(2) + '</td>' +
-      '<td>' + (p.corte
-        ? '<span class="badge-corte">AFECTO AL CORTE</span>'
-        : '<span class="badge-pend">PENDIENTE</span>') + '</td>';
-    tbody.appendChild(tr);
-  });
-
-  document.getElementById('totalDeuda').textContent = 'S/ ' + total.toFixed(2);
 
   if (meses === 0) {
-    document.getElementById('sinDeuda').style.display          = 'block';
+    // Sin deuda: mostrar último recibo si existe, o fila "Al día"
+    var ur = cli.ultimo_recibo;
+    var tr = document.createElement('tr');
+    tr.className = 'fila-normal';
+    if (ur) {
+      tr.innerHTML =
+        '<td>' + ur.periodo + '</td>' +
+        '<td>' + ur.recibo  + '</td>' +
+        '<td class="text-right font-weight-bold">S/ ' + parseFloat(ur.total).toFixed(2) + '</td>' +
+        '<td><span style="background:#27ae60;color:#fff;font-size:.70rem;padding:2px 7px;border-radius:10px;">PAGADO</span></td>';
+    } else {
+      tr.innerHTML =
+        '<td colspan="3" style="color:#888;font-style:italic;">Sin deuda pendiente registrada</td>' +
+        '<td><span style="background:#27ae60;color:#fff;font-size:.70rem;padding:2px 7px;border-radius:10px;">AL DÍA</span></td>';
+    }
+    tbody.appendChild(tr);
     document.getElementById('contenedorBtnPagar').style.display = 'none';
-    document.getElementById('tablaContenedor').style.display    = 'none';
   } else {
-    document.getElementById('sinDeuda').style.display          = 'none';
+    periodos.forEach(function(p) {
+      var tr = document.createElement('tr');
+      tr.className = p.corte ? 'fila-corte' : 'fila-normal';
+      tr.innerHTML =
+        '<td>' + p.periodo + '</td>' +
+        '<td>' + p.recibo  + '</td>' +
+        '<td class="text-right font-weight-bold">S/ ' + p.total.toFixed(2) + '</td>' +
+        '<td>' + (p.corte
+          ? '<span class="badge-corte">AFECTO AL CORTE</span>'
+          : '<span class="badge-pend">PENDIENTE</span>') + '</td>';
+      tbody.appendChild(tr);
+    });
     document.getElementById('contenedorBtnPagar').style.display = 'block';
-    document.getElementById('tablaContenedor').style.display    = '';
   }
+
+  document.getElementById('tablaContenedor').style.display = '';
+  document.getElementById('totalDeuda').textContent = 'S/ ' + total.toFixed(2);
 
   suministroActual = cod;
 
