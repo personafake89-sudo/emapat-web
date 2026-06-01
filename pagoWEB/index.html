@@ -470,14 +470,48 @@
     </div>
 
     <!-- ══ PASO 3: RESULTADO ══ -->
-    <div id="paso3" style="display:none;padding:2rem 1.25rem;text-align:center;">
-      <div id="p3Icono" style="font-size:3rem;margin-bottom:12px;"></div>
-      <div id="p3Titulo" style="font-size:1.1rem;font-weight:700;color:#222;margin-bottom:6px;"></div>
-      <div id="p3Texto"  style="font-size:.85rem;color:#666;margin-bottom:16px;"></div>
-      <div id="p3NroOp"  style="background:#f0f4f8;border-radius:8px;padding:8px 14px;font-family:monospace;font-size:.85rem;margin-bottom:20px;display:none;"></div>
-      <button onclick="cerrarModalPago()" style="padding:10px 28px;background:#1c3643;border:none;border-radius:8px;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;">
-        Cerrar
-      </button>
+    <div id="paso3" style="display:none;padding:1.5rem 1.25rem;">
+
+      <!-- logo -->
+      <div style="text-align:center;margin-bottom:1rem;">
+        <img src="assets/img/logotipo.png" alt="EPS EMAPAT" style="width:170px;height:auto;">
+      </div>
+
+      <!-- banda estado -->
+      <div id="p3Banda" style="border-radius:8px;padding:12px 16px;text-align:center;margin-bottom:1rem;">
+        <div id="p3Titulo" style="font-size:1rem;font-weight:700;letter-spacing:.4px;"></div>
+        <div id="p3Texto"  style="font-size:.8rem;margin-top:4px;"></div>
+      </div>
+
+      <!-- detalle constancia -->
+      <div id="p3Detalle" style="background:#f7f9fc;border-radius:8px;padding:14px 16px;font-size:.82rem;color:#333;display:none;">
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8ecf0;">
+          <span style="color:#777;">Suministro</span>
+          <span id="p3Suministro" style="font-weight:700;"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8ecf0;">
+          <span style="color:#777;">Monto pagado</span>
+          <span id="p3Monto" style="font-weight:700;color:#27ae60;"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8ecf0;">
+          <span style="color:#777;">N° Operación</span>
+          <span id="p3NroOp" style="font-family:monospace;font-weight:600;"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8ecf0;">
+          <span style="color:#777;">Fecha y hora</span>
+          <span id="p3Fecha" style="font-weight:600;"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;">
+          <span style="color:#777;">Constancia enviada a</span>
+          <span id="p3Correo" style="font-weight:600;color:#1a7abf;word-break:break-all;text-align:right;max-width:60%;"></span>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:1.2rem;">
+        <button onclick="cerrarModalPago()" style="padding:10px 32px;background:#1c3643;border:none;border-radius:8px;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;">
+          Cerrar
+        </button>
+      </div>
     </div>
 
   </div>
@@ -725,21 +759,35 @@ async function procesarPago() {
         titular:     titular,
       }),
     });
-    var data = await resp.json();
+    var data  = await resp.json();
+    var ahora = new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' });
+    var correo = clienteActual ? (clienteActual.email || document.getElementById('email').value || '—') : '—';
     irPaso(3);
+
     if (data.exitoso) {
-      document.getElementById('p3Icono').textContent  = '✅';
-      document.getElementById('p3Titulo').textContent = '¡Pago registrado!';
-      document.getElementById('p3Texto').textContent  = 'Tu pago fue procesado correctamente.';
-      document.getElementById('p3NroOp').textContent  = 'N° Operación: ' + data.nroOperacion;
-      document.getElementById('p3NroOp').style.display = 'block';
+      var banda = document.getElementById('p3Banda');
+      banda.style.background = '#e8f8ee';
+      banda.style.border     = '1px solid #a3d9b1';
+      document.getElementById('p3Titulo').style.color = '#1a7a3c';
+      document.getElementById('p3Titulo').textContent = 'Pago exitoso';
+      document.getElementById('p3Texto').style.color  = '#2e7d50';
+      document.getElementById('p3Texto').textContent  = 'Constancia enviada al correo registrado';
     } else {
-      document.getElementById('p3Icono').textContent  = '❌';
+      var banda = document.getElementById('p3Banda');
+      banda.style.background = '#fdecea';
+      banda.style.border     = '1px solid #f5c6cb';
+      document.getElementById('p3Titulo').style.color = '#b71c1c';
       document.getElementById('p3Titulo').textContent = 'Pago rechazado';
+      document.getElementById('p3Texto').style.color  = '#c62828';
       document.getElementById('p3Texto').textContent  = data.motivo || 'No se pudo procesar el pago.';
-      document.getElementById('p3NroOp').textContent  = 'N° Operación: ' + data.nroOperacion;
-      document.getElementById('p3NroOp').style.display = 'block';
     }
+
+    document.getElementById('p3Suministro').textContent = suministroActual;
+    document.getElementById('p3Monto').textContent      = document.getElementById('totalDeuda').textContent;
+    document.getElementById('p3NroOp').textContent      = data.nroOperacion || '—';
+    document.getElementById('p3Fecha').textContent      = ahora;
+    document.getElementById('p3Correo').textContent     = correo;
+    document.getElementById('p3Detalle').style.display  = 'block';
   } catch(err) {
     btn.disabled = false;
     btn.style.opacity = '1';
