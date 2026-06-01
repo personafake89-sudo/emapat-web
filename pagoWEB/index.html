@@ -355,8 +355,10 @@
       </div>
 
       <!-- botón pagar -->
-      <button id="btnPagarModal" onclick="procesarPago()" style="background:url('https://static-content.vnforapps.com/v2/img/button/EN/navy/default/PayWith.png') center/contain no-repeat;width:100%;height:46px;border:none;cursor:pointer;">
-        <span id="btnPagarTxt" style="display:none;"></span>
+      <button id="btnPagarModal" onclick="procesarPago()"
+        style="width:100%;padding:13px;background:#43bf43;border:1px solid #39a239;border-radius:6px;
+               color:#fff;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.3px;">
+        Pay <span id="btnPagarTxt">S/ 0.00</span>
       </button>
 
       <!-- logos -->
@@ -532,7 +534,9 @@ function irPaso(n) {
   if (n === 2) {
     var now = new Date();
     document.getElementById('p2Suministro').textContent = suministroActual;
-    document.getElementById('p2Monto').textContent      = document.getElementById('totalDeuda').textContent;
+    var monto = document.getElementById('totalDeuda').textContent;
+    document.getElementById('p2Monto').textContent      = monto;
+    document.getElementById('btnPagarTxt').textContent  = monto;
     document.getElementById('p2Fecha').textContent      = now.toLocaleDateString('es-PE');
     document.getElementById('ckbTerms').checked = false;
     document.getElementById('p2NumTarjeta').value = '';
