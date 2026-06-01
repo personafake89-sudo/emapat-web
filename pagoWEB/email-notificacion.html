@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notificación de Pago — EPS EMAPAT S.A.</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#f4f4f4;" width="100%">
+  <tbody>
+    <tr>
+      <td align="center" style="padding:20px 0;">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+               style="background-color:#ffffff;border-radius:8px;overflow:hidden;" width="600">
+          <tbody>
+
+            <!-- HEADER con logo -->
+            <tr>
+              <td align="center" style="background-color:#1c3643;padding:24px 40px;">
+                <img alt="EPS EMAPAT S.A."
+                     src="https://emapat.com.pe/administrador_pagina/Vista/usuario/logo/imagen_62dff53bb5303.png"
+                     style="display:block;max-width:220px;height:auto;border:0;" />
+              </td>
+            </tr>
+
+            <!-- BARRA CELESTE -->
+            <tr>
+              <td style="background-color:#0097c7;padding:10px 40px;">
+                <p style="margin:0;color:#ffffff;font-size:13px;font-weight:bold;letter-spacing:.5px;">
+                  NOTIFICACIÓN DE PAGO — SERVICIO DE AGUA POTABLE
+                </p>
+              </td>
+            </tr>
+
+            <!-- CUERPO -->
+            <tr>
+              <td style="padding:30px 40px;color:#333333;font-size:15px;line-height:1.7;">
+
+                <h2 style="color:#1c3643;margin-top:0;">Estimado/a {{.FirstName}},</h2>
+
+                <p>Le saludamos cordialmente desde <strong>EPS EMAPAT S.A.</strong> — Empresa Prestadora de Servicios de Saneamiento de Puerto Maldonado.</p>
+
+                <p><strong>Notificación Importante:</strong></p>
+
+                <p>Hemos detectado que su número de suministro <strong>{{.LastName}}</strong> se encuentra
+                <span style="color:#c0392b;font-weight:bold;">afecto al corte de servicio</span> por falta de pago.</p>
+
+                <p><strong>Detalles de su deuda:</strong></p>
+
+                <table style="width:100%;border-collapse:collapse;margin:15px 0;">
+                  <tbody>
+                    <tr style="background-color:#e8f4f8;">
+                      <td style="border:1px solid #c8dde8;padding:10px;"><strong>N° de Suministro:</strong></td>
+                      <td style="border:1px solid #c8dde8;padding:10px;">{{.LastName}}</td>
+                    </tr>
+                    <tr>
+                      <td style="border:1px solid #c8dde8;padding:10px;"><strong>Importe Pendiente:</strong></td>
+                      <td style="border:1px solid #c8dde8;padding:10px;color:#c0392b;font-weight:bold;">{{.Position}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p>Le invitamos a regularizar su deuda en nuestra plataforma de pagos en línea a la brevedad posible
+                para <strong>evitar la suspensión de su servicio de agua</strong>.</p>
+
+                <!-- BOTÓN -->
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin:25px 0;">
+                  <tbody>
+                    <tr>
+                      <td align="center" bgcolor="#0097c7" style="border-radius:6px;">
+                        <a href="https://emapat-web.vercel.app/pagoWEB/"
+                           style="display:inline-block;padding:13px 32px;color:#ffffff;text-decoration:none;font-weight:bold;font-size:15px;"
+                           target="_blank">
+                          Pagar en Línea
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p>Si ya realizó su pago, por favor ignore este mensaje.</p>
+
+                <p style="margin-top:30px;">
+                  Atentamente,<br/>
+                  <strong>EPS EMAPAT S.A. | Área Comercial y Finanzas</strong><br/>
+                  <span style="font-size:12px;color:#666;">Equipo de Cobranza</span>
+                </p>
+
+              </td>
+            </tr>
+
+            <!-- FOOTER -->
+            <tr>
+              <td align="center" style="background-color:#1c3643;padding:20px 40px;">
+                <p style="margin:0;font-size:12px;color:#90b8c8;">
+                  © 2026 EPS EMAPAT S.A. Todos los derechos reservados.<br/>
+                  Av. Ernesto Rivero 782 — Puerto Maldonado, Madre de Dios, Perú<br/>
+                  Central: 571984 &nbsp;|&nbsp; emapat-web.vercel.app
+                </p>
+                <p style="margin:8px 0 0;font-size:11px;color:#607d8b;">
+                  Correo de notificación automática — No responder a este mensaje.
+                </p>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>{{.Tracker}}</p>
+</body>
+</html>
