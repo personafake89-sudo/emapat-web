@@ -152,7 +152,8 @@
 
         <div class="card mt-3 mt-md-2" style="border-radius:15px;box-shadow:0 2px 20px #cbcbcb;">
           <div class="card-header font-weight-bold text-center">
-            <p class="mb-0">Información del pago</p>
+            <p class="mb-1">Pago con Visa</p>
+            <a href="assets/doc/MANUAL_01.pdf" target="_blank" class="btn btn-info btn-sm"><b>Manual de uso</b></a>
           </div>
           <div class="card-body">
             <b style="padding-left:20px;">Codigo Cliente: </b><span id="infoSuministro">—</span><br>
@@ -455,19 +456,20 @@ function mostrarDeuda(cod, cli) {
   var hoy      = new Date().toLocaleDateString('es-PE');
   var dni      = document.getElementById('dni').value;
 
+  var nroPedido = Math.floor(10000 + Math.random() * 90000);
+
   document.getElementById('infoSuministro').textContent = cod;
+  document.getElementById('infoUltimoRecibo').textContent = nroPedido;
   document.getElementById('infoFecha').textContent      = hoy;
   document.getElementById('infoDni').textContent        = dni;
 
   if (meses === 0) {
     var ur = cli.ultimo_recibo;
-    document.getElementById('infoUltimoRecibo').textContent = ur ? ur.recibo : '—';
-    document.getElementById('totalDeuda').textContent       = ur ? 'S/ ' + parseFloat(ur.total).toFixed(2) : 'S/ 0.00';
+    document.getElementById('totalDeuda').textContent = ur ? 'S/ ' + parseFloat(ur.total).toFixed(2) : 'S/ 0.00';
     document.getElementById('contenedorBtnPagar').style.display = 'none';
   } else {
     var p = periodos[0];
-    document.getElementById('infoUltimoRecibo').textContent = p.recibo;
-    document.getElementById('totalDeuda').textContent       = 'S/ ' + p.total.toFixed(2);
+    document.getElementById('totalDeuda').textContent = 'S/ ' + p.total.toFixed(2);
     document.getElementById('contenedorBtnPagar').style.display = 'block';
   }
 
