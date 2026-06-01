@@ -135,6 +135,93 @@
 
 
 <!-- ══════════════════════════════════════════════════
+     PANEL CLIENTE (datos + tabla de deuda)
+══════════════════════════════════════════════════ -->
+<div id="panelCliente" style="display:none;flex-direction:column;min-height:100vh;">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">EPS EMAPAT S.A.</a>
+      <button onclick="volverBusqueda()" class="btn btn-dark">Salir</button>
+    </div>
+  </nav>
+
+  <div class="container mt-3" style="flex:1;">
+
+    <!-- Datos del cliente -->
+    <div class="row mt-2">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header"><span class="h6 font-weight-bold">Datos Cliente.</span></div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 col-lg-6"><span class="font-weight-bold">Codigo :</span> <span id="cli-codigo">—</span></div>
+              <div class="col-12 col-lg-6"><span class="font-weight-bold">Localidad :</span> PUERTO MALDONADO</div>
+              <div class="col-12 col-lg-6 mt-1"><span class="font-weight-bold">Titular :</span> <span id="cli-titular">—</span></div>
+              <div class="col-12 col-lg-6 mt-1"><span class="font-weight-bold">Dirección :</span> <span id="cli-direccion">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado de cuenta -->
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header"><span class="h6 font-weight-bold">Estado de cuenta.</span></div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm" id="tablaCliente">
+                <thead>
+                  <tr>
+                    <th>Período</th><th>Recibo</th>
+                    <th style="text-align:right;">Total Mes</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyCliente"></tbody>
+                <tfoot style="font-size:18px;">
+                  <tr>
+                    <th style="text-align:right;" colspan="2">TOTAL A PAGAR:</th>
+                    <th style="text-align:left;" id="cli-total">0.00</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="text-center mt-2">
+              <button class="btn btn-success btn-lg" onclick="irAPago()"><b>REALIZAR PAGO</b></button>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <hr>
+            <button onclick="volverBusqueda()" class="btn btn-dark" style="margin:0 5px 5px;"><b>Nueva búsqueda</b></button>
+            <button onclick="volverBusqueda()" class="btn btn-danger" style="margin:0 5px 5px;"><b>Salir</b></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer mt-auto py-1" style="background:#1c3643;">
+    <div class="container py-1">
+      <div class="row">
+        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center order-1 order-md-0">
+          <span class="text-info font-weight-bold h4">EPS EMAPAT S.A.</span>
+        </div>
+        <div class="col-12 col-md-6 text-white text-md-left text-center">
+          <p class="h5 font-weight-bold">Dudas o Consultas</p>
+          <p class="my-0 py-0">Centro de atención al cliente: 571984</p>
+          <p class="my-0 py-0">Av. Ernesto Rivero 782 - Pto. Maldonado</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
      PANEL DEUDA
 ══════════════════════════════════════════════════ -->
 <div id="panelDeuda" style="display:none;flex-direction:column;min-height:100vh;">
@@ -449,22 +536,66 @@ async function buscar(e) {
   return false;
 }
 
-/* ── Mostrar panel de deuda ── */
+/* ── Datos globales del cliente actual ── */
+var clienteActual = null;
+
+/* ── Mostrar panel cliente (paso intermedio) ── */
 function mostrarDeuda(cod, cli) {
+  clienteActual    = cli;
+  suministroActual = cod;
+
   var periodos = cli.periodos || [];
   var meses    = cli.meses   || 0;
-  var hoy      = new Date().toLocaleDateString('es-PE');
-  var dni      = document.getElementById('dni').value;
 
-  var nroPedido = Math.floor(10000 + Math.random() * 90000);
+  document.getElementById('cli-codigo').textContent    = cod;
+  document.getElementById('cli-titular').textContent   = cli.nombre || '—';
+  document.getElementById('cli-direccion').textContent = cli.dir    || '—';
 
-  document.getElementById('infoSuministro').textContent = cod;
-  document.getElementById('infoUltimoRecibo').textContent = nroPedido;
-  document.getElementById('infoFecha').textContent      = hoy;
-  document.getElementById('infoDni').textContent        = dni;
+  var tbody = document.getElementById('tbodyCliente');
+  tbody.innerHTML = '';
 
   if (meses === 0) {
-    var ur = cli.ultimo_recibo;
+    var ur  = cli.ultimo_recibo;
+    var tr  = document.createElement('tr');
+    tr.innerHTML = ur
+      ? '<td>' + ur.periodo + '</td><td>' + ur.recibo + '</td><td align="right">AL DÍA</td>'
+      : '<td colspan="3" style="color:#888;font-style:italic;">Sin deuda pendiente</td>';
+    tbody.appendChild(tr);
+    document.getElementById('cli-total').textContent = ur ? parseFloat(ur.total).toFixed(2) : '0.00';
+    document.querySelector('#panelCliente .btn-success').style.display = 'none';
+  } else {
+    var p  = periodos[0];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + p.periodo + '</td><td>' + p.recibo + '</td><td align="right">' + p.total.toFixed(2) + '</td>';
+    tbody.appendChild(tr);
+    // fila total deuda
+    var trTotal = document.createElement('tr');
+    trTotal.innerHTML = '<td align="right" style="color:#1B4F72;" colspan="2"><b>TOTAL DEUDA</b></td><td align="right" style="color:#1B4F72;"><b>' + p.total.toFixed(2) + '</b></td>';
+    tbody.appendChild(trTotal);
+    document.getElementById('cli-total').textContent = p.total.toFixed(2);
+    document.querySelector('#panelCliente .btn-success').style.display = '';
+  }
+
+  document.getElementById('panelBusqueda').style.display  = 'none';
+  document.getElementById('panelCliente').style.display   = 'flex';
+  document.body.style.overflowY = 'auto';
+}
+
+/* ── Ir al panel de pago ── */
+function irAPago() {
+  var periodos = clienteActual ? (clienteActual.periodos || []) : [];
+  var meses    = clienteActual ? (clienteActual.meses   || 0) : 0;
+  var hoy      = new Date().toLocaleDateString('es-PE');
+  var dni      = document.getElementById('dni').value;
+  var nroPedido = Math.floor(10000 + Math.random() * 90000);
+
+  document.getElementById('infoSuministro').textContent  = suministroActual;
+  document.getElementById('infoUltimoRecibo').textContent = nroPedido;
+  document.getElementById('infoFecha').textContent       = hoy;
+  document.getElementById('infoDni').textContent         = dni;
+
+  if (meses === 0) {
+    var ur = clienteActual.ultimo_recibo;
     document.getElementById('totalDeuda').textContent = ur ? 'S/ ' + parseFloat(ur.total).toFixed(2) : 'S/ 0.00';
     document.getElementById('contenedorBtnPagar').style.display = 'none';
   } else {
@@ -473,11 +604,8 @@ function mostrarDeuda(cod, cli) {
     document.getElementById('contenedorBtnPagar').style.display = 'block';
   }
 
-  suministroActual = cod;
-
-  document.getElementById('panelBusqueda').style.display = 'none';
-  document.getElementById('panelDeuda').style.display    = 'flex';
-  document.body.style.overflowY = 'auto';
+  document.getElementById('panelCliente').style.display = 'none';
+  document.getElementById('panelDeuda').style.display   = 'flex';
 }
 
 /* ── Modal métodos de pago ── */
@@ -608,7 +736,8 @@ async function procesarPago() {
 
 /* ── Volver a búsqueda ── */
 function volverBusqueda() {
-  document.getElementById('panelDeuda').style.display    = 'none';
+  document.getElementById('panelDeuda').style.display   = 'none';
+  document.getElementById('panelCliente').style.display = 'none';
   document.getElementById('panelBusqueda').style.display = '';
   document.body.style.overflowY = 'hidden';
   document.getElementById('codigo').value = '';
