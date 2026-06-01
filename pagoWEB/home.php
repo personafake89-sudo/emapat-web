@@ -231,25 +231,20 @@
           <table class="tabla-deuda" id="miTabla">
             <thead>
               <tr>
-                <?php if ($checkfactmes == 'SI'): ?><th style="width:36px;"></th><?php endif; ?>
+                <th style="width:30px;"></th>
                 <th>Período</th>
                 <th>Recibo</th>
                 <th style="text-align:right;">Total Mes</th>
-                <th>Estado</th>
               </tr>
             </thead>
             <tbody>
               <?php if ($mesesDeuda === 0): ?>
               <tr>
-                <td colspan="<?= ($checkfactmes == 'SI') ? 5 : 4 ?>" style="text-align:center; padding:18px; color:#555; font-style:italic;">
+                <td></td>
+                <td colspan="2" style="padding:14px 10px; color:#555; font-style:italic;">
                   No se encontraron recibos pendientes en este momento.
                 </td>
-              </tr>
-              <tr>
-                <td colspan="<?= ($checkfactmes == 'SI') ? 4 : 3 ?>" style="text-align:right; padding:10px; font-weight:700; color:#1B4F72; background:#eaf4fb;">
-                  ESTADO ACTUAL
-                </td>
-                <td style="text-align:right; padding:10px; background:#eaf4fb;">
+                <td style="text-align:right; padding:14px 10px;">
                   <span style="background:#27ae60;color:#fff;font-size:11px;padding:3px 10px;border-radius:10px;font-weight:700;">AL DÍA</span>
                 </td>
               </tr>
@@ -257,10 +252,10 @@
               <?php
               $tot_02 = 0;
               foreach ($rowsArray as $rows):
-                  $tot_02    += $rows->impmestotal;
-                  $esCorte    = ($rows->nrofacturacion == $nroCorte);
-                  $esReclamo  = ($rows->flagreclamo == 1);
-                  $filaClass  = $esCorte ? 'fila-corte' : ($esReclamo ? 'fila-reclamo' : '');
+                  $tot_02   += $rows->impmestotal;
+                  $esCorte   = ($rows->nrofacturacion == $nroCorte);
+                  $esReclamo = ($rows->flagreclamo == 1);
+                  $filaClass = $esCorte ? 'fila-corte' : ($esReclamo ? 'fila-reclamo' : '');
               ?>
               <tr class="<?= $filaClass ?>">
                 <td>
@@ -279,28 +274,17 @@
                 <td><?= htmlspecialchars($curl->nombremes($rows->mes) . ' - ' . $rows->anio) ?></td>
                 <td><?= htmlspecialchars($rows->seriedoc . ' - ' . $rows->nrodoc) ?></td>
                 <td style="text-align:right;"><strong>S/ <?= number_format($rows->impmestotal, 2) ?></strong></td>
-                <td>
-                  <?php if ($esCorte): ?>
-                    <span class="badge-corte">AFECTO AL CORTE</span>
-                  <?php elseif ($esReclamo): ?>
-                    <span class="badge-reclamo">EN RECLAMO</span>
-                  <?php else: ?>
-                    <span class="badge-pend">PENDIENTE</span>
-                  <?php endif; ?>
-                </td>
               </tr>
               <?php endforeach; ?>
               <tr class="fila-total">
-                <td colspan="<?= ($checkfactmes == 'SI') ? 4 : 3 ?>" style="text-align:right; padding:10px;">
+                <td colspan="3" style="text-align:right; padding:10px;">
                   TOTAL DEUDA (<?= $mesesDeuda ?> mes<?= $mesesDeuda != 1 ? 'es' : '' ?>)
                 </td>
                 <td style="text-align:right; padding:10px;">S/ <?= number_format($tot_02, 2) ?></td>
               </tr>
               <?php if ($valcomision > 0): ?>
               <tr class="fila-total">
-                <td colspan="<?= ($checkfactmes == 'SI') ? 4 : 3 ?>" style="text-align:right; padding:10px;">
-                  Comisión Niubiz
-                </td>
+                <td colspan="3" style="text-align:right; padding:10px;">Comisión Niubiz</td>
                 <td style="text-align:right; padding:10px;">S/ <?= number_format($valcomision, 2) ?></td>
               </tr>
               <?php endif; ?>
@@ -418,7 +402,10 @@
         <table>
           <tr><td style="color:#888;">Cliente:</td>   <td class="rval"><?= htmlspecialchars($codcliente . ' - ' . $titular) ?></td></tr>
           <tr><td style="color:#888;">N° Pedido:</td> <td class="rval"><?= htmlspecialchars($nropedido) ?></td></tr>
-          <tr><td style="color:#888;">Concepto:</td>  <td class="rval">PAGO SERVICIO DE AGUA</td></tr>
+          <?php if ($mesesDeuda > 0): ?>
+          <tr><td style="color:#888;">Período:</td>   <td class="rval"><?= htmlspecialchars($curl->nombremes($rowsArray[0]->mes) . ' - ' . $rowsArray[0]->anio) ?><?= $mesesDeuda > 1 ? ' (+' . ($mesesDeuda - 1) . ' más)' : '' ?></td></tr>
+          <?php endif; ?>
+          <tr><td style="color:#888;">Concepto:</td>  <td class="rval">PAGO DE SERVICIO DE AGUA</td></tr>
           <tr><td style="color:#888;">Fecha:</td>     <td class="rval"><?= $fecha ?></td></tr>
           <tr>
             <td style="color:#888;padding-top:6px;font-weight:700;">TOTAL:</td>
@@ -433,7 +420,7 @@
       </label>
 
       <div id="wrapVisaModal" style="display:none;">
-        <form id="frmVisaNet" action="<?= $urlBase ?>/finalizar.php" method="POST">
+        <form id="frmVisaModal" action="<?= $urlBase ?>/finalizar.php" method="POST">
           <script
             src="<?= VISA_URL_JS ?>"
             data-sessiontoken="<?= htmlspecialchars($sesion) ?>"
@@ -446,6 +433,10 @@
             data-timeouturl="<?= $urlBase ?>/"
             data-cardholderemail="<?= htmlspecialchars($correo) ?>">
           </script>
+          <button type="submit" class="start-js-btn modal-opener default"
+            style="background:url('https://static-content.vnforapps.com/v2/img/button/EN/navy/default/PayWith.png') center/contain no-repeat;
+                   width:100%; height:42px; border:none; cursor:pointer; margin-top:8px;">
+          </button>
         </form>
       </div>
 
