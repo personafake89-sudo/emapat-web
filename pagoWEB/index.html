@@ -41,6 +41,9 @@
     }
     .btn-pagar-verde:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(39,174,96,.4); color: #fff; }
     #sinDeuda { display: none; }
+
+    /* Bloquea scroll mientras solo está el panel de búsqueda */
+    html, body { overflow: hidden; height: 100%; }
   </style>
 </head>
 <body>
@@ -133,8 +136,8 @@
 <!-- ══════════════════════════════════════════════════
      PANEL DEUDA
 ══════════════════════════════════════════════════ -->
-<div id="panelDeuda" style="min-height:100vh;background:linear-gradient(135deg,#1c3643 0%,#1a7abf 60%,#00b0ff 100%);
-     display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:30px 16px;">
+<div id="panelDeuda" style="display:none;min-height:100vh;background:linear-gradient(135deg,#1c3643 0%,#1a7abf 60%,#00b0ff 100%);
+     flex-direction:column;align-items:center;justify-content:flex-start;padding:30px 16px;">
   <div style="width:100%;max-width:860px;">
 
     <div style="background:#1c3643;color:#fff;border-radius:14px 14px 0 0;padding:16px 24px;
@@ -495,6 +498,7 @@ function mostrarDeuda(cod, cli) {
 
   document.getElementById('panelBusqueda').style.display = 'none';
   document.getElementById('panelDeuda').style.display    = 'flex';
+  document.body.style.overflowY = 'auto';
 }
 
 /* ── Modal métodos de pago ── */
@@ -625,6 +629,7 @@ async function procesarPago() {
 function volverBusqueda() {
   document.getElementById('panelDeuda').style.display    = 'none';
   document.getElementById('panelBusqueda').style.display = '';
+  document.body.style.overflowY = 'hidden';
   document.getElementById('codigo').value = '';
   document.getElementById('email').value  = '';
   document.getElementById('dni').value    = '';
