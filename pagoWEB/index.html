@@ -159,6 +159,8 @@
               <div class="col-12 col-lg-6"><span class="font-weight-bold">Localidad :</span> PUERTO MALDONADO</div>
               <div class="col-12 col-lg-6 mt-1"><span class="font-weight-bold">Titular :</span> <span id="cli-titular">—</span></div>
               <div class="col-12 col-lg-6 mt-1"><span class="font-weight-bold">Dirección :</span> <span id="cli-direccion">—</span></div>
+              <div class="col-12 col-lg-6 mt-1"><span class="font-weight-bold">Correo :</span> <span id="cli-email">—</span></div>
+              <div class="col-12 col-lg-6 mt-1"><span class="font-weight-bold">Teléfono :</span> <span id="cli-telefono">—</span></div>
             </div>
           </div>
         </div>
@@ -548,8 +550,10 @@ function mostrarDeuda(cod, cli) {
   var meses    = cli.meses   || 0;
 
   document.getElementById('cli-codigo').textContent    = cod;
-  document.getElementById('cli-titular').textContent   = cli.nombre || '—';
-  document.getElementById('cli-direccion').textContent = cli.dir    || '—';
+  document.getElementById('cli-titular').textContent   = cli.nombre   || '—';
+  document.getElementById('cli-direccion').textContent = cli.dir       || '—';
+  document.getElementById('cli-email').textContent     = cli.email     || '—';
+  document.getElementById('cli-telefono').textContent  = cli.telefono  || '—';
 
   var tbody = document.getElementById('tbodyCliente');
   tbody.innerHTML = '';
