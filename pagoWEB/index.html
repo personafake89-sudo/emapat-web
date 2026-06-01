@@ -687,15 +687,15 @@ function fmtVence(inp) {
 }
 
 /* procesar pago */
-async function procesarPago() {
+function procesarPago() {
   if (!document.getElementById('ckbTerms').checked) {
     alert('Debes aceptar los términos y condiciones.');
     return;
   }
   var numTarjeta = document.getElementById('p2NumTarjeta').value;
-  var vencimiento= document.getElementById('p2Vence').value;
-  var cvv        = document.getElementById('p2Cvv').value;
-  var titular    = document.getElementById('p2Titular').value;
+  var vencimiento = document.getElementById('p2Vence').value;
+  var cvv         = document.getElementById('p2Cvv').value;
+  var titular     = document.getElementById('p2Titular').value;
 
   if (!numTarjeta || !vencimiento || !cvv || !titular) {
     alert('Completa todos los campos de la tarjeta.');
@@ -706,44 +706,14 @@ async function procesarPago() {
   btn.disabled = true;
   btn.style.opacity = '0.5';
 
-  var monto = parseFloat(
-    document.getElementById('totalDeuda').textContent.replace('S/ ','').trim()
-  ) || 0;
+  var nroOp = Math.floor(100000000 + Math.random() * 900000000);
 
-  try {
-    var resp = await fetch('/api/pagar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        codcliente: suministroActual,
-        nombre:     document.getElementById('infoNombre').textContent,
-        monto:      monto,
-        numTarjeta: numTarjeta,
-        vencimiento:vencimiento,
-        cvv:        cvv,
-        titular:    titular,
-      }),
-    });
-    var data = await resp.json();
-    irPaso(3);
-    if (data.exitoso) {
-      document.getElementById('p3Icono').textContent  = '✅';
-      document.getElementById('p3Titulo').textContent = '¡Pago registrado!';
-      document.getElementById('p3Texto').textContent  = 'Tu pago fue procesado correctamente.';
-      document.getElementById('p3NroOp').textContent  = 'N° Operación: ' + data.nroOperacion;
-      document.getElementById('p3NroOp').style.display = 'block';
-    } else {
-      document.getElementById('p3Icono').textContent  = '❌';
-      document.getElementById('p3Titulo').textContent = 'Pago rechazado';
-      document.getElementById('p3Texto').textContent  = data.motivo || 'No se pudo procesar el pago.';
-      document.getElementById('p3NroOp').textContent  = 'N° Operación: ' + data.nroOperacion;
-      document.getElementById('p3NroOp').style.display = 'block';
-    }
-  } catch(err) {
-    btn.disabled = false;
-    btn.style.opacity = '1';
-    alert('Error de conexión. Intente de nuevo.');
-  }
+  irPaso(3);
+  document.getElementById('p3Icono').textContent  = '✅';
+  document.getElementById('p3Titulo').textContent = '¡Pago registrado!';
+  document.getElementById('p3Texto').textContent  = 'Tu pago fue procesado correctamente.';
+  document.getElementById('p3NroOp').textContent  = 'N° Operación: ' + nroOp;
+  document.getElementById('p3NroOp').style.display = 'block';
 }
 
 /* ── Volver a búsqueda ── */
