@@ -150,57 +150,27 @@
     <div class="row justify-content-center">
       <div class="col-12 col-lg-8">
 
-        <div class="card shadow-sm mb-4" style="border-radius:10px;">
-          <div class="card-header font-weight-bold" style="background:#1c3643;color:#fff;border-radius:10px 10px 0 0;">
-            Estado de Cuenta
+        <div class="card mt-3 mt-md-2" style="border-radius:15px;box-shadow:0 2px 20px #cbcbcb;">
+          <div class="card-header font-weight-bold text-center">
+            <p class="mb-0">Información del cliente</p>
           </div>
           <div class="card-body">
-            <div class="row mb-2">
-              <div class="col-6 col-md-3 mb-2">
-                <div class="info-label">Suministro</div>
-                <div class="info-value" id="infoSuministro">—</div>
-              </div>
-              <div class="col-6 col-md-3 mb-2">
-                <div class="info-label">Localidad</div>
-                <div class="info-value">PTO. MALDONADO</div>
-              </div>
-              <div class="col-12 col-md-6 mb-2">
-                <div class="info-label">Titular</div>
-                <div class="info-value" id="infoNombre">—</div>
-              </div>
-              <div class="col-12 col-md-6 mb-2">
-                <div class="info-label">Dirección</div>
-                <div class="info-value" id="infoDireccion">—</div>
-              </div>
-              <div class="col-12 col-md-6 mb-2">
-                <div class="info-label">Correo</div>
-                <div class="info-value" id="infoEmail">—</div>
-              </div>
-            </div>
-            <hr class="mt-0">
+            <p class="h5" style="padding-left:20px;">Datos del suministro</p>
+            <b style="padding-left:20px;">Código de Suministro: </b><span id="infoSuministro">—</span><br>
+            <b style="padding-left:20px;">Titular: </b><span id="infoNombre">—</span><br>
+            <b style="padding-left:20px;">Dirección: </b><span id="infoDireccion">—</span><br>
+            <b style="padding-left:20px;">Correo: </b><span id="infoEmail">—</span><br>
+            <b style="padding-left:20px;">Localidad: </b>Puerto Maldonado<br>
+            <hr>
+            <p class="h5" style="padding-left:20px;">Detalle de deuda</p>
+            <b style="padding-left:20px;">Período: </b><span id="infoUltimoPeriodo">—</span><br>
+            <b style="padding-left:20px;">Nro. Recibo: </b><span id="infoUltimoRecibo">—</span><br>
+            <b style="padding-left:20px;">Importe a pagar: </b><span id="totalDeuda" style="color:#27ae60;font-weight:700;">S/ 0.00</span><br>
+            <b style="padding-left:20px;">Concepto: </b>PAGO DE SERVICIO DE AGUA<br>
+            <b style="padding-left:20px;">Meses en deuda: </b><span id="infoMesesDeuda">—</span><br>
+            <hr>
 
-            <div id="alertaMeses" class="alert-corte-bar" style="display:none;"></div>
-
-            <div id="tablaContenedor" class="table-responsive">
-              <table class="table table-sm tabla-deuda mb-0">
-                <thead>
-                  <tr>
-                    <th>Período</th><th>Recibo</th>
-                    <th class="text-right">Total Mes</th><th>Estado</th>
-                  </tr>
-                </thead>
-                <tbody id="tbodyDeuda"></tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="2" class="text-right">TOTAL DEUDA</td>
-                    <td class="text-right" id="totalDeuda">S/ 0.00</td>
-                    <td></td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-
-            <div class="text-center mt-4" id="contenedorBtnPagar">
+            <div id="contenedorBtnPagar">
               <button onclick="abrirModalPago()" style="background:url('https://static-content.vnforapps.com/v2/img/button/EN/navy/default/PayWith.png') center/contain no-repeat;width:100%;max-width:260px;height:46px;border:none;cursor:pointer;display:block;margin:0 auto;"></button>
             </div>
 
@@ -493,58 +463,23 @@ function mostrarDeuda(cod, cli) {
   document.getElementById('infoEmail').textContent      = cli.email || '—';
 
   var periodos = cli.periodos || [];
-  var total    = cli.deuda   || 0;
   var meses    = cli.meses   || 0;
 
-  var alertaMeses = document.getElementById('alertaMeses');
-  if (meses > 0) {
-    alertaMeses.innerHTML =
-      '<strong>Meses en deuda: ' + meses + '</strong> &nbsp;|&nbsp; ' +
-      'El período más reciente está <span class="badge-corte">AFECTO AL CORTE</span>';
-    alertaMeses.style.display = 'block';
-  } else {
-    alertaMeses.style.display = 'none';
-  }
-
-  var tbody = document.getElementById('tbodyDeuda');
-  tbody.innerHTML = '';
-
   if (meses === 0) {
-    // Sin deuda: mostrar último recibo si existe, o fila "Al día"
     var ur = cli.ultimo_recibo;
-    var tr = document.createElement('tr');
-    tr.className = 'fila-normal';
-    if (ur) {
-      tr.innerHTML =
-        '<td>' + ur.periodo + '</td>' +
-        '<td>' + ur.recibo  + '</td>' +
-        '<td class="text-right font-weight-bold">S/ ' + parseFloat(ur.total).toFixed(2) + '</td>' +
-        '<td><span style="background:#27ae60;color:#fff;font-size:.70rem;padding:2px 7px;border-radius:10px;">PAGADO</span></td>';
-    } else {
-      tr.innerHTML =
-        '<td colspan="3" style="color:#888;font-style:italic;">Sin deuda pendiente registrada</td>' +
-        '<td><span style="background:#27ae60;color:#fff;font-size:.70rem;padding:2px 7px;border-radius:10px;">AL DÍA</span></td>';
-    }
-    tbody.appendChild(tr);
+    document.getElementById('infoUltimoPeriodo').textContent = ur ? ur.periodo : '—';
+    document.getElementById('infoUltimoRecibo').textContent  = ur ? ur.recibo  : '—';
+    document.getElementById('totalDeuda').textContent        = ur ? 'S/ ' + parseFloat(ur.total).toFixed(2) : 'S/ 0.00';
+    document.getElementById('infoMesesDeuda').textContent    = '0 (AL DÍA)';
     document.getElementById('contenedorBtnPagar').style.display = 'none';
   } else {
-    // Solo mostrar la última deuda (período más reciente)
     var p = periodos[0];
-    var tr = document.createElement('tr');
-    tr.className = p.corte ? 'fila-corte' : 'fila-normal';
-    tr.innerHTML =
-      '<td>' + p.periodo + '</td>' +
-      '<td>' + p.recibo  + '</td>' +
-      '<td class="text-right font-weight-bold">S/ ' + p.total.toFixed(2) + '</td>' +
-      '<td>' + (p.corte
-        ? '<span class="badge-corte">AFECTO AL CORTE</span>'
-        : '<span class="badge-pend">PENDIENTE</span>') + '</td>';
-    tbody.appendChild(tr);
+    document.getElementById('infoUltimoPeriodo').textContent = p.periodo;
+    document.getElementById('infoUltimoRecibo').textContent  = p.recibo;
+    document.getElementById('totalDeuda').textContent        = 'S/ ' + p.total.toFixed(2);
+    document.getElementById('infoMesesDeuda').textContent    = '1';
     document.getElementById('contenedorBtnPagar').style.display = 'block';
   }
-
-  document.getElementById('tablaContenedor').style.display = '';
-  document.getElementById('totalDeuda').textContent = 'S/ ' + total.toFixed(2);
 
   suministroActual = cod;
 
