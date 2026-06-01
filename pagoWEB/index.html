@@ -644,11 +644,8 @@ function irPaso(n) {
   document.getElementById('paso2').style.display = n === 2 ? 'block' : 'none';
   document.getElementById('paso3').style.display = n === 3 ? 'block' : 'none';
   if (n === 2) {
-    var now = new Date();
-    document.getElementById('p2Suministro').textContent = suministroActual;
     var monto = document.getElementById('totalDeuda').textContent;
     document.getElementById('btnPagarTxt').textContent  = monto;
-    document.getElementById('p2Fecha').textContent      = now.toLocaleDateString('es-PE');
     document.getElementById('ckbTerms').checked = false;
     document.getElementById('p2NumTarjeta').value = '';
     document.getElementById('p2Vence').value      = '';
