@@ -320,32 +320,59 @@
       </div>
 
 
-      <!-- campos tarjeta -->
-      <div style="margin-bottom:10px;">
-        <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">Número de tarjeta</div>
-        <input type="tel" id="p2NumTarjeta" maxlength="19" placeholder="1234 5678 9012 3456"
-               style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
-               oninput="actualizarTarjeta(this)" onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+      <!-- campos tarjeta estilo Niubiz -->
+      <style>
+        .vn-field { position:relative; margin-bottom:10px; }
+        .vn-field input {
+          width:100%; border:1px solid #d0d0d0; border-radius:5px;
+          padding:10px 11px 10px 38px; font-size:.88rem; outline:none;
+          box-sizing:border-box; color:#333; background:#fff;
+          transition:border-color .2s;
+        }
+        .vn-field input:focus { border-color:#1a7abf; }
+        .vn-field .vni {
+          position:absolute; left:11px; top:50%; transform:translateY(-50%);
+          color:#aaa; font-size:14px; pointer-events:none;
+        }
+        .vn-row { display:flex; gap:8px; margin-bottom:10px; }
+        .vn-row .vn-field { flex:1; margin-bottom:0; }
+      </style>
+
+      <!-- número de tarjeta -->
+      <div class="vn-field">
+        <span class="vni"><i class="fas fa-credit-card"></i></span>
+        <input type="tel" id="p2NumTarjeta" maxlength="19" placeholder="Número de tarjeta"
+               oninput="actualizarTarjeta(this)">
       </div>
-      <div style="display:flex;gap:10px;margin-bottom:10px;">
-        <div style="flex:1;">
-          <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">Vencimiento</div>
-          <input type="tel" id="p2Vence" maxlength="5" placeholder="MM/AA"
-                 style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
-                 oninput="fmtVence(this)" onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+
+      <!-- vencimiento + cvv -->
+      <div class="vn-row">
+        <div class="vn-field">
+          <span class="vni"><i class="fas fa-calendar-alt"></i></span>
+          <input type="tel" id="p2Vence" maxlength="5" placeholder="MM/AA" oninput="fmtVence(this)">
         </div>
-        <div style="flex:1;">
-          <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">CVV</div>
-          <input type="tel" id="p2Cvv" maxlength="4" placeholder="•••"
-                 style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
-                 onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+        <div class="vn-field">
+          <span class="vni"><i class="fas fa-lock"></i></span>
+          <input type="tel" id="p2Cvv" maxlength="4" placeholder="CVV">
         </div>
       </div>
-      <div style="margin-bottom:12px;">
-        <div style="font-size:.72rem;font-weight:600;color:#546e7a;margin-bottom:3px;">Titular de la tarjeta</div>
-        <input type="text" id="p2Titular" placeholder="Como aparece en la tarjeta"
-               style="width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 11px;font-size:.9rem;outline:none;"
-               onfocus="this.style.borderColor='#1a7abf'" onblur="this.style.borderColor='#ccc'">
+
+      <!-- nombre + apellido (titular) -->
+      <div class="vn-row">
+        <div class="vn-field">
+          <span class="vni"><i class="fas fa-user"></i></span>
+          <input type="text" id="p2Titular" placeholder="Nombre">
+        </div>
+        <div class="vn-field">
+          <span class="vni"><i class="fas fa-user"></i></span>
+          <input type="text" id="p2Apellido" placeholder="Apellido">
+        </div>
+      </div>
+
+      <!-- email -->
+      <div class="vn-field" style="margin-bottom:12px;">
+        <span class="vni"><i class="fas fa-envelope"></i></span>
+        <input type="email" id="p2Email" placeholder="Correo electrónico">
       </div>
 
       <!-- términos -->
@@ -362,12 +389,12 @@
       </button>
 
       <!-- logos -->
-      <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid #e0e0e0;">
-        <img src="https://static-content.vnforapps.com/v2/img/pci.png"             alt="PCI"        style="height:18px;width:auto;">
-        <img src="https://static-content.vnforapps.com/v2/img/bottom/visa.png"     alt="Visa"       style="width:27px;height:18px;object-fit:contain;">
-        <img src="https://static-content.vnforapps.com/v2/img/bottom/mc.png"       alt="Mastercard" style="height:18px;width:auto;">
-        <img src="https://static-content.vnforapps.com/v2/img/bottom/dc.png"       alt="Diners"     style="height:18px;width:auto;">
-        <img src="https://static-content.vnforapps.com/v2/img/bottom/unionpay.svg" alt="UnionPay"   style="height:18px;width:auto;">
+      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #e0e0e0;">
+        <img src="https://static-content.vnforapps.com/v2/img/pci.png"             alt="PCI"        style="height:28px;width:auto;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/visa.png"     alt="Visa"       style="width:44px;height:28px;object-fit:contain;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/mc.png"       alt="Mastercard" style="height:28px;width:auto;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/dc.png"       alt="Diners"     style="height:28px;width:auto;">
+        <img src="https://static-content.vnforapps.com/v2/img/bottom/unionpay.svg" alt="UnionPay"   style="height:28px;width:auto;">
       </div>
     </div>
 
