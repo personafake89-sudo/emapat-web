@@ -472,6 +472,17 @@
     <!-- ══ PASO 3: RESULTADO ══ -->
     <div id="paso3" style="display:none;padding:1.5rem 1.25rem;">
 
+      <!-- loading -->
+      <div id="p3Loading" style="text-align:center;padding:2rem 0;">
+        <div style="display:inline-block;width:48px;height:48px;border:5px solid #e0e0e0;border-top-color:#0097c7;border-radius:50%;animation:spin .8s linear infinite;"></div>
+        <div style="margin-top:14px;font-size:.95rem;font-weight:600;color:#555;">Procesando pago...</div>
+        <div style="font-size:.78rem;color:#aaa;margin-top:4px;">Por favor espere</div>
+      </div>
+      <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+
+      <!-- resultado (oculto hasta que llega respuesta) -->
+      <div id="p3Resultado" style="display:none;">
+
       <!-- gif + estado -->
       <div id="p3Banda" style="border-radius:8px;padding:14px 16px;text-align:center;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:12px;">
         <img id="p3Gif" src="assets/img/figure/credit-card.gif" alt="" style="width:56px;height:56px;object-fit:contain;display:none;">
@@ -510,6 +521,8 @@
           Cerrar
         </button>
       </div>
+
+      </div> <!-- /p3Resultado -->
     </div>
 
   </div>
@@ -757,10 +770,18 @@ async function procesarPago() {
         titular:     titular,
       }),
     });
+    irPaso(3);
+    document.getElementById('p3Loading').style.display   = 'block';
+    document.getElementById('p3Resultado').style.display = 'none';
+
     var data  = await resp.json();
+    await new Promise(r => setTimeout(r, 1800));
+
     var ahora = new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' });
     var correo = clienteActual ? (clienteActual.email || document.getElementById('email').value || '—') : '—';
-    irPaso(3);
+
+    document.getElementById('p3Loading').style.display   = 'none';
+    document.getElementById('p3Resultado').style.display = 'block';
 
     var banda = document.getElementById('p3Banda');
     if (data.exitoso) {
