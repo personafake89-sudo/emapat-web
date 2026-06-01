@@ -137,79 +137,100 @@
 <!-- ══════════════════════════════════════════════════
      PANEL DEUDA
 ══════════════════════════════════════════════════ -->
-<div id="panelDeuda" style="display:none;min-height:100vh;background:linear-gradient(135deg,#1c3643 0%,#1a7abf 60%,#00b0ff 100%);
-     flex-direction:column;align-items:center;justify-content:flex-start;padding:30px 16px;">
-  <div style="width:100%;max-width:860px;">
+<div id="panelDeuda" style="display:none;flex-direction:column;min-height:100vh;">
 
-    <div style="background:#1c3643;color:#fff;border-radius:14px 14px 0 0;padding:16px 24px;
-                display:flex;align-items:center;gap:16px;">
-      <img src="assets/img/logotipo.png"
-           alt="Logo" style="width:190px;height:auto;">
-      <div>
-        <div style="font-weight:700;font-size:1rem;">EPS EMAPAT S.A.</div>
-        <div style="font-size:.75rem;opacity:.75;">Estado de Cuenta — Puerto Maldonado</div>
-      </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">EPS EMAPAT S.A.</a>
+      <button onclick="volverBusqueda()" class="btn btn-dark">Salir</button>
     </div>
+  </nav>
 
-    <div style="background:#fff;border-radius:0 0 14px 14px;padding:20px 24px;box-shadow:0 20px 50px rgba(0,0,0,.3);">
+  <div class="container mt-4" style="flex:1;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
 
-      <div class="row mb-3">
-        <div class="col-6 col-md-3 mb-2">
-          <div class="info-label">Suministro</div>
-          <div class="info-value" id="infoSuministro">—</div>
+        <div class="card shadow-sm mb-4" style="border-radius:10px;">
+          <div class="card-header font-weight-bold" style="background:#1c3643;color:#fff;border-radius:10px 10px 0 0;">
+            Estado de Cuenta
+          </div>
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col-6 col-md-3 mb-2">
+                <div class="info-label">Suministro</div>
+                <div class="info-value" id="infoSuministro">—</div>
+              </div>
+              <div class="col-6 col-md-3 mb-2">
+                <div class="info-label">Localidad</div>
+                <div class="info-value">PTO. MALDONADO</div>
+              </div>
+              <div class="col-12 col-md-6 mb-2">
+                <div class="info-label">Titular</div>
+                <div class="info-value" id="infoNombre">—</div>
+              </div>
+              <div class="col-12 col-md-6 mb-2">
+                <div class="info-label">Dirección</div>
+                <div class="info-value" id="infoDireccion">—</div>
+              </div>
+              <div class="col-12 col-md-6 mb-2">
+                <div class="info-label">Correo</div>
+                <div class="info-value" id="infoEmail">—</div>
+              </div>
+            </div>
+            <hr class="mt-0">
+
+            <div id="alertaMeses" class="alert-corte-bar" style="display:none;"></div>
+
+            <div id="tablaContenedor" class="table-responsive">
+              <table class="table table-sm tabla-deuda mb-0">
+                <thead>
+                  <tr>
+                    <th>Período</th><th>Recibo</th>
+                    <th class="text-right">Total Mes</th><th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyDeuda"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2" class="text-right">TOTAL DEUDA</td>
+                    <td class="text-right" id="totalDeuda">S/ 0.00</td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <div class="text-center mt-4" id="contenedorBtnPagar">
+              <button onclick="abrirModalPago()" style="background:url('https://static-content.vnforapps.com/v2/img/button/EN/navy/default/PayWith.png') center/contain no-repeat;width:100%;max-width:260px;height:46px;border:none;cursor:pointer;display:block;margin:0 auto;"></button>
+            </div>
+
+            <div class="text-center mt-3">
+              <button class="btn btn-outline-secondary btn-sm" onclick="volverBusqueda()">
+                <i class="fas fa-arrow-left mr-1"></i>Nueva búsqueda
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="col-6 col-md-3 mb-2">
-          <div class="info-label">Localidad</div>
-          <div class="info-value">PUERTO MALDONADO</div>
-        </div>
-        <div class="col-12 col-md-6 mb-2">
-          <div class="info-label">Titular</div>
-          <div class="info-value" id="infoNombre">—</div>
-        </div>
-        <div class="col-12 col-md-6 mb-2">
-          <div class="info-label">Dirección</div>
-          <div class="info-value" id="infoDireccion">—</div>
-        </div>
-        <div class="col-12 col-md-6 mb-2">
-          <div class="info-label">Correo</div>
-          <div class="info-value" id="infoEmail">—</div>
-        </div>
+
       </div>
-      <hr class="mt-0">
-
-      <div id="alertaMeses" class="alert-corte-bar" style="display:none;"></div>
-
-      <div id="tablaContenedor" class="table-responsive">
-        <table class="table table-sm tabla-deuda mb-0">
-          <thead>
-            <tr>
-              <th>Período</th><th>Recibo</th>
-              <th class="text-right">Total Mes</th><th>Estado</th>
-            </tr>
-          </thead>
-          <tbody id="tbodyDeuda"></tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2" class="text-right">TOTAL DEUDA</td>
-              <td class="text-right" id="totalDeuda">S/ 0.00</td>
-              <td></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-      <div class="text-center mt-4" id="contenedorBtnPagar">
-        <button onclick="abrirModalPago()" style="background:url('https://static-content.vnforapps.com/v2/img/button/EN/navy/default/PayWith.png') center/contain no-repeat;width:100%;max-width:260px;height:46px;border:none;cursor:pointer;display:block;margin:0 auto;"></button>
-      </div>
-
-      <div class="text-center mt-3">
-        <button class="btn btn-outline-secondary btn-sm" onclick="volverBusqueda()">
-          <i class="fas fa-arrow-left mr-1"></i>Nueva búsqueda
-        </button>
-      </div>
-
     </div>
   </div>
+
+  <footer class="footer mt-auto py-1" style="background:#1c3643;">
+    <div class="container py-1">
+      <div class="row">
+        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center order-1 order-md-0">
+          <span class="text-info font-weight-bold h4">EPS EMAPAT S.A.</span>
+        </div>
+        <div class="col-12 col-md-6 text-white text-md-left text-center">
+          <p class="h5 font-weight-bold">Dudas o Consultas</p>
+          <p class="my-0 py-0">Centro de atención al cliente: 571984</p>
+          <p class="my-0 py-0">Av. Ernesto Rivero 782 - Pto. Maldonado</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </div>
 
 
@@ -507,18 +528,18 @@ function mostrarDeuda(cod, cli) {
     tbody.appendChild(tr);
     document.getElementById('contenedorBtnPagar').style.display = 'none';
   } else {
-    periodos.forEach(function(p) {
-      var tr = document.createElement('tr');
-      tr.className = p.corte ? 'fila-corte' : 'fila-normal';
-      tr.innerHTML =
-        '<td>' + p.periodo + '</td>' +
-        '<td>' + p.recibo  + '</td>' +
-        '<td class="text-right font-weight-bold">S/ ' + p.total.toFixed(2) + '</td>' +
-        '<td>' + (p.corte
-          ? '<span class="badge-corte">AFECTO AL CORTE</span>'
-          : '<span class="badge-pend">PENDIENTE</span>') + '</td>';
-      tbody.appendChild(tr);
-    });
+    // Solo mostrar la última deuda (período más reciente)
+    var p = periodos[0];
+    var tr = document.createElement('tr');
+    tr.className = p.corte ? 'fila-corte' : 'fila-normal';
+    tr.innerHTML =
+      '<td>' + p.periodo + '</td>' +
+      '<td>' + p.recibo  + '</td>' +
+      '<td class="text-right font-weight-bold">S/ ' + p.total.toFixed(2) + '</td>' +
+      '<td>' + (p.corte
+        ? '<span class="badge-corte">AFECTO AL CORTE</span>'
+        : '<span class="badge-pend">PENDIENTE</span>') + '</td>';
+    tbody.appendChild(tr);
     document.getElementById('contenedorBtnPagar').style.display = 'block';
   }
 
