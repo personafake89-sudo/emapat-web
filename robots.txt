@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /pagos/api/
 
 Sitemap: https://emapat.epsagua.com/sitemap.xml
