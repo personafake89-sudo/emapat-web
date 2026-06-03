@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://emapat-web.vercel.app/sitemap.xml
+Sitemap: https://emapat.epsagua.com/sitemap.xml

@@ -90,26 +90,85 @@
 <html lang="es">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--  CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- SEO Primary -->
+    <title>Pagar Recibo EMAPAT en Línea | EPS EMAPAT S.A. | Puerto Maldonado</title>
+    <meta name="description" content="Consulta y paga tu recibo de agua EMAPAT en línea desde cualquier lugar. Ingresa tu código de suministro y paga con tarjeta VISA de forma segura. EPS EMAPAT S.A. - Puerto Maldonado, Madre de Dios.">
+    <meta name="keywords" content="pagar recibo emapat, consultar recibo emapat, pago agua Puerto Maldonado, emapat en línea, recibo agua Madre de Dios, EPS EMAPAT, emapat.com.pe, pago recibo agua, suministro emapat">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="EPS EMAPAT S.A.">
+    <meta name="geo.region" content="PE-MDD">
+    <meta name="geo.placename" content="Puerto Maldonado, Madre de Dios, Perú">
+    <link rel="canonical" href="<?php echo $urlPagina; ?>">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo $urlPagina; ?>">
+    <meta property="og:title" content="Pagar Recibo EMAPAT en Línea | EPS EMAPAT S.A.">
+    <meta property="og:description" content="Consulta y paga tu recibo de agua EMAPAT en línea. Ingresa tu código de suministro y paga con VISA desde cualquier lugar. Puerto Maldonado, Madre de Dios.">
+    <meta property="og:image" content="<?php echo $urlPagina; ?>/assets/img/favicon.png">
+    <meta property="og:locale" content="es_PE">
+    <meta property="og:site_name" content="EPS EMAPAT S.A.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Pagar Recibo EMAPAT en Línea | EPS EMAPAT S.A.">
+    <meta name="twitter:description" content="Consulta y paga tu recibo de agua EMAPAT en línea. Paga con VISA desde cualquier lugar. Puerto Maldonado.">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "EPS EMAPAT S.A.",
+      "alternateName": "EMAPAT",
+      "description": "Empresa Prestadora de Servicios de Saneamiento de Madre de Dios. Paga tu recibo de agua en línea.",
+      "url": "<?php echo $urlPagina; ?>",
+      "telephone": "<?php echo $telefono; ?>",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "<?php echo $direccion; ?>",
+        "addressLocality": "Puerto Maldonado",
+        "addressRegion": "Madre de Dios",
+        "addressCountry": "PE"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Puerto Maldonado"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Pago de Recibos de Agua",
+        "itemListElement": [{
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pago de Recibo de Agua en Línea",
+            "description": "Consulta y paga tu recibo de agua EMAPAT en línea con tarjeta VISA"
+          }
+        }]
+      }
+    }
+    </script>
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <!-- Bootstrap CSS -->
+
+    <!-- Performance: preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <!-- Flaticon CSS -->
     <link rel="stylesheet" href="assets/font/flaticon.css">
-    <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-    <title><?php echo $emp->nombreEmpresa();?></title>
 </head>
 
 <body>
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Pagar Recibo de Agua EMAPAT en Línea - EPS EMAPAT S.A. Puerto Maldonado</h1>
     <section class="fxt-template-animation fxt-template-layout1">
         <div class="container-fluid">
             <div class="row">
