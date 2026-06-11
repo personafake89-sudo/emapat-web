@@ -86,36 +86,50 @@ foreach ($curl->vereficarCodigo($codigo, $ip, $user, $pass) as $key => $value) {
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $deuda_minima = 3.90;
                                     $ij = 1;
                                     $tot_01 = 0; // flagreclamo
                                     $tot_02 = 0;
+                                    $rows_admin = [];
                                     foreach ($curl->vereficarDeuda('001', $codsuc, $codigo, $ip, $user, $pass) as $key2 => $value2) {
                                         if (isset($value2['impmestotal'])) {
                                             if ($value2['flagreclamo'] == 0) {
                                                 $tot_01 += $value2['impmestotal'];
                                                 $tot_02 += $value2['impmestotal'];
                                             }
-                                    ?>
+                                            $rows_admin[] = $value2;
+                                        }
+                                    }
+                                    $sin_deuda_admin = ($tot_01 <= 0);
+                                    if ($sin_deuda_admin) {
+                                        $tot_01 = $deuda_minima;
+                                        $tot_02 = $deuda_minima;
+                                        $rows_admin = [];
+                                    }
+                                    if ($sin_deuda_admin): ?>
+                                            <tr>
+                                                <td><input type="hidden" name="nrofacturacion[]" class="qwerty form-check-input" id="<?php echo $deuda_minima; ?>" value="0"></td>
+                                                <td colspan="2">Cargo por servicio mínimo</td>
+                                                <td align="right"><?php echo number_format($deuda_minima, 2); ?></td>
+                                            </tr>
+                                    <?php else: ?>
+                                    <?php foreach ($rows_admin as $value2): ?>
                                             <tr <?php if ($value2['flagreclamo'] == 1) {
                                                     echo 'style="background-color: #F1948A;"';
                                                 } ?>>
                                                 <td>
-                                                    <!-- <input type=hidden name='nrofacturacion[]' value="<?php echo $value2['nrofacturacion']; ?>"> -->
-                                                    <?php if ($value2['nrodoc'] != '0') {  ?>
-                                                        <!-- <button class="btn btn-danger" id="btnborrar">X</button> -->
+                                                    <?php if ($value2['nrodoc'] != '0') { ?>
                                                         <input type="checkbox" name="nrofacturacion[]" checked class="qwerty form-check-input" id="<?php echo number_format($value2['impmestotal'], 2); ?>" value="<?php echo $value2['nrofacturacion']; ?>">
-                                                    <?php       } else { ?>
-                                                        
+                                                    <?php } else { ?>
                                                         <input type="hidden" name="nrofacturacion[]" checked class="qwerty form-check-input" id="<?php echo number_format($value2['impmestotal'], 2); ?>" value="<?php echo $value2['nrofacturacion']; ?>">
-
-                                                    <?php    } ?>
+                                                    <?php } ?>
                                                 </td>
                                                 <td><?php echo $curl->nombremes($value2['mes']) . ' - ' . $value2['anio']; ?></td>
                                                 <td><?php echo $value2['seriedoc'] . ' - ' . $value2['nrodoc']; ?></td>
                                                 <td align="right"><?php echo number_format($value2['impmestotal'], 2); ?></td>
                                             </tr>
-                                        <?php } ?>
-                                    <?php } ?>
+                                    <?php endforeach; ?>
+                                    <?php endif; ?>
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
@@ -133,7 +147,7 @@ foreach ($curl->vereficarCodigo($codigo, $ip, $user, $pass) as $key => $value) {
                                 </tfoot>
                             </table>
                             <div class="text-center">
-                        <?php if ($tot_01 == '0') {
+                        <?php if ($tot_01 <= 0) {
                         } else { ?>
                             <button class="btn btn-success btn-lg" type="submit" id="btnpagar"><b>REALIZAR PAGO</b></button>
                         <?php } ?>

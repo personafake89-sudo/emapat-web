@@ -607,15 +607,16 @@ function mostrarDeuda(cod, cli) {
   var tbody = document.getElementById('tbodyCliente');
   tbody.innerHTML = '';
 
+  var CARGO_MINIMO = 5.70;
   if (meses === 0) {
-    var ur  = cli.ultimo_recibo;
-    var tr  = document.createElement('tr');
-    tr.innerHTML = ur
-      ? '<td>' + ur.periodo + '</td><td>' + ur.recibo + '</td><td align="right">AL DÍA</td>'
-      : '<td colspan="3" style="color:#888;font-style:italic;">Sin deuda pendiente</td>';
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Cargo por servicio</td><td>—</td><td align="right">' + CARGO_MINIMO.toFixed(2) + '</td>';
     tbody.appendChild(tr);
-    document.getElementById('cli-total').textContent = ur ? parseFloat(ur.total).toFixed(2) : '0.00';
-    document.querySelector('#panelCliente .btn-success').style.display = 'none';
+    var trTotal = document.createElement('tr');
+    trTotal.innerHTML = '<td align="right" style="color:#1B4F72;" colspan="2"><b>TOTAL DEUDA</b></td><td align="right" style="color:#1B4F72;"><b>' + CARGO_MINIMO.toFixed(2) + '</b></td>';
+    tbody.appendChild(trTotal);
+    document.getElementById('cli-total').textContent = CARGO_MINIMO.toFixed(2);
+    document.querySelector('#panelCliente .btn-success').style.display = '';
   } else {
     var p  = periodos[0];
     var tr = document.createElement('tr');
@@ -647,10 +648,10 @@ function irAPago() {
   document.getElementById('infoFecha').textContent       = hoy;
   document.getElementById('infoDni').textContent         = dni;
 
+  var CARGO_MINIMO = 5.70;
   if (meses === 0) {
-    var ur = clienteActual.ultimo_recibo;
-    document.getElementById('totalDeuda').textContent = ur ? 'S/ ' + parseFloat(ur.total).toFixed(2) : 'S/ 0.00';
-    document.getElementById('contenedorBtnPagar').style.display = 'none';
+    document.getElementById('totalDeuda').textContent = 'S/ ' + CARGO_MINIMO.toFixed(2);
+    document.getElementById('contenedorBtnPagar').style.display = 'block';
   } else {
     var p = periodos[0];
     document.getElementById('totalDeuda').textContent = 'S/ ' + p.total.toFixed(2);

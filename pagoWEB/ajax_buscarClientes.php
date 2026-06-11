@@ -109,7 +109,8 @@ if ($NumReg > 0 ) {
                                     <td><?php echo $value5['codcliente']; ?></td>
                                     <td><?php echo $value5['cliente']; ?></td>
                                     <td><?php echo $value5['tdir'].' '.$value5['dir'].' '.$value5['nrocalle']; ?></td>
-                                    <td><?php echo number_format($value5['deuda_mes']+$value5['deuda_anterior'], 2); ?></td>
+                                    <?php $deuda_total = $value5['deuda_mes'] + $value5['deuda_anterior']; ?>
+                                    <td><?php echo number_format($deuda_total > 0 ? $deuda_total : 3.90, 2); ?></td>
                                   </tr>
                                 <?php } else { ?>
                                   <tr>

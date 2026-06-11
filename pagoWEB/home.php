@@ -43,9 +43,16 @@
             if ($period > $maxPeriod) { $maxPeriod = $period; $nroCorte = $r->nrofacturacion; }
         }
     }
+    $deuda_minima = 3.90;
     $mesesDeuda  = count($rowsArray);
     $tot_01      = 0;
     foreach ($rowsArray as $r) $tot_01 += $r->impmestotal;
+    $sin_deuda_real = ($tot_01 <= 0);
+    if ($sin_deuda_real) {
+        $tot_01    = $deuda_minima;
+        $rowsArray = [];
+        $mesesDeuda = 0;
+    }
     $total_deuda = $tot_01 + floatval($valcomision);
     $fecha       = date('d/m/Y');
 
@@ -240,13 +247,15 @@
             <tbody>
               <?php if ($mesesDeuda === 0): ?>
               <tr>
-                <td></td>
+                <td><input type="hidden" name="nrofacturacion[]" class="qwerty form-check-input" id="3.90" value="0"></td>
                 <td colspan="2" style="padding:14px 10px; color:#555; font-style:italic;">
-                  No se encontraron recibos pendientes en este momento.
+                  Cargo por servicio
                 </td>
-                <td style="text-align:right; padding:14px 10px;">
-                  <span style="background:#27ae60;color:#fff;font-size:11px;padding:3px 10px;border-radius:10px;font-weight:700;">AL DÍA</span>
-                </td>
+                <td style="text-align:right; padding:14px 10px;"><strong>S/ 3.90</strong></td>
+              </tr>
+              <tr class="fila-total">
+                <td colspan="3" style="text-align:right; padding:10px;">TOTAL DEUDA</td>
+                <td style="text-align:right; padding:10px;">S/ <?= number_format($deuda_minima, 2) ?></td>
               </tr>
               <?php else: ?>
               <?php
