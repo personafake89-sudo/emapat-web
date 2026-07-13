@@ -618,15 +618,19 @@ function mostrarDeuda(cod, cli) {
     document.getElementById('cli-total').textContent = CARGO_MINIMO.toFixed(2);
     document.querySelector('#panelCliente .btn-success').style.display = '';
   } else {
-    var p  = periodos[0];
-    var tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + p.periodo + '</td><td>' + p.recibo + '</td><td align="right">' + p.total.toFixed(2) + '</td>';
-    tbody.appendChild(tr);
+    var totalDeuda = 0;
+    periodos.forEach(function (p) {
+      totalDeuda += p.total;
+      var tr = document.createElement('tr');
+      tr.className = p.corte ? 'fila-corte' : 'fila-normal';
+      tr.innerHTML = '<td>' + p.periodo + '</td><td>' + p.recibo + '</td><td align="right">' + p.total.toFixed(2) + '</td>';
+      tbody.appendChild(tr);
+    });
     // fila total deuda
     var trTotal = document.createElement('tr');
-    trTotal.innerHTML = '<td align="right" style="color:#1B4F72;" colspan="2"><b>TOTAL DEUDA</b></td><td align="right" style="color:#1B4F72;"><b>' + p.total.toFixed(2) + '</b></td>';
+    trTotal.innerHTML = '<td align="right" style="color:#1B4F72;" colspan="2"><b>TOTAL DEUDA</b></td><td align="right" style="color:#1B4F72;"><b>' + totalDeuda.toFixed(2) + '</b></td>';
     tbody.appendChild(trTotal);
-    document.getElementById('cli-total').textContent = p.total.toFixed(2);
+    document.getElementById('cli-total').textContent = totalDeuda.toFixed(2);
     document.querySelector('#panelCliente .btn-success').style.display = '';
   }
 
@@ -653,8 +657,8 @@ function irAPago() {
     document.getElementById('totalDeuda').textContent = 'S/ ' + CARGO_MINIMO.toFixed(2);
     document.getElementById('contenedorBtnPagar').style.display = 'block';
   } else {
-    var p = periodos[0];
-    document.getElementById('totalDeuda').textContent = 'S/ ' + p.total.toFixed(2);
+    var totalDeuda = periodos.reduce(function (acc, p) { return acc + p.total; }, 0);
+    document.getElementById('totalDeuda').textContent = 'S/ ' + totalDeuda.toFixed(2);
     document.getElementById('contenedorBtnPagar').style.display = 'block';
   }
 
