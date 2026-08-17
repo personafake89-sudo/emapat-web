@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión Corporativa | EPS EMAPAT S.A.</title>
+  <meta name="description" content="RPS, ROF, MOF, CAP, POI, PAP, RIT y Código de Ética de EPS EMAPAT S.A.">
+  <meta name="author" content="EPS EMAPAT S.A.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emapat.epsagua.com/gestion_corporativa/">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="theme-color" content="#004d81">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emapat.epsagua.com/gestion_corporativa/">
+  <meta property="og:site_name" content="EPS EMAPAT S.A.">
+  <meta property="og:title" content="Gestión Corporativa | EPS EMAPAT S.A.">
+  <meta property="og:description" content="RPS, ROF, MOF, CAP, POI, PAP, RIT y Código de Ética de EPS EMAPAT S.A.">
+  <meta property="og:locale" content="es_PE">
+  <meta property="og:image" content="https://emapat.epsagua.com/img/logo-alt.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="EPS EMAPAT S.A. – Puerto Maldonado, Madre de Dios">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gestión Corporativa | EPS EMAPAT S.A.">
+  <meta name="twitter:description" content="RPS, ROF, MOF, CAP, POI, PAP, RIT y Código de Ética de EPS EMAPAT S.A.">
+  <meta name="twitter:image" content="https://emapat.epsagua.com/img/logo-alt.png">
+
+  <meta name="geo.region" content="PE-MDD">
+  <meta name="geo.placename" content="Puerto Maldonado, Tambopata, Madre de Dios, Perú">
+  <meta name="geo.position" content="-12.5931;-69.1894">
+  <meta name="ICBM" content="-12.5931, -69.1894">
+
+  <link href="img/logo-alt.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Raleway:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root { --primary:#428bca; --dark:#004d81; --accent:#1ca7e3; }
+    body { font-family:'Open Sans',sans-serif; }
+    h1,h2,h3,h4,.navbar { font-family:'Raleway',sans-serif; }
+    #topbar { background:var(--dark); padding:8px 0; }
+    #topbar .contact-info a { color:#cde; }
+    #topbar .contact-info a:hover { color:#fff; }
+    #header { background:#fff; border-bottom:3px solid var(--accent); box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+    #header .logo img { max-height:60px; }
+    .navbar .dropdown-menu { border:none; box-shadow:0 8px 24px rgba(0,77,129,0.15); border-radius:10px; }
+    .navbar .dropdown-item { font-family:'Open Sans',sans-serif; font-size:0.9rem; padding:8px 16px; }
+    .navbar .dropdown-item:hover { background:#f0f7fc; color:var(--dark); }
+    .page-banner { background:linear-gradient(135deg,var(--dark) 0%,#0b5c96 100%); color:#fff; padding:60px 0 46px; }
+    .page-banner h1 { font-weight:900; letter-spacing:1px; }
+    .page-banner .breadcrumb { margin:0; }
+    .page-banner .breadcrumb a, .page-banner .breadcrumb-item { color:#a8d4f0; }
+    .page-banner .breadcrumb-item.active { color:#fff; }
+    .page-content { padding:48px 0 64px; }
+    .page-content h2 { color:var(--dark); font-weight:700; margin:32px 0 16px; font-size:1.5rem; }
+    .page-content h3 { color:var(--dark); font-weight:700; margin:28px 0 12px; font-size:1.2rem; }
+    .page-content p, .page-content li { color:#45505b; line-height:1.75; }
+    .doc-card { border:1px solid #e6eef5; border-radius:12px; padding:16px; margin-bottom:12px; transition:box-shadow .2s; }
+    .doc-card:hover { box-shadow:0 4px 16px rgba(66,139,202,0.15); }
+    .doc-card .doc-name { font-weight:600; color:var(--dark); }
+    .btn-descarga { background:var(--dark); color:#fff; border:none; border-radius:20px; padding:6px 18px; font-size:0.85rem; text-decoration:none; }
+    .btn-descarga:hover { background:var(--accent); color:#fff; }
+    .requisito-list li { margin-bottom:8px; }
+    .img-marco { border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12); max-width:100%; height:auto; }
+    #footer { background:var(--dark); color:#cde; padding:48px 0 0; }
+    #footer h4 { color:#fff; font-weight:700; font-size:1rem; }
+    #footer a { color:#9ab8d4; text-decoration:none; }
+    #footer a:hover { color:#fff; }
+    #footer .copyright { padding:20px 0; text-align:center; font-size:0.85rem; border-top:1px solid rgba(255,255,255,0.15); margin-top:32px; }
+    .whatsapp-float { position:fixed; bottom:80px; right:20px; z-index:9999; }
+    .whatsapp-float a { background:#25d366; color:#fff; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; box-shadow:0 4px 14px rgba(37,211,102,0.5); text-decoration:none; }
+    .back-to-top { position:fixed; bottom:20px; right:20px; background:var(--dark); color:#fff; width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; z-index:9998; text-decoration:none; }
+    .sidebar-link { display:block; padding:10px 16px; color:#45505b; text-decoration:none; border-left:3px solid transparent; font-size:0.92rem; }
+    .sidebar-link:hover { background:#f0f7fc; color:var(--dark); border-left-color:var(--accent); }
+    .sidebar-link.active { background:#f0f7fc; color:var(--dark); border-left-color:var(--accent); font-weight:600; }
+  </style>
+</head>
+
+<body>
+<div id="topbar">
+  <div class="container d-flex justify-content-between">
+    <div class="d-flex align-items-center">
+      <a href="https://www.facebook.com/epsemapatsa2021" class="me-3" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://twitter.com/EmapatSa" class="me-3" target="_blank" title="Twitter"><i class="bi bi-twitter"></i></a>
+      <a href="https://www.youtube.com/channel/UC3HC6-WG1l5B3i24CyH2tog" class="me-3" target="_blank" title="YouTube"><i class="bi bi-youtube"></i></a>
+    </div>
+    <div class="d-none d-md-flex align-items-center">
+      <a href="https://emapat.com.pe/portal-de-transparencia" target="_blank" style="color:#fff;font-weight:bold;font-size:0.85rem;">
+        Portal de Transparencia <i class="fa-solid fa-magnifying-glass ms-1"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<header id="header">
+  <div class="container d-flex justify-content-between align-items-center py-2">
+    <div class="logo">
+      <a href="/"><img src="/img/logo.png" alt="EPS EMAPAT S.A." style="max-height:60px;"></a>
+    </div>
+    <nav class="navbar navbar-expand-lg">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Empresa</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/quienes-somos/">Quiénes Somos</a></li>
+            <li><a class="dropdown-item" href="/origen/">Origen e Historia</a></li>
+            <li><a class="dropdown-item" href="/organigrama/">Organigrama</a></li>
+            <li><a class="dropdown-item" href="/directorio/">Directorio</a></li>
+            <li><a class="dropdown-item" href="/objetivos/">Misión y Visión</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Clientes</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/venta-conexion-de-agua/">Nuevo Servicio</a></li>
+            <li><a class="dropdown-item" href="/pagoWEB/">Pagos en Línea</a></li>
+            <li><a class="dropdown-item" href="https://emapat.com.pe/consultaweb/" target="_blank">Reclamos</a></li>
+            <li><a class="dropdown-item" href="/tarifario/">Tarifas</a></li>
+            <li><a class="dropdown-item" href="/centro-pago/">Corte y Reposición</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Trámites</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://facilita.gob.pe/t/41322" target="_blank">Solicitudes</a></li>
+            <li><a class="dropdown-item" href="/libro-de-reclamaciones/">Estado de Trámite</a></li>
+            <li><a class="dropdown-item" href="https://facilita.gob.pe/t/41322" target="_blank">Mesa de Partes Virtual</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Gestión Institucional</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/documentos_gestion/">Documentos de Gestión</a></li>
+            <li><a class="dropdown-item" href="/gestion_economica/">Gestión Económica</a></li>
+            <li><a class="dropdown-item" href="/gestion_corporativa/">Gestión Corporativa</a></li>
+            <li><a class="dropdown-item" href="/normas_auditoria/">Resoluciones y Actas</a></li>
+            <li><a class="dropdown-item" href="/memoria_anual/">Memoria Anual</a></li>
+            <li><a class="dropdown-item" href="/documentos_gestion/">Licitaciones</a></li>
+            <li><a class="dropdown-item" href="/rendicion_cuentas/">Transparencia</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="/#noticias">Noticias</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-banner">
+    <div class="container">
+      <h1>Gestión Corporativa</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+          <li class="breadcrumb-item">Gestión</li>
+          <li class="breadcrumb-item active">Gestión Corporativa</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <section class="page-content">
+    <div class="container">
+<div class="row g-4"><div class="col-lg-3"><div class="sticky-top" style="top:20px;"><a class="sidebar-link" href="/documentos_gestion/">Documentos de Gestión</a><a class="sidebar-link" href="/gestion_economica/">Gestión Económica</a><a class="sidebar-link active" href="/gestion_corporativa/">Gestión Corporativa</a><a class="sidebar-link" href="/normas_auditoria/">Resoluciones y Actas</a><a class="sidebar-link" href="/memoria_anual/">Memoria Anual</a><a class="sidebar-link" href="/rendicion_cuentas/">Transparencia</a></div></div><div class="col-lg-9">
+<h2>Reglamento de Prestación de Servicios</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">Reglamento de Prestación de Servicios</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/3" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Reglamento de Organización y Funciones - ROF</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">Reglamento de Organización y Funciones - ROF</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/4" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Manual de Organización y Funciones - MOF</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">MOF</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/19" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Cuadro de Asignación de Personal - CAP</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">CAP</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/5" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Plan Operativo Institucional - POI</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2015</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/6" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2016</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/7" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2017</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/8" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2018</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/9" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2019</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/10" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2020</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/11" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2021</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/12" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">POI 2022</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/13" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">RGG-222-2021</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/179" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">RGG-223-2021 - Plan de Contingencia</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/180" target="_blank" rel="noopener">Descargar</a></div>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">Plan Operativo Institucional - POI 2023</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/211" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Presupuesto Analítico de Personal - PAP</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">PAP</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/14" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Reglamento Interno de Trabajo - RIT</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">RIT</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/15" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Código de Ética</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">Código de Ética EPS EMAPAT S.A.</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/41" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Directorio de Funcionarios</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">Directorio de Funcionarios de la EPS EMAPAT S.A.</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/46" target="_blank" rel="noopener">Descargar</a></div>
+
+<h2>Buen Gobierno Corporativo</h2>
+<div class="doc-card d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="doc-name">Código Buen Gobierno Corporativo</span><a class="btn-descarga" href="https://emapat.com.pe/gestion/47" target="_blank" rel="noopener">Descargar</a></div>
+</div></div></div></section></main>
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="/img/logo-alt.png" class="mb-2" style="max-height:55px;" alt="EMAPAT">
+        <h4>RUC: 20129302322</h4>
+        <ul class="list-unstyled" style="font-size:0.9rem;">
+          <li class="mb-2"><i class="bx bx-map me-2"></i>Av. Ernesto Rivero Nro 786, Puerto Maldonado</li>
+          <li class="mb-2"><i class="bx bx-phone me-2"></i>(042) 522-900</li>
+          <li class="mb-2"><i class="bx bx-envelope me-2"></i>mesadepartes@emapat.com.pe</li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <h4>Gestión Institucional</h4>
+        <ul class="list-unstyled" style="font-size:0.9rem;">
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="/documentos_gestion/">Documentos de Gestión</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="/gestion_economica/">Gestión Económica</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="/gestion_corporativa/">Gestión Corporativa</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="/normas_auditoria/">Resoluciones y Actas</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="/memoria_anual/">Memoria Anual</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="/rendicion_cuentas/">Transparencia</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <h4>Enlaces de interés</h4>
+        <ul class="list-unstyled" style="font-size:0.9rem;">
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="https://facilita.gob.pe/t/41322" target="_blank">Mesa de Partes Virtual</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="https://facilita.gob.pe/t/47226" target="_blank">Acceso a la Información</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="https://www.gob.pe/institucion/epsemapat" target="_blank">Convocatorias (gob.pe)</a></li>
+          <li class="mb-1"><i class="bx bx-chevron-right"></i> <a href="https://www.facebook.com/epsemapatsa2021" target="_blank">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">&copy; 2026 EPS EMAPAT S.A. &mdash; Todos los derechos reservados</div>
+</footer>
+
+<div class="whatsapp-float">
+  <a href="https://wa.me/13858859268" target="_blank" title="Chatea con nosotros"><i class="bi bi-whatsapp"></i></a>
+</div>
+<a href="#" class="back-to-top"><i class="bi bi-arrow-up-short"></i></a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
