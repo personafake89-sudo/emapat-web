@@ -9,4 +9,4 @@ Disallow: /class.
 Disallow: /check-login.php
 Disallow: /if-loggedin.php
 
-Sitemap: https://sysco.emapat.com.pe/pagoWEB/sitemap.xml
+Sitemap: https://emapat.epsagua.com/pagoWEB/sitemap.xml
