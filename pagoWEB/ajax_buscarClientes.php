@@ -28,6 +28,7 @@ if ($_POST['tipo'] == 1)
   if (!$apiOk) {
     $clientesLocales = [
       566 => ['codcliente' => 566, 'cliente' => 'DEL CASTILLO ACUÑA LUZ MARINA', 'tdir' => '', 'dir' => '', 'nrocalle' => '', 'deuda_mes' => 5.70, 'deuda_anterior' => 0.00, 'codsuc' => '001', 'nomsuc' => '', 'nropedido' => ''],
+      1067803 => ['codcliente' => 1067803, 'cliente' => 'CONDORI NINA BENEDICTO', 'tdir' => 'JR.', 'dir' => 'LOS CONQUISTADORES S/N', 'nrocalle' => 'MZ Z LT 13', 'deuda_mes' => 60.10, 'deuda_anterior' => 117.50, 'codsuc' => '001', 'nomsuc' => 'PUERTO MALDONADO', 'nropedido' => ''],
     ];
     if (isset($clientesLocales[intval($codigo)])) {
       $padron[] = $clientesLocales[intval($codigo)];
