@@ -20,7 +20,8 @@ function checkRateLimit(ip, maxRequests = 30, windowMs = 60000) {
 
 // Known attack IPs
 const KNOWN_ATTACK_IPS = [
-  '66.234.153.160', // Recent spam attacker from landing-eps
+  '66.234.153.160', // Previous spam attacker from landing-eps
+  '217.113.171.7',  // Active attacker - Aug 27 2026
 ];
 
 // Blocked IPs from environment variable
@@ -32,14 +33,19 @@ function isIPBlocked(ip) {
 
 // Filter offensive words (Spanish and English)
 const PALABRAS_OFENSIVAS = [
-  'mierda', 'puta', 'pendejo', 'imbecil', 'estupido', 'basura', 'idiota', 'carajo', 'joder', 'maldito',
-  'pene', 'vagina', 'pinga', 'culo', 'teta', 'pedo', 'cipote', 'chucha', 'puchaira', 'somawe',
+  // Español fuerte
+  'mierda', 'puta', 'pendejo', 'pendeja', 'imbecil', 'estupido', 'estupida', 'basura', 'idiota', 'carajo', 'joder', 'maldito',
+  'pene', 'vagina', 'pinga', 'culo', 'teta', 'tetas', 'pedo', 'cipote', 'chucha', 'puchaira', 'somawe',
   'huevón', 'huevon', 'cabron', 'cabrón', 'chupamedias', 'soplapollas', 'maricon', 'maricón',
-  'puto', 'zorra', 'perra', 'gonorrea', 'gonorea', 'chamaco', 'pendeja',
-  'estupida', 'estúpida', 'retardado', 'retrasado', 'mongol', 'mongoloide',
+  'puto', 'zorra', 'perra', 'gonorrea', 'gonorea', 'chamaco', 'retardado', 'retrasado', 'mongol', 'mongoloide',
+  // Contenido sexual explícito
+  'peludo', 'lechoso', 'lechosa', 'semen', 'europeo', 'europea', 'porno', 'xxx',
+  'follar', 'coger', 'mamada', 'chocha', 'chichita', 'nena', 'nenita',
+  // Referencias a redes sociales / spam
   'ofanim', 't.me', 'telegram', 'whatsapp', 'facebook', 'instagram', 'twitter', 'tiktok',
-  'xxx', 'porn', 'sex', 'nude', 'naked', 'fuck', 'shit', 'ass', 'dick', 'pussy', 'cock',
-  'bitch', 'slut', 'whore', 'damn', 'hell', 'crap', 'bastard', 'asshole', 'motherfucker',
+  // Inglés ofensivo
+  'fuck', 'shit', 'ass', 'dick', 'pussy', 'cock', 'bitch', 'slut', 'whore', 'damn', 'hell',
+  'crap', 'bastard', 'asshole', 'motherfucker', 'porn', 'sex', 'nude', 'naked',
 ];
 
 function containsOffensiveWords(text) {
